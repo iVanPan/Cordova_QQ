@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  id="org.zy.yuancheng.qq"
+  version="0.0.1">
+
+  <name>YCQQ</name>
+  <description>Cordova YCQQ Plugin</description>
+  <license>MIT</license>
+  <keywords>cordova,qq</keywords>
+  <repo></repo>
+  <issue></issue>
+  
+  <preference name="QQ_APP_ID" />
+  
+  <!--require cordova version -->
+  <engines>
+    <engine name="cordova" version=">=3.5.0" />
+  </engines>
+
+  <!-- js module-->
+  <js-module src="www/ycqq.js" name="ycqq">
+    <clobbers target="YCQQ" />
+  </js-module>
+
+  <!-- ios -->
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+        <feature name="YCQQ">
+         <param name="ios-package" value="YCQQ"/>
+       </feature>
+       <!--whitelist for QQ SDK-->
+      <access origin = "https://openmobile.qq.com/*"/>
+      <access origin = "http://qzs.qq.com/open/mobile/login/*"/>
+      <access origin = "http://qzonestyle.gtimg.cn/*"/>
+      <access origin = "http://pub.idqqimg.com/*"/>
+      <access origin = "http://appsupport.qq.com/*"/>
+      <access origin = "http://support.qq.com/*"/>
+      <access origin = "http://qzs.qq.com/*"/>
+      <access origin = "http://m.qzone.com/*"/>
+     </config-file>
+
+    <!--set ios URLTypes for QQ SDK -->
+   <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+      <array>
+        <dict>
+          <key>CFBundleTypeRole</key>
+          <string>Editor</string>
+          <key>CFBundleURLName</key>
+          <string>tencentopenapi</string>
+          <key>CFBundleURLSchemes</key>
+          <array>
+            <string>tencent$QQ_APP_ID</string>
+          </array>
+        </dict>
+      </array>
+    </config-file>
+
+    <header-file src="src/ios/YCQQ.h"/>
+    <source-file src="src/ios/YCQQ.m"/>
+    <!--required frameworks for qq sdk-->
+    <framework src="CoreGraphics.framework" />
+    <framework src="CoreTelephony.framework" />
+    <framework src="SystemConfiguration.framework" />
+    <framework src="Security.framework" />
+    <framework src="libiconv.dylib" />
+    <framework src="libsqlite3.dylib" />
+    <framework src="libstdc++.dylib" />
+    <framework src="libz.dylib" />
+    <!--QQ SDK version 2.8.1-->
+    <framework src="src/ios/TencentOpenAPI.framework" custom="true" framework="true"/>
+    <resource-file src="src/ios/TencentOpenApi_IOS_Bundle.bundle" />
+  </platform>
+    
+  <!-- android -->
+  <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="YCQQ" >
+        <param name="android-package" value="org.zy.yuancheng.qq.YCQQ"/>
+      </feature>
+      <!--whitelist for QQ SDK-->
+      <access origin = "https://openmobile.qq.com/*"/>
+      <access origin = "http://qzs.qq.com/open/mobile/login/*"/>
+      <access origin = "http://qzonestyle.gtimg.cn/*"/>
+      <access origin = "http://pub.idqqimg.com/*"/>
+      <access origin = "http://appsupport.qq.com/*"/>
+      <access origin = "http://support.qq.com/*"/>
+      <access origin = "http://qzs.qq.com/*"/>
+      <access origin = "http://m.qzone.com/*"/>
+    </config-file>
+  <!--permission for QQ SDK -->
+  <config-file target="AndroidManifest.xml" parent="/manifest">
+      <uses-permission android:name="android.permission.INTERNET" />
+      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> 
+    </config-file>
+  <!--QQ webview Auth Activity -->
+  <config-file target="AndroidManifest.xml" parent="/manifest/application">
+   <activity
+         android:name="com.tencent.tauth.AuthActivity"
+         android:noHistory="true"
+         android:launchMode="singleTask" >
+      <intent-filter>
+             <action android:name="android.intent.action.VIEW" />
+          <category android:name="android.intent.category.DEFAULT" />
+          <category android:name="android.intent.category.BROWSABLE" />
+             <data android:scheme="tencent$QQ_APP_ID"/>
+      </intent-filter>
+   </activity>
+    <activity
+      android:name="com.tencent.connect.common.AssistActivity"
+      android:configChanges="orientation|keyboardHidden"
+      android:screenOrientation="portrait"
+      android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+    </activity>
+  </config-file>
+  <source-file src="src/android/YCQQ.java" target-dir="src/org/zy/yuancheng/qq" />
+  <!--QQ SDK version 2.8.0-->
+  <source-file src="src/android/open_sdk_r4547.jar" target-dir="libs/" />
+    <source-file src="src/android/mta-sdk-1.6.2.jar" target-dir="libs/" />
+  <source-file src="src/android/android-support-v4.jar" target-dir="libs/" />
+  </platform>
+</plugin>
