@@ -1,15 +1,18 @@
 
 #import "YCQQ.h"
 #import "AppDelegate.h"
-
+#import <TencentOpenAPI/QQApi.h>
+#import <TencentOpenAPI/QQApiInterface.h>
 
 @implementation YCQQ
--(void)ssoLogin:(CDVInvokedUrlCommand *)command{
+- (void)pluginInitialize {
+    NSString* appId = [[self.commandDelegate settings] objectForKey:@"qq_app_id"];
     if (nil == self.tencentOAuth) {
-        CDVViewController *controller = [[CDVViewController alloc] init];
-        NSString *appid =[controller.settings objectForKey:@"qq_app_id"];
-        self.tencentOAuth = [[TencentOAuth alloc] initWithAppId:appid andDelegate:self];
+        self.tencentOAuth = [[TencentOAuth alloc] initWithAppId:appId andDelegate:self];
     }
+}
+
+-(void)ssoLogin:(CDVInvokedUrlCommand *)command{
     self.permissions =[NSArray arrayWithObjects:
                      kOPEN_PERMISSION_GET_USER_INFO,
                      kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
@@ -49,11 +52,6 @@
 }
 -(void)logout:(CDVInvokedUrlCommand *)command
 {
-    if (nil == self.tencentOAuth) {
-        CDVViewController *controller = [[CDVViewController alloc] init];
-        NSString *appid =[controller.settings objectForKey:@"qq_app_id"];
-        self.tencentOAuth = [[TencentOAuth alloc] initWithAppId:appid andDelegate:self];
-    }
     if(self.tencentOAuth.isSessionValid){
          [self.tencentOAuth logout:self];
     }
@@ -61,6 +59,29 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
+-(void)shareToQQ:(CDVInvokedUrlCommand *)command{
+    self.callback=command.callbackId;
+    NSDictionary *args         = [command.arguments objectAtIndex:0];
+    NSLog(@"%@",args);
+    if(args){
+        NSString *url = [args objectForKey:@"url"];
+        //分享图预览图URL地址
+        NSString *previewImageUrl = [args objectForKey:@"imageUrl"];
+        QQApiNewsObject *newsObj = [QQApiNewsObject
+                                    objectWithURL:[NSURL URLWithString:url]
+                                    title: [args objectForKey:@"title"]
+                                    description: [args objectForKey:@"description"]
+                                    previewImageURL:[NSURL URLWithString:previewImageUrl]];
+        SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:newsObj];
+        
+        QQApiSendResultCode sent = [QQApiInterface sendReq:req];
+        [self handleSendResult:sent];
+    }else{
+        CDVPluginResult *pluginResult=[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
+
+}
 - (void)handleOpenURL:(NSNotification *)notification
 {
     NSURL* url = [notification object];
@@ -74,18 +95,10 @@
     
     if (self.tencentOAuth.accessToken && 0 != [self.tencentOAuth.accessToken length])
     {
-        NSUserDefaults *saveDefaults=[NSUserDefaults standardUserDefaults];
-        [saveDefaults setValue:self.tencentOAuth.openId forKey:@"userid"];
-        [saveDefaults setValue:self.tencentOAuth.accessToken forKey:@"access_token"];
-        [saveDefaults synchronize];
-        
         NSMutableDictionary *Dic =[NSMutableDictionary dictionaryWithCapacity:2];
         [Dic setObject:self.tencentOAuth.openId forKey:@"userid"];
         [Dic setObject:self.tencentOAuth.accessToken forKey:@"access_token"];
-
         NSLog(@"开始保存 dic is %@",Dic);
-        
-        
         CDVPluginResult *pluginResult=[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:Dic];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
     }else{
@@ -110,6 +123,35 @@
 -(void)tencentDidNotNetWork{
     CDVPluginResult *pluginResult=[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
+}
+
+- (void)handleSendResult:(QQApiSendResultCode)sendResult
+{
+    switch (sendResult)
+    {
+        case EQQAPIAPPNOTREGISTED:
+        case EQQAPIMESSAGECONTENTINVALID:
+        case EQQAPIMESSAGECONTENTNULL:
+        case EQQAPIMESSAGETYPEINVALID:
+        case EQQAPIQQNOTINSTALLED:
+        case EQQAPIQQNOTSUPPORTAPI:
+        case EQQAPISENDFAILD:
+        {
+            CDVPluginResult *pluginResult=[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
+            
+            break;
+        }
+        case EQQAPISENDSUCESS:
+        {
+            CDVPluginResult *pluginResult=[CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
+        }
+        default:
+        {
+            break;
+        }
+    }
 }
 
 @end

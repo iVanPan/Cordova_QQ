@@ -3,14 +3,14 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="org.zy.yuancheng.qq"
-  version="0.0.1">
+  version="0.1.1">
 
   <name>YCQQ</name>
   <description>Cordova YCQQ Plugin</description>
   <license>MIT</license>
   <keywords>cordova,qq</keywords>
-  <repo></repo>
-  <issue></issue>
+  <repo>https://github.com/iVanPan/Cordova_QQ</repo>
+  <issue>https://github.com/iVanPan/Cordova_QQ/issues</issue>
   
   <preference name="QQ_APP_ID" />
   
@@ -39,6 +39,8 @@
       <access origin = "http://support.qq.com/*"/>
       <access origin = "http://qzs.qq.com/*"/>
       <access origin = "http://m.qzone.com/*"/>
+
+       <preference name="QQ_APP_ID" value="$QQ_APP_ID" />
      </config-file>
 
     <!--set ios URLTypes for QQ SDK -->
@@ -88,6 +90,8 @@
       <access origin = "http://support.qq.com/*"/>
       <access origin = "http://qzs.qq.com/*"/>
       <access origin = "http://m.qzone.com/*"/>
+
+      <preference name="QQ_APP_ID" value="$QQ_APP_ID" />
     </config-file>
   <!--permission for QQ SDK -->
   <config-file target="AndroidManifest.xml" parent="/manifest">

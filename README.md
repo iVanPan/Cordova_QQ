@@ -1,11 +1,10 @@
 # Cordova_QQ_Plugin
 This is a Cordova Plugin for QQ Login (Both on android and iOS)     
 # Feature
-QQ SSO Login, QQ Logout
+QQ SSO Login, QQ Logout , QQ Share 
 # Install
-1. ```cordova plugin add https://github.com/iVanPan/Cordova_QQ.git --variable QQ_APP_ID=YOUR_QQ_APPID```
-2. Add ```<preference name="QQ_APP_ID" value="YOUR_QQ_APP_ID" />``` in your config.xml                   
-3. cordova build      
+1. ```cordova plugin add https://github.com/iVanPan/Cordova_QQ.git --variable QQ_APP_ID=YOUR_QQ_APPID```              
+2. cordova build      
 
 # Usage
 ### QQ SSO Login
@@ -25,7 +24,16 @@ YCQQ.logout(function(){
 	console.log('logout error');
 });
 ```
-
+### QQ Share
+```Javascript
+YCQQ.shareToQQ(function(){
+console.log("share success");
+},function(){
+console.log("share failed");
+},args);
+```
+    
+    			
 
 #Notice      
 When two cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007)

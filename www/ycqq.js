@@ -8,6 +8,9 @@ module.exports = {
 	},
 	logout:function(successCallback, errorCallback){
 		exec(successCallback, errorCallback, "YCQQ", "logout", []);
+	},
+	shareToQQ:function(successCallback, errorCallback,args){
+		exec(successCallback, errorCallback, "YCQQ", "shareToQQ", [args]);
 	}
 
 };

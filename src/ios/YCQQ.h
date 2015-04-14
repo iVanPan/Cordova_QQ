@@ -9,4 +9,5 @@
 @property (nonatomic , copy) NSArray *permissions;
 -(void)ssoLogin:(CDVInvokedUrlCommand*)command;
 -(void)logout:(CDVInvokedUrlCommand*)command;
+-(void)shareToQQ:(CDVInvokedUrlCommand *)command;
 @end
