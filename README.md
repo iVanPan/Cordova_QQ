@@ -26,6 +26,11 @@ YCQQ.logout(function(){
 ```
 ### QQ Share
 ```Javascript
+var args = {};
+args.url = "";
+args.title = "";
+args.description = "";
+args.imageUrl = "";
 YCQQ.shareToQQ(function(){
 console.log("share success");
 },function(){
