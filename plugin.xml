@@ -120,7 +120,7 @@
   </config-file>
   <source-file src="src/android/YCQQ.java" target-dir="src/org/zy/yuancheng/qq" />
   <!--QQ SDK version 2.8.0-->
-  <source-file src="src/android/open_sdk_r4547.jar" target-dir="libs/" />
+  <source-file src="src/android/open_sdk_r4889.jar" target-dir="libs/" />
     <source-file src="src/android/mta-sdk-1.6.2.jar" target-dir="libs/" />
   <source-file src="src/android/android-support-v4.jar" target-dir="libs/" />
   </platform>

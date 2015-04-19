@@ -21,158 +21,220 @@ public class YCQQ extends CordovaPlugin {
 
 	public String callbackId = "";
 	public static Tencent mTencent;
+	public static String APP_ID;
+	public static CallbackContext currentCallbackContext;
+	public static final String QQ_APP_ID ="qq_app_id";
+	public static final String QQ_CANCEL_BY_USER ="cancel by user";
+	public static final String QQ_SHARE_ERROR ="error happend when sharing";
+	public static final String QQ_LOGIN_ERROR ="error happend when loging";
+	public static final String QQ_PARAM_ERROR ="paran incorrect";
+	public static final String QQ_RESONPSE_ERROR ="QQ resopnse is error";
 
 	@Override
-	public boolean execute(String action, final JSONArray args,
-		final CallbackContext callbackContext) throws JSONException {
+	protected void pluginInitialize() {
 		// TODO Auto-generated method stub
-		boolean result = false;
-		String APP_ID = webView.getProperty("qq_app_id", "");
+		super.pluginInitialize();
+		APP_ID = webView.getProperty(QQ_APP_ID, "");
 		mTencent = Tencent.createInstance(APP_ID, this.cordova.getActivity()
-			.getApplicationContext());
-		final PluginResult pr = new PluginResult(PluginResult.Status.NO_RESULT);
-		pr.setKeepCallback(true);
-		callbackId = callbackContext.getCallbackId();
+				.getApplicationContext());
+	}
+	@Override
+	public boolean execute(String action, final JSONArray args,
+			final CallbackContext callbackContext) throws JSONException {
+		// TODO Auto-generated method stub
 		if (action.equals("ssoLogin")) {
-			if (mTencent.isSessionValid()) {
-				JSONObject jo = makeJson(mTencent.getAccessToken(),
-					mTencent.getOpenId());
-				this.webView.sendPluginResult(new PluginResult(
-					PluginResult.Status.OK, jo), this.callbackId);
-				result = true;
-			} else {
-				Runnable runnable = new Runnable() {
-
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						mTencent.login(YCQQ.this.cordova.getActivity(), "all",
-							loginListener);
-					}
-				};
-				this.cordova.getActivity().runOnUiThread(runnable);
-				this.cordova.setActivityResultCallback(this);
-				result = true;
-			}
-
+			return ssoLogin(callbackContext);
 		}
-		if (action.equals("logout")) {
-			mTencent.logout(this.cordova.getActivity());
-			callbackContext.success();
-			result = true;
+		if (action.equals("logout")) {			
+			return logout(callbackContext);
 		}
 		if (action.equalsIgnoreCase("shareToQQ")) {
-			JSONObject json = args.getJSONObject(0);
-			result = true;
-			qqshare(json.getString("title"), json.getString("description"),
-				json.getString("url"), json.getString("imageUrl"));
+			return qqshare(args,callbackContext);
 		}
-		return result;
+		return super.execute(action, args, callbackContext);
 	}
+	/**
+	 * QQ 单点登录
+	 * @param callbackContext
+	 * @return
+	 */
+	private boolean ssoLogin(CallbackContext callbackContext) {
+		callbackId = callbackContext.getCallbackId();
+		if (mTencent.isSessionValid()) {
+			JSONObject jo = makeJson(mTencent.getAccessToken(),
+					mTencent.getOpenId());
+			this.webView.sendPluginResult(new PluginResult(
+					PluginResult.Status.OK, jo), this.callbackId);
+			return true;
+		} else {
+			Runnable runnable = new Runnable() {
 
-	private void qqshare(String title, String description, String Url,
-		String imgUrl) {
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					mTencent.login(YCQQ.this.cordova.getActivity(), "all",
+							loginListener);
+//					mTencent.loginServerSide(YCQQ.this.cordova.getActivity(), "all",
+//							loginListener);
+				}
+			};
+			this.cordova.getActivity().runOnUiThread(runnable);
+			this.cordova.setActivityResultCallback(this);
+			return true;
+		}
+		
+	}
+	/**
+	 * QQ 登出
+	 * @param callbackContext
+	 * @return
+	 */
+	private boolean logout(CallbackContext callbackContext) {
+		mTencent.logout(this.cordova.getActivity());
+		callbackContext.success();
+		return true;
+	}
+	/**
+	 * QQ 分享
+	 * @param json
+	 * @return
+	 * @throws JSONException 
+	 */
+	private boolean qqshare(JSONArray args,CallbackContext callbackContext) throws JSONException {
+		currentCallbackContext =callbackContext;
+		JSONObject json = args.getJSONObject(0);
+		callbackId =callbackContext.getCallbackId();
+		if(json ==null || json.length() == 0 ){
+			currentCallbackContext.error(QQ_PARAM_ERROR);
+		}
+		String imgUrl = json.getString("imageUrl");
 		final Bundle params = new Bundle();
 		params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE,
-			QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
-		params.putString(QQShare.SHARE_TO_QQ_TITLE, title);
-		params.putString(QQShare.SHARE_TO_QQ_SUMMARY, description);
-		params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, Url);
-		if (!imgUrl.equalsIgnoreCase("")) {
-			params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, imgUrl);
+				QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
+		params.putString(QQShare.SHARE_TO_QQ_TITLE, json.getString("title"));
+		params.putString(QQShare.SHARE_TO_QQ_SUMMARY, json.getString("description"));
+		params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, json.getString("url"));
+		if (imgUrl!=null && !imgUrl.equalsIgnoreCase("")) {
+			if(imgUrl.startsWith("http://") || imgUrl.startsWith("https://")){
+				params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, imgUrl);
+			}
+			
 		}
-		params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "圆橙志愿");
-		mTencent.shareToQQ(YCQQ.this.cordova.getActivity(), params,
-			qqShareListener);
-	}
+		if(json.has("appName")){
+			params.putString(QQShare.SHARE_TO_QQ_APP_NAME, json.getString("appName"));
+		}else{
+			params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "");
+		}
+		this.cordova.setActivityResultCallback(this);
+		this.cordova.getActivity().runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				mTencent.shareToQQ(YCQQ.this.cordova.getActivity(), params,
+						qqShareListener);
+			}
+		});
 
+		return true;
+	}
+	/**
+	 * 保存token 和 openid
+	 * @param jsonObject
+	 */
 	public static void initOpenidAndToken(JSONObject jsonObject) {
 		try {
 			String token = jsonObject.getString(Constants.PARAM_ACCESS_TOKEN);
 			String expires = jsonObject.getString(Constants.PARAM_EXPIRES_IN);
 			String openId = jsonObject.getString(Constants.PARAM_OPEN_ID);
 			if (!TextUtils.isEmpty(token) && !TextUtils.isEmpty(expires)
-				&& !TextUtils.isEmpty(openId)) {
+					&& !TextUtils.isEmpty(openId)) {
 				mTencent.setAccessToken(token, expires);
-			mTencent.setOpenId(openId);
+				mTencent.setOpenId(openId);
+			}
+		} catch (Exception e) {
 		}
-	} catch (Exception e) {
 	}
-}
+	/**
+	 * 登录监听
+	 */
+	IUiListener loginListener = new BaseUiListener(this) {
+		@Override
+		protected void doComplete(JSONObject values) {
+			initOpenidAndToken(values);
+			JSONObject jo = makeJson(mTencent.getAccessToken(),
+					mTencent.getOpenId());
+			this.mQQ.webView.sendPluginResult(new PluginResult(
+					PluginResult.Status.OK, jo), this.mQQ.callbackId);
+		}
+	};
+	 /**
+	  * 分享监听
+	  */
+	IUiListener qqShareListener = new IUiListener() {
+		@Override
+		public void onCancel() {
+			YCQQ.this.webView.sendPluginResult(new PluginResult(
+					PluginResult.Status.ERROR,QQ_CANCEL_BY_USER), YCQQ.this.callbackId);
+		}
 
-IUiListener loginListener = new BaseUiListener(this) {
-	@Override
-	protected void doComplete(JSONObject values) {
-		initOpenidAndToken(values);
-		JSONObject jo = makeJson(mTencent.getAccessToken(),
-			mTencent.getOpenId());
-		this.mQQ.webView.sendPluginResult(new PluginResult(
-			PluginResult.Status.OK, jo), this.mQQ.callbackId);
-	}
-};
-IUiListener qqShareListener = new IUiListener() {
-	@Override
-	public void onCancel() {
-		YCQQ.this.webView.sendPluginResult(new PluginResult(
-			PluginResult.Status.ERROR), YCQQ.this.callbackId);
-	}
-
-	@Override
-	public void onComplete(Object response) {
+		@Override
+		public void onComplete(Object response) {
 			// TODO Auto-generated method stub
-		YCQQ.this.webView.sendPluginResult(new PluginResult(
-			PluginResult.Status.OK), YCQQ.this.callbackId);
-	}
+			YCQQ.this.webView.sendPluginResult(new PluginResult(
+					PluginResult.Status.OK), YCQQ.this.callbackId);
+		}
 
-	@Override
-	public void onError(UiError e) {
+		@Override
+		public void onError(UiError e) {
 			// TODO Auto-generated method stub
-		YCQQ.this.webView.sendPluginResult(new PluginResult(
-			PluginResult.Status.ERROR), YCQQ.this.callbackId);
-	}
-};
+			YCQQ.this.webView.sendPluginResult(new PluginResult(
+					PluginResult.Status.ERROR,QQ_SHARE_ERROR), YCQQ.this.callbackId);
+		}
+		
+	};
 
-private class BaseUiListener implements IUiListener {
-	YCQQ mQQ;
+	private class BaseUiListener implements IUiListener {
+		YCQQ mQQ;
 
-	public BaseUiListener(YCQQ mQQ) {
+		public BaseUiListener(YCQQ mQQ) {
 			// TODO Auto-generated constructor stub
-		super();
-		this.mQQ = mQQ;
-	}
-
-	@Override
-	public void onComplete(Object response) {
-		if (null == response) {
-			this.mQQ.webView.sendPluginResult(new PluginResult(
-				PluginResult.Status.ERROR), this.mQQ.callbackId);
-			return;
+			super();
+			this.mQQ = mQQ;
 		}
-		JSONObject jsonResponse = (JSONObject) response;
-		if (null != jsonResponse && jsonResponse.length() == 0) {
-			this.mQQ.webView.sendPluginResult(new PluginResult(
-				PluginResult.Status.ERROR), this.mQQ.callbackId);
-			return;
+
+		@Override
+		public void onComplete(Object response) {
+			if (null == response) {
+				this.mQQ.webView.sendPluginResult(new PluginResult(
+						PluginResult.Status.ERROR,QQ_RESONPSE_ERROR), this.mQQ.callbackId);
+				return;
+			}
+			JSONObject jsonResponse = (JSONObject) response;
+			if (null != jsonResponse && jsonResponse.length() == 0) {
+				this.mQQ.webView.sendPluginResult(new PluginResult(
+						PluginResult.Status.ERROR,QQ_RESONPSE_ERROR), this.mQQ.callbackId);
+				return;
+			}
+			doComplete((JSONObject) response);
 		}
-		doComplete((JSONObject) response);
-	}
 
-	protected void doComplete(JSONObject values) {
+		protected void doComplete(JSONObject values) {
 
-	}
+		}
 
-	@Override
-	public void onError(UiError e) {
-		this.mQQ.webView.sendPluginResult(new PluginResult(
-			PluginResult.Status.ERROR), this.mQQ.callbackId);
-	}
+		@Override
+		public void onError(UiError e) {
+			this.mQQ.webView.sendPluginResult(new PluginResult(
+					PluginResult.Status.ERROR,QQ_LOGIN_ERROR), this.mQQ.callbackId);
+		}
 
-	@Override
-	public void onCancel() {
-		this.mQQ.webView.sendPluginResult(new PluginResult(
-			PluginResult.Status.ERROR), this.mQQ.callbackId);
+		@Override
+		public void onCancel() {
+			this.mQQ.webView.sendPluginResult(new PluginResult(
+					PluginResult.Status.ERROR,QQ_CANCEL_BY_USER), this.mQQ.callbackId);
+		}
 	}
-}
 
 	/**
 	 * 组装JSON
@@ -183,7 +245,7 @@ private class BaseUiListener implements IUiListener {
 	 */
 	private JSONObject makeJson(String access_token, String userid) {
 		String json = "{\"access_token\": \"" + access_token
-		+ "\",  \"userid\": \"" + userid + "\"}";
+				+ "\",  \"userid\": \"" + userid + "\"}";
 		JSONObject jo = null;
 		try {
 			jo = new JSONObject(json);
@@ -196,6 +258,10 @@ private class BaseUiListener implements IUiListener {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		// TODO Auto-generated method stub
+//		if(null!=mTencent){
+//			mTencent.onActivityResult(requestCode, resultCode, intent);
+//		}
+				
 		if (requestCode == Constants.REQUEST_API) {
 			if (resultCode == Constants.RESULT_LOGIN) {
 				Tencent.handleResultData(intent, loginListener);

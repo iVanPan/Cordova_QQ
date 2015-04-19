@@ -6,6 +6,8 @@
 //  Copyright (c) 2013年 Tencent. All rights reserved.
 //
 
+#ifndef QQ_OPEN_SDK_LITE
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "sdkdef.h"
@@ -407,4 +409,4 @@ typedef enum
 - (void)setVideoUrl:(NSString *)videoUrl;
 @end
 
-
+#endif

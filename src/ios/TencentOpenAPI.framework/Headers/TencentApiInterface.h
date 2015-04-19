@@ -6,6 +6,8 @@
 //  Copyright (c) 2013年 Tencent. All rights reserved.
 //
 
+#ifndef QQ_OPEN_SDK_LITE
+
 #import <Foundation/Foundation.h>
 #import "TencentMessageObject.h"
 
@@ -97,3 +99,5 @@ TencentApiRetCode;
 + (BOOL)isTencentAppSupportTencentApi:(TecnentPlatformType)platform;
 
 @end
+
+#endif

@@ -25,6 +25,11 @@ typedef enum
     kTencentWebviewAuthorzieState,
 } TencentAuthorizeState;
 
+typedef enum
+{
+    kAuthModeClientSideToken,
+    kAuthModeServerSideCode,
+} TencentAuthMode;
 
 #pragma mark - TencentOAuth(授权登录及相关开放接口调用)
 
@@ -74,6 +79,10 @@ typedef enum
 
 /** 登陆透传的数据 */
 @property(nonatomic, copy) NSDictionary* passData;
+
+/** 授权方式(Client Side Token或者Server Side Code) */
+@property(nonatomic, assign) TencentAuthMode authMode;
+
 /**
  * 用来获得当前sdk的版本号
  * \return 返回sdk版本号
@@ -87,6 +96,13 @@ typedef enum
  **/
 
 + (NSString*)sdkSubVersion;
+
+/**
+ * 用来获得当前sdk的是否精简版
+ * \return 返回YES表示精简版
+ **/
+
++ (BOOL)isLiteSDK;
 
 /** 
  * 主要是用来帮助判断是否有登陆被发起，但是还没有过返回结果 
@@ -192,7 +208,18 @@ typedef enum
 + (BOOL)CanHandleOpenURL:(NSURL *)url;
 
 /**
- * 退出登录
+ * (静态方法)获取TencentOAuth调用的上一次错误信息
+ */
++ (NSString *)getLastErrorMsg;
+
+/**
+ * 以Server Side Code模式授权登录时，通过此接口获取返回的code值;
+ * 以Client Side Token模式授权登录时，忽略此接口。
+ */
+- (NSString *)getServerSideCode;
+
+/**
+ * 退出登录(退出登录后，TecentOAuth失效，需要重新初始化)
  * \param delegate 第三方应用用于接收请求返回结果的委托对象
  */
 - (void)logout:(id<TencentSessionDelegate>)delegate;
@@ -209,7 +236,13 @@ typedef enum
  */
 - (BOOL)getUserInfo;
 
-#ifndef QQ_OPEN_SDK_LITE
+/**
+ * SDK内置webview实现定向分享时，第三方应用可以根据应用是否在白名单里来开启该配置开关，默认为关闭；
+ * 在白名单里的应用调用该接口后，即打开sdk内置webview的二级白名单开关（相对与sdk后台的白名单），
+ * 那么在sdk后台白名单校验请求失败的情况下，会继续先尝试采用内置webview进行分享。
+ */
+- (void)openSDKWebViewQQShareEnable;
+
 
 /**
  * 获取用户QZone相册列表
@@ -363,14 +396,6 @@ typedef enum
  */
 - (BOOL)sendGiftRequest:(NSString *)receiver exclude:(NSString *)exclude specified:(NSString *)specified only:(BOOL)only type:(NSString *)type title:(NSString *)title message:(NSString *)message imageURL:(NSString *)imageUrl source:(NSString *)source;
 
-/**
- * SDK内置webview实现定向分享时，第三方应用可以根据应用是否在白名单里来开启该配置开关，默认为关闭；
- * 在白名单里的应用调用该接口后，即打开sdk内置webview的二级白名单开关（相对与sdk后台的白名单），
- * 那么在sdk后台白名单校验请求失败的情况下，会继续先尝试采用内置webview进行分享。
- */
-- (void)openSDKWebViewQQShareEnable;
-
-#endif
 
 /**
  * 退出指定API调用
@@ -442,7 +467,9 @@ typedef enum
  *
  * 第三方应用需要实现每条需要调用的API的回调协议
  */
-@protocol TencentSessionDelegate<NSObject, TencentLoginDelegate, TencentApiInterfaceDelegate, TencentWebViewDelegate>
+@protocol TencentSessionDelegate<NSObject, TencentLoginDelegate,
+                                TencentApiInterfaceDelegate,
+                                TencentWebViewDelegate>
 
 @optional
 
@@ -490,7 +517,6 @@ typedef enum
 - (void)getUserInfoResponse:(APIResponse*) response;
 
 
-#ifndef QQ_OPEN_SDK_LITE
 /**
  * 获取用户QZone相册列表回调
  * \param response API返回结果，具体定义参见sdkdef.h文件中\ref APIResponse
@@ -600,7 +626,6 @@ typedef enum
  */
 - (void)sendStoryResponse:(APIResponse*) response;
 
-#endif
 
 /**
  * 社交API统一回调接口
