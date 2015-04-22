@@ -12,7 +12,7 @@ you may get a error like this "platforms/android/libs/android-support-v4.jar" al
 # Usage
 ### QQ SSO Login
 ```Javascript
-var checkClientIsInstalled ＝ 1;//default is 0,only for iOS
+var checkClientIsInstalled = 1;//default is 0,only for iOS
 YCQQ.ssoLogin(function(args){
          alert(args.access_token);
          alert(args.userid);
