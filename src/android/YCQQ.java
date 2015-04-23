@@ -34,7 +34,7 @@ public class YCQQ extends CordovaPlugin {
 	protected void pluginInitialize() {
 		// TODO Auto-generated method stub
 		super.pluginInitialize();
-		APP_ID = webView.getProperty(QQ_APP_ID, "");
+		APP_ID = webView.getPreferences().getString(QQ_APP_ID,"");
 		mTencent = Tencent.createInstance(APP_ID, this.cordova.getActivity()
 				.getApplicationContext());
 	}
