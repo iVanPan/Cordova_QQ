@@ -3,7 +3,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="org.zy.yuancheng.qq"
-  version="0.1.1">
+  version="0.3.2">
 
   <name>YCQQ</name>
   <description>Cordova YCQQ Plugin</description>
@@ -74,6 +74,10 @@
     <!--QQ SDK version 2.8.1-->
     <framework src="src/ios/TencentOpenAPI.framework" custom="true" framework="true"/>
     <resource-file src="src/ios/TencentOpenApi_IOS_Bundle.bundle" />
+
+    <info>
+      安装完插件，请用XCode打开工程，查看URL Types里面QQ的URL type有没有，如果没有请手动添加/after installing this plugin,check the URL Types in your Xcode project.If you don't find URL Types for qqsdk，manually add it.
+    </info>
   </platform>
     
   <!-- android -->
