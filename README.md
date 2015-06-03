@@ -1,5 +1,5 @@
 # Cordova_QQ_Plugin
-This is a Cordova Plugin for QQ Login (Both on android and iOS)     
+This is a Cordova Plugin for QQ Login (Both on android and iOS).For Chinese,See [中文说明](https://github.com/iVanPan/Cordova_QQ/blob/master/README_ZH.md).     
 # Feature
 QQ SSO Login, QQ Logout , QQ Share 
 # Install
@@ -55,7 +55,7 @@ when you using qq login,you may get an error code.if you get one, find detail er
 When two cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007)
 
 
-# LICENSE
+#LICENSE
 
 [MIT LICENSE](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
 
