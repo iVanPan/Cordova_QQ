@@ -71,7 +71,7 @@
     <framework src="libsqlite3.dylib" />
     <framework src="libstdc++.dylib" />
     <framework src="libz.dylib" />
-    <!--QQ SDK version 2.8.1-->
+    <!--QQ SDK version 2.9.0-->
     <framework src="src/ios/TencentOpenAPI.framework" custom="true" framework="true"/>
     <resource-file src="src/ios/TencentOpenApi_IOS_Bundle.bundle" />
 
@@ -124,8 +124,8 @@
     </activity>
   </config-file>
   <source-file src="src/android/YCQQ.java" target-dir="src/org/zy/yuancheng/qq" />
-  <!--QQ SDK version 2.8.0-->
-  <source-file src="src/android/open_sdk_r4889.jar" target-dir="libs/" />
+  <!--QQ SDK version 2.9.1-->
+  <source-file src="src/android/open_sdk_r5043.jar" target-dir="libs/" />
     <source-file src="src/android/mta-sdk-1.6.2.jar" target-dir="libs/" />
   <source-file src="src/android/android-support-v4.jar" target-dir="libs/" />
   </platform>
