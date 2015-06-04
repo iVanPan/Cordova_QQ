@@ -1,5 +1,6 @@
 # Cordova_QQ_Plugin
 This is a Cordova Plugin for QQ Login (Both on android and iOS).For Chinese,See [中文说明](https://github.com/iVanPan/Cordova_QQ/blob/master/README_ZH.md).     
+I also write a weibo cordova plugin  [here](https://github.com/iVanPan/cordova_weibo).
 # Feature
 QQ SSO Login, QQ Logout , QQ Share 
 # Install

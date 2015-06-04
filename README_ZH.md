@@ -1,5 +1,6 @@
 # Cordova_QQ_插件
-这个一个QQ SDK的Cordova 插件(支持android和iOS平台)。   For English,check [here](https://github.com/iVanPan/Cordova_QQ) please
+这个一个QQ SDK的Cordova 插件(支持android和iOS平台)。   For English,check [here](https://github.com/iVanPan/Cordova_QQ) please					
+如果你希望使用一个微博的cordova插件可以查看[这里](https://github.com/iVanPan/cordova_weibo).
 #主要功能
 QQ登录，QQ登出，QQ分享 
 # 安装
