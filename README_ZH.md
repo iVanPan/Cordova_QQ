@@ -8,7 +8,7 @@ QQ登录，QQ登出，QQ分享
 3. 如果你在你的cordova iOS工程上面使用了这个插件,请打开Xcode检查QQ的URLTypes是否正确添加了.如果没有，请自行手动添加.    			
 
 #重要事项			
-1. ~~在安装过程中遇到如下错误"platforms/android/libs/android-support-v4.jar" already exists!",请将你android工程中的 android-support-v4.jar 文件删除再安装本插件 .~~ 已经通过 hook 脚本解决		        		
+1. <del>在安装过程中遇到如下错误"platforms/android/libs/android-support-v4.jar" already exists!",请将你android工程中的 android-support-v4.jar 文件删除再安装本插件 .</del> 已经通过 hook 脚本解决		        		
 2. 这个插件要求cordova-android 的版本 >=4.0,推荐使用 cordova  5.0.0 或更高的版本，因为从cordova 5.0 开始cordova-android 4.0 是默认使用的android版本
 3.  请在cordova的deviceready事件触发以后再调用本插件！！！！   		
 
