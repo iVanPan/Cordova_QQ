@@ -8,7 +8,7 @@ QQ SSO Login, QQ Logout , QQ Share
 3.  If you are using this plugin for iOS,check the URLTypes in your Xcode project.If you don't  find URLTypes for qqsdk，manually add it.    			
 
 #important			
-1. you may get a error like this "platforms/android/libs/android-support-v4.jar" already exists!",because you may have duplicate android-support-v4.jar files in your android project. Remove android-support-v4.jar from the /libs folder of your project.		        		
+1. ~~you may get a error like this "platforms/android/libs/android-support-v4.jar" already exists!",because you may have duplicate android-support-v4.jar files in your android project. Remove android-support-v4.jar from the /libs folder of your project.	~~ fixed by hook	        		
 2. This plugin is required cordova-android version >=4.0,so using cordova  5.0.0 or higher is recommended
 3.  This plugin should be used after the deviceready event has been fired!!!!!!!   		
 
