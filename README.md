@@ -2,7 +2,7 @@
 This is a Cordova Plugin for QQ Login (Both on android and iOS).For Chinese,See [中文说明](https://github.com/iVanPan/Cordova_QQ/blob/master/README_ZH.md).     
 I also write a weibo cordova plugin  [here](https://github.com/iVanPan/cordova_weibo).
 # Feature
-QQ SSO Login, QQ Logout , QQ Share 
+QQ SSO Login, QQ Logout , QQ Share , checkClientInstalled
 # Install
 1. ```cordova plugin add https://github.com/iVanPan/Cordova_QQ.git --variable QQ_APP_ID=YOUR_QQ_APPID```              
 2. cordova build      
@@ -47,8 +47,17 @@ console.log("share success");
 console.log(failReason);
 },args);
 ```
-    
-    			
+### CheckClientInstalled
+```Javascript
+YCQQ.checkClientInstalled(function(){
+	console.log('client is installed');
+},function(){
+	// if installed QQ Client version is not supported sso,also will get this error
+	console.log('client is not installed');
+});
+```
+
+						
 #ERROR_CODE					
 when you using qq login,you may get an error code.if you get one, find detail error msg from [here](http://wiki.open.qq.com/wiki/mobile/API%E8%B0%83%E7%94%A8%E8%AF%B4%E6%98%8E#6._.E8.BF.94.E5.9B.9E.E7.A0.81.E8.AF.B4.E6.98.8E%E3%80%82) please.
 

@@ -2,7 +2,7 @@
 这个一个QQ SDK的Cordova 插件(支持android和iOS平台)。   For English,check [here](https://github.com/iVanPan/Cordova_QQ) please					
 如果你希望使用一个微博的cordova插件可以查看[这里](https://github.com/iVanPan/cordova_weibo).
 #主要功能
-QQ登录，QQ登出，QQ分享 
+QQ登录，QQ登出，QQ分享 ，检查QQ手机客户端端是否安装
 # 安装
 1. 命令行运行      ```cordova plugin add https://github.com/iVanPan/Cordova_QQ.git --variable QQ_APP_ID=YOUR_QQ_APPID```              
 2. 命令行运行 cordova build      
@@ -47,7 +47,15 @@ console.log("share success");
 console.log(failReason);
 },args);
 ```
-    
+### 检查QQ客户端是否安装了
+```Javascript
+YCQQ.checkClientInstalled(function(){
+	console.log('client is installed');
+},function(){
+	// 如果安装的QQ客户端版本太低，不支持SSO登录也会返回没有安装客户端的错误
+	console.log('client is not installed');
+});
+```
     			
 #错误码				
 使用SDK时，所有结果都会通过回调返回给应用。在回调的结果中，会包含每次调用结果的返回码。
