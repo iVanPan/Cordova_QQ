@@ -29,6 +29,7 @@ public class YCQQ extends CordovaPlugin {
 	public static final String QQ_LOGIN_ERROR ="error happend when loging";
 	public static final String QQ_PARAM_ERROR ="paran incorrect";
 	public static final String QQ_RESONPSE_ERROR ="QQ resopnse is error";
+	public static final String QQ_Client_NOT_INSYALLED_ERROR ="QQ client is not installed";
 
 	@Override
 	protected void pluginInitialize() {
@@ -50,6 +51,9 @@ public class YCQQ extends CordovaPlugin {
 		}
 		if (action.equalsIgnoreCase("shareToQQ")) {
 			return qqshare(args,callbackContext);
+		}
+		if(action.equalsIgnoreCase("checkClientInstalled")){
+			return checkClientInstalled(callbackContext);
 		}
 		return super.execute(action, args, callbackContext);
 	}
@@ -83,6 +87,20 @@ public class YCQQ extends CordovaPlugin {
 			return true;
 		}
 		
+	}
+	/**
+	 * 检查手机QQ客户端是否安装
+	 * @param callbackContext
+	 * @return
+	 */
+	private boolean checkClientInstalled(CallbackContext callbackContext){
+		Boolean installed = mTencent.isSupportSSOLogin(YCQQ.this.cordova.getActivity());
+		if(installed){
+			callbackContext.success();
+		}else{
+			callbackContext.error(QQ_Client_NOT_INSYALLED_ERROR);
+		}
+		return true;
 	}
 	/**
 	 * QQ 登出

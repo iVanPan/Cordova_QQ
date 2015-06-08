@@ -39,7 +39,15 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
     CDVPluginResult *pluginResult=[CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
-
+-(void)checkClientInstalled:(CDVInvokedUrlCommand *)command{
+    if ([TencentOAuth iphoneQQInstalled] &&[TencentOAuth iphoneQQSupportSSOLogin]) {
+        CDVPluginResult *pluginResult=[CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }else{
+        CDVPluginResult *pluginResult=[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
+}
 -(void)shareToQQ:(CDVInvokedUrlCommand *)command{
     self.callback=command.callbackId;
     NSDictionary *args         = [command.arguments objectAtIndex:0];

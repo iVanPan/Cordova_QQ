@@ -32,6 +32,9 @@ module.exports = {
 			args.appName = "";
 		}
 		exec(successCallback, errorCallback, "YCQQ", "shareToQQ", [args]);
+	},
+	checkClientInstalled:function(successCallback, errorCallback){
+		exec(successCallback, errorCallback, "YCQQ", "checkClientInstalled", []);
 	}
 
 };
