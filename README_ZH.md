@@ -1,19 +1,31 @@
 # Cordova_QQ_插件
-这个一个QQ SDK的Cordova 插件(支持android和iOS平台)。   For English,check [here](https://github.com/iVanPan/Cordova_QQ) please					
+[![version](https://img.shields.io/badge/version-0.3.2-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
+[![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)]()
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)]()
+[![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)
+	
+这个一个QQ SDK的Cordova 插件。 [English](https://github.com/iVanPan/Cordova_QQ)				
 如果你希望使用一个微博的cordova插件可以查看[这里](https://github.com/iVanPan/cordova_weibo).
-#主要功能
-QQ登录，QQ登出，QQ分享 ，检查QQ手机客户端端是否安装
-# 安装
-1. 命令行运行      ```cordova plugin add https://github.com/iVanPan/Cordova_QQ.git --variable QQ_APP_ID=YOUR_QQ_APPID```              
-2. 命令行运行 cordova build      
-3. 如果你在你的cordova iOS工程上面使用了这个插件,请打开Xcode检查QQ的URLTypes是否正确添加了.如果没有，请自行手动添加.    			
+##主要功能
+- QQ登录
+- QQ登出
+- QQ分享 
+- 检查QQ手机客户端端是否安装		
 
-#重要事项			
+##安装要求
+- Cordova Version >=3.5
+- Cordova-Android >=4.0
+
+##安装
+1. 命令行运行      ```cordova plugin add https://github.com/iVanPan/Cordova_QQ.git --variable QQ_APP_ID=YOUR_QQ_APPID```              
+2. 命令行运行 cordova build      		
+##注意事项			
 1. <del>在安装过程中遇到如下错误"platforms/android/libs/android-support-v4.jar" already exists!",请将你android工程中的 android-support-v4.jar 文件删除再安装本插件 .</del> 已经通过 hook 脚本解决		        		
 2. 这个插件要求cordova-android 的版本 >=4.0,推荐使用 cordova  5.0.0 或更高的版本，因为从cordova 5.0 开始cordova-android 4.0 是默认使用的android版本
-3.  请在cordova的deviceready事件触发以后再调用本插件！！！！   		
+3.  请在cordova的deviceready事件触发以后再调用本插件！！！		
+4. <del>在低于5.1.1的cordova版本中存在一个Bug，如果你有多个插件要修改iOS工程中的 “*-Info.plist” CFBundleURLTypes, 只有第一个安装的插件才会生效.所以安装完插件请务必在你的Xcode工程里面检查一下URLTypes。 关于这个bug的详情你可以在 [这里](https://issues.apache.org/jira/browse/CB-8007)找到</del> 建议安装使用5.1.1及以上的cordova版本 		
 
-# 使用方式                								
+##使用方式                								
 					     
 ### QQ SSO 登录
 ```Javascript
@@ -42,9 +54,9 @@ args.description = "";
 args.imageUrl = "";
 args.appName = "";
 YCQQ.shareToQQ(function(){
-console.log("share success");
+	console.log("share success");
 },function(failReason){
-console.log(failReason);
+	console.log(failReason);
 },args);
 ```
 ### 检查QQ客户端是否安装了
@@ -76,12 +88,4 @@ YCQQ.checkClientInstalled(function(){
 
 详情查看[这里](http://wiki.open.qq.com/wiki/mobile/API%E8%B0%83%E7%94%A8%E8%AF%B4%E6%98%8E#6._.E8.BF.94.E5.9B.9E.E7.A0.81.E8.AF.B4.E6.98.8E%E3%80%82) 
 
-
-#注意事项      
-cordova目前有一个bug，如果你有多个插件要修改iOS工程中的 “*-Info.plist” CFBundleURLTypes, 只有第一个安装的插件才会生效.所以安装完插件请务必在你的Xcode工程里面检查一下URLTypes。 关于这个bug的详情你可以在 [这里](https://issues.apache.org/jira/browse/CB-8007)找到
-
-
-# LICENSE
-
-[MIT LICENSE](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
 

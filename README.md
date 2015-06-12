@@ -24,7 +24,7 @@ I also write a cordova plugin for WeiboSDK [here](https://github.com/iVanPan/cor
 1.  <del>you may get a error like this "platforms/android/libs/android-support-v4.jar" already exists!",because you may have duplicate android-support-v4.jar files in your android project. Remove android-support-v4.jar from the /libs folder of your project.	</del> fixed by hook	        		
 2. This plugin is required cordova-android version >=4.0,so using cordova  5.0.0 or higher is recommended
 3.  This plugin should be used after the deviceready event has been fired!!!				
-4. <del>If cordova version  <5.1.1,when two cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007).<del>Update:This Bug is fixed in last cordova version(5.1.1)	
+4. <del>If cordova version  <5.1.1,when two cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007).</del>Update:This Bug is fixed in last cordova version(5.1.1)	
 
 ##Usage                								
 					     
