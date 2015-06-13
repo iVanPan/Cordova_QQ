@@ -1,7 +1,7 @@
 # Cordova_QQ_插件
 [![version](https://img.shields.io/badge/version-0.3.2-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
-[![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)]()
-[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)]()
+[![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)
 	
 这个一个QQ SDK的Cordova 插件。 [English](https://github.com/iVanPan/Cordova_QQ)				
