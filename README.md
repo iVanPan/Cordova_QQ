@@ -1,5 +1,5 @@
 # Cordova Plugin For QQ SDK
-[![version](https://img.shields.io/badge/version-0.3.2-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
+[![version](https://img.shields.io/badge/version-0.3.5-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)					
@@ -9,8 +9,9 @@ I also write a cordova plugin for WeiboSDK [here](https://github.com/iVanPan/cor
 ## Feature
 1. QQ SSO Login
 2. QQ Logout 
-3.  QQ Share 
-4. checkClientInstalled		
+3. QQ Share 
+4. QZone Share
+5. checkClientInstalled		
 
 ## Requirements
 - Cordova Version 3.5+ 
@@ -59,6 +60,22 @@ YCQQ.shareToQQ(function(){
 },function(failReason){
 	console.log(failReason);
 },args);
+```
+### QZone Share
+```Javascript
+ var args = {};
+ args.url = "http://www.baidu.com";
+ args.title = "This is cordova QZone share ";
+ args.description = "This is cordova QZone share ";
+ var imgs =['https://www.baidu.com/img/bdlogo.png',
+ 'https://www.baidu.com/img/bdlogo.png',
+ 'https://www.baidu.com/img/bdlogo.png'];
+  args.imageUrl = imgs;
+  YCQQ.shareToQzone(function () {
+      alert("share success");
+  }, function (failReason) {
+      alert(failReason);
+  }, args);
 ```
 ### CheckClientInstalled
 ```Javascript

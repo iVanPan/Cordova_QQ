@@ -1,5 +1,5 @@
 # Cordova_QQ_插件
-[![version](https://img.shields.io/badge/version-0.3.2-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
+[![version](https://img.shields.io/badge/version-0.3.5-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)
@@ -10,6 +10,7 @@
 - QQ登录
 - QQ登出
 - QQ分享 
+- QQ空间分享
 - 检查QQ手机客户端端是否安装		
 
 ##安装要求
@@ -59,6 +60,22 @@ YCQQ.shareToQQ(function(){
 },function(failReason){
 	console.log(failReason);
 },args);
+```
+### QQ空间分享
+```Javascript
+ var args = {};
+ args.url = "http://www.baidu.com";
+ args.title = "This is cordova QZone share ";
+ args.description = "This is cordova QZone share ";
+ var imgs =['https://www.baidu.com/img/bdlogo.png',
+ 'https://www.baidu.com/img/bdlogo.png',
+ 'https://www.baidu.com/img/bdlogo.png'];
+  args.imageUrl = imgs;
+  YCQQ.shareToQzone(function () {
+      alert("share success");
+  }, function (failReason) {
+      alert(failReason);
+  }, args);
 ```
 ### 检查QQ客户端是否安装了
 ```Javascript
