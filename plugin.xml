@@ -3,7 +3,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="org.zy.yuancheng.qq"
-  version="0.3.2">
+  version="0.3.5">
 
   <name>YCQQ</name>
   <description>Cordova YCQQ Plugin</description>

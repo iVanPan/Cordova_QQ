@@ -10,5 +10,6 @@
 -(void)ssoLogin:(CDVInvokedUrlCommand*)command;
 -(void)logout:(CDVInvokedUrlCommand*)command;
 -(void)shareToQQ:(CDVInvokedUrlCommand *)command;
+-(void)shareToQzone:(CDVInvokedUrlCommand *)command;
 -(void)checkClientInstalled:(CDVInvokedUrlCommand *)command;
 @end
