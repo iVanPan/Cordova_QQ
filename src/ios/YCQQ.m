@@ -8,7 +8,9 @@ NSString *QQ_LOGIN_CANCEL = @"QQ login cancelled";
 NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
 
 @implementation YCQQ
-
+/**
+ *  插件初始化，主要用户appkey注册
+ */
 - (void)pluginInitialize {
     NSString *appId = [[self.commandDelegate settings] objectForKey:@"qq_app_id"];
     if (nil == self.tencentOAuth) {
@@ -17,8 +19,10 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
 }
 
 /**
-* QQ 单点登录
-*/
+ *  QQ单点登录
+ *
+ *  @param command CDVInvokedUrlCommand
+ */
 - (void)ssoLogin:(CDVInvokedUrlCommand *)command {
     NSString *checkQQInstalled = [command.arguments objectAtIndex:0];
     if (([checkQQInstalled integerValue] == 1)) {
@@ -36,8 +40,10 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
 }
 
 /**
-* QQ 登出
-*/
+ *  QQ 登出
+ *
+ *  @param command CDVInvokedUrlCommand
+ */
 - (void)logout:(CDVInvokedUrlCommand *)command {
     if (self.tencentOAuth.isSessionValid) {
         [self.tencentOAuth logout:self];
@@ -47,8 +53,10 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
 }
 
 /**
-* 检查客户端是否安装
-*/
+ *  检查QQ官方客户端是否安装
+ *
+ *  @param command CDVInvokedUrlCommand
+ */
 - (void)checkClientInstalled:(CDVInvokedUrlCommand *)command {
     if ([TencentOAuth iphoneQQInstalled] && [TencentOAuth iphoneQQSupportSSOLogin]) {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -61,8 +69,10 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
 }
 
 /**
-* 分享到QQ
-*/
+ *  分享到QQ
+ *
+ *  @param command CDVInvokedUrlCommand
+ */
 - (void)shareToQQ:(CDVInvokedUrlCommand *)command {
     self.callback = command.callbackId;
     NSDictionary *args = [command.arguments objectAtIndex:0];
@@ -79,8 +89,10 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
 }
 
 /**
-* 分享到QQ空间
-*/
+ *  分享到QQ空间
+ *
+ *  @param command CDVInvokedUrlCommand
+ */
 - (void)shareToQzone:(CDVInvokedUrlCommand *)command {
     self.callback = command.callbackId;
     NSDictionary *args = [command.arguments objectAtIndex:0];
@@ -97,8 +109,10 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
 }
 
 /**
-* 添加到QQ收藏
-*/
+ *  添加到收藏
+ *
+ *  @param command CDVInvokedUrlCommand
+ */
 - (void)addToQQFavorites:(CDVInvokedUrlCommand *)command {
     self.callback = command.callbackId;
     NSDictionary *args = [command.arguments objectAtIndex:0];
@@ -116,8 +130,13 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
 }
 
 /**
-* 构建新闻类分享实例
-*/
+ *  创建要分享的新闻类
+ *
+ *  @param args      新闻类所需要的参数
+ *  @param shareType 分享的类型
+ *
+ *  @return QQApiNewsObject
+ */
 - (QQApiNewsObject *)makeNewsObject:(NSDictionary *)args with:(int)shareType {
     if (!args) {
         return nil;
@@ -140,8 +159,10 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
 }
 
 /**
-* 处理URL
-*/
+ *  处理URL
+ *
+ *  @param notification cordova 传递进来的消息
+ */
 - (void)handleOpenURL:(NSNotification *)notification {
     NSURL *url = [notification object];
     if ([url isKindOfClass:[NSURL class]]) {
@@ -180,10 +201,11 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_LOGIN_NETWORK_ERROR];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
 }
-
 /**
-* QQ 请求回调函数
-*/
+ *  QQ 请求回调函数
+ *
+ *  @param sendResult 请求返回码
+ */
 - (void)handleSendResult:(QQApiSendResultCode)sendResult {
     switch (sendResult) {
         case EQQAPIAPPNOTREGISTED:
@@ -219,8 +241,10 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
 }
 
 /**
-* QQ 登录
-*/
+ *  QQ 登录
+ *
+ *  @param command CDVInvokedUrlCommand
+ */
 - (void)qqLogin:(CDVInvokedUrlCommand *)command {
     self.permissions = [NSArray arrayWithObjects:
             kOPEN_PERMISSION_GET_USER_INFO,
