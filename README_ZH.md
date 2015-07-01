@@ -1,5 +1,5 @@
 # Cordova_QQ_插件
-[![version](https://img.shields.io/badge/version-0.3.5-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
+[![version](https://img.shields.io/badge/version-0.3.6-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)
@@ -7,11 +7,12 @@
 这个一个QQ SDK的Cordova 插件。 [English](https://github.com/iVanPan/Cordova_QQ)				
 如果你希望使用一个微博的cordova插件可以查看[这里](https://github.com/iVanPan/cordova_weibo).
 ##主要功能
-- QQ登录
-- QQ登出
-- QQ分享 
-- QQ空间分享
-- 检查QQ手机客户端端是否安装		
+- QQ 登录
+- QQ 登出
+- QQ 分享 
+- QQ 空间分享
+- QQ 收藏
+- 检查 QQ 手机客户端端是否安装		
 
 ##安装要求
 - Cordova Version >=3.5
@@ -76,6 +77,20 @@ YCQQ.shareToQQ(function(){
   }, function (failReason) {
       alert(failReason);
   }, args);
+```
+###QQ 收藏
+```Javascript
+ var args = {};
+ args.url = "http://www.baidu.com";
+ args.title = "这个是cordova QQ 收藏测试";
+ args.description = "这个是cordova QQ 收藏测试";
+ args.imageUrl = "https://www.baidu.com/img/bdlogo.png";
+ args.appName = "cordova—QQ";
+ YCQQ.addToQQFavorites(function () {
+   alert("share success");
+ }, function (failReason) {
+   alert(failReason);
+ }, args);
 ```
 ### 检查QQ客户端是否安装了
 ```Javascript

@@ -51,6 +51,27 @@ module.exports = {
 		}
 		exec(successCallback, errorCallback, "YCQQ", "shareToQzone", [args]);
 	},
+	addToQQFavorites:function(successCallback, errorCallback,args){
+		if(args == null || args == undefined){
+			args = {};
+		}
+		if(args.url == null || args.url == undefined){
+			args.url = "";
+		}
+		if(args.title == null || args.title == undefined){
+			args.title = "";
+		}
+		if(args.description == null || args.description == undefined){
+			args.description = "";
+		}
+		if(args.imageUrl == null || args.imageUrl == undefined){
+			args.imageUrl = "";
+		}
+		if(args.appName == null || args.appName == undefined){
+			args.appName = "";
+		}
+		exec(successCallback, errorCallback, "YCQQ", "addToQQFavorites", [args]);
+	},
 	checkClientInstalled:function(successCallback, errorCallback){
 		exec(successCallback, errorCallback, "YCQQ", "checkClientInstalled", []);
 	}

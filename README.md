@@ -1,5 +1,5 @@
 # Cordova Plugin For QQ SDK
-[![version](https://img.shields.io/badge/version-0.3.5-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
+[![version](https://img.shields.io/badge/version-0.3.6-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)					
@@ -11,7 +11,8 @@ I also write a cordova plugin for WeiboSDK [here](https://github.com/iVanPan/cor
 2. QQ Logout 
 3. QQ Share 
 4. QZone Share
-5. checkClientInstalled		
+5. QQ Favorites
+6. checkClientInstalled		
 
 ## Requirements
 - Cordova Version 3.5+ 
@@ -76,6 +77,20 @@ YCQQ.shareToQQ(function(){
   }, function (failReason) {
       alert(failReason);
   }, args);
+```
+###QQ Favorites
+```Javascript
+ var args = {};
+ args.url = "http://www.baidu.com";
+ args.title = "这个是cordova QQ 收藏测试";
+ args.description = "这个是cordova QQ 收藏测试";
+ args.imageUrl = "https://www.baidu.com/img/bdlogo.png";
+ args.appName = "cordova—QQ";
+ YCQQ.addToQQFavorites(function () {
+   alert("share success");
+ }, function (failReason) {
+   alert(failReason);
+ }, args);
 ```
 ### CheckClientInstalled
 ```Javascript
