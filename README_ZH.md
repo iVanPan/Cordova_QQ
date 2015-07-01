@@ -101,7 +101,9 @@ YCQQ.checkClientInstalled(function(){
 	console.log('client is not installed');
 });
 ```
-    			
+#测试Demo
+在安装完这个插件以后，把 cordova 工程中的代码替换为 example_www中的代码，在build以后可以进行各个功能测试，以下为运行效果图：
+<div style="text-align:center"><img src="https://github.com/iVanPan/Cordova_QQ/blob/master/ScreenShot.png?raw=true" alt="example" style="width:300px"></div>			
 #错误码				
 使用SDK时，所有结果都会通过回调返回给应用。在回调的结果中，会包含每次调用结果的返回码。
 正常情况下返回码为0，表示调用成功。
