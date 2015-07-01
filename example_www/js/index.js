@@ -50,5 +50,18 @@ var app = function () {
     }, function (failReason) {
       alert(failReason);
     });
+  };
+  this.addToFavirtes = function(){
+    var args = {};
+    args.url = "http://www.baidu.com";
+    args.title = "这个是cordova QQ 收藏测试";
+    args.description = "这个是cordova QQ 收藏测试";
+    args.imageUrl = "https://www.baidu.com/img/bdlogo.png";
+    args.appName = "cordova—QQ";
+    YCQQ.addToQQFavorites(function () {
+      alert("share success");
+    }, function (failReason) {
+      alert(failReason);
+    }, args);
   }
 }
