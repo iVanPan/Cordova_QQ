@@ -1,0 +1,29 @@
+{
+  "name": "cordova-plugin-qqsdk",
+  "version": "1.0.0",
+  "description": "codrova/phonegap wrapper for qq sdk",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iVanPan/Cordova_QQ.git"
+  },
+  "keywords": [
+    "cordova",
+    "phonegap",
+    "plugin",
+    "qqsdk",
+    "qq",
+    "tercent",
+    "login",
+    "share"
+  ],
+  "author": "https://github.com/iVanPan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/21paradox/Cordova_QQ/issues"
+  },
+  "homepage": "https://github.com/21paradox/Cordova_QQ#readme"
+}
