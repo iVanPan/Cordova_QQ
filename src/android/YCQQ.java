@@ -404,6 +404,7 @@ public class YCQQ extends CordovaPlugin {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        mTencent.onActivityResultData(requestCode,resultCode,intent,loginListener);
         if (requestCode == Constants.REQUEST_API) {
             if (resultCode == Constants.RESULT_LOGIN) {
                 Tencent.handleResultData(intent, loginListener);
