@@ -1,5 +1,5 @@
 # Cordova Plugin For QQ SDK
-[![version](https://img.shields.io/badge/version-0.3.6-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
+[![version](https://img.shields.io/badge/version-0.3.7-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)					
@@ -28,6 +28,14 @@ I also write a cordova plugin for WeiboSDK [here](https://github.com/iVanPan/cor
 3. This plugin should be used after the deviceready event has been fired!!!				
 4. ~~If cordova version  <5.1.1,when two cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007)~~ Update:This Bug is fixed in last cordova version(5.1.1)	
 
+## About iOS 9
+
+###App Transport Security    				
+iOS 9 introduces a new security feature that blocks non-HTTPS traffic in your app. However,   Tencent QQ SDK not support HTTPS yet, this Plugin will turn off https and allow non-HTTPS traffic						
+### BitCode   		
+Apple introduces Bitcode in iOS 9 . However, Tencent QQ SDK not  support it ,you should set bitcode to No in your Xcode build Setting
+
+  
 ##Usage                								
 					     
 ### QQ SSO Login
