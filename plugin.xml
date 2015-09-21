@@ -3,7 +3,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-qqsdk"
-  version="0.3.7">
+  version="0.3.7.1">
 
   <name>YCQQ</name>
   <description>Cordova YCQQ Plugin</description>
@@ -63,7 +63,7 @@
     <config-file platform="ios" target="*-Info.plist" parent="NSAppTransportSecurity">
        <dict>
         <key>NSAllowsArbitraryLoads</key>
-        </true>
+        <true/>
       </dict>
     </config-file>
     <!--scheme query whitlist-->
