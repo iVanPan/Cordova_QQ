@@ -3,7 +3,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-qqsdk"
-  version="0.3.8">
+  version="0.3.9">
 
   <name>YCQQ</name>
   <description>Cordova YCQQ Plugin</description>
@@ -35,11 +35,11 @@
       <access origin = "https://openmobile.qq.com/*"/>
       <access origin = "http://qzonestyle.gtimg.cn/*"/>
       <access origin = "http://pub.idqqimg.com/*"/>
-      <access origin = "http://appsupport.qq.com/*"/>
-      <access origin = "http://support.qq.com/*"/>
       <access origin = "http://qzs.qq.com/*"/>
       <access origin = "http://m.qzone.com/*"/>
-
+      <access origin = "http://*.ptlogin2.qq.com/*"/>
+      <access origin = "http://*.qq.com/*"/>
+      <access origin = "http://q2.qlogo.cn/*" />
        <preference name="QQ_APP_ID" value="$QQ_APP_ID" />
      </config-file>
 
@@ -105,12 +105,12 @@
     <framework src="libsqlite3.dylib" />
     <framework src="libstdc++.dylib" />
     <framework src="libz.dylib" />
-    <!--QQ SDK version 2.9.0-->
+    <!--QQ SDK version 2.9.3-->
     <framework src="src/ios/TencentOpenAPI.framework" custom="true" framework="true"/>
     <resource-file src="src/ios/TencentOpenApi_IOS_Bundle.bundle" />
 
     <info>
-      安装完插件，请用XCode打开工程，查看URL Types里面QQ的URL type有没有，如果没有请手动添加.目前QQ SDK还没有支持Apple的鼻涕虫的技术，请在手动在Xcode中设置bitcode为NO/after installing this plugin,check the URL Types in your Xcode project.If you don't find URL Types for qqsdk，manually add it.As qq sdk not support bitcode yet，please set bitcode to No in Xcode.
+      安装完插件，请用XCode打开工程，查看URL Types里面QQ的URL type有没有，如果没有请手动添加.after installing this plugin,check the URL Types in your Xcode project.If you don't find URL Types for qqsdk，manually add it.
     </info>
   </platform>
     
@@ -125,10 +125,11 @@
       <access origin = "https://openmobile.qq.com/*"/>
       <access origin = "http://qzonestyle.gtimg.cn/*"/>
       <access origin = "http://pub.idqqimg.com/*"/>
-      <access origin = "http://appsupport.qq.com/*"/>
-      <access origin = "http://support.qq.com/*"/>
       <access origin = "http://qzs.qq.com/*"/>
       <access origin = "http://m.qzone.com/*"/>
+      <access origin = "http://*.ptlogin2.qq.com/*"/>
+      <access origin = "http://*.qq.com/*"/>
+      <access origin = "http://q2.qlogo.cn/*" />
 
       <preference name="QQ_APP_ID" value="$QQ_APP_ID" />
     </config-file>
@@ -159,8 +160,8 @@
     </activity>
   </config-file>
   <source-file src="src/android/YCQQ.java" target-dir="src/org/zy/yuancheng/qq" />
-  <!--QQ SDK version 2.9.1-->
-  <source-file src="src/android/open_sdk_r5276.jar" target-dir="libs/" />
+  <!--QQ SDK version 2.9.4-->
+  <source-file src="src/android/open_sdk_r5509.jar" target-dir="libs/" />
     <source-file src="src/android/mta-sdk-1.6.2.jar" target-dir="libs/" />
   <source-file src="src/android/android-support-v4.jar" target-dir="libs/" />
   </platform>
