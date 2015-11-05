@@ -1,5 +1,5 @@
 # Cordova_QQ_插件
-[![version](https://img.shields.io/badge/version-0.3.7-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
+[![version](https://img.shields.io/badge/version-0.3.9-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)
@@ -26,14 +26,13 @@
 1. <del>在安装过程中遇到如下错误"platforms/android/libs/android-support-v4.jar" already exists!",请将你android工程中的 android-support-v4.jar 文件删除再安装本插件 .</del> 已经通过 hook 脚本解决		        		
 2. 这个插件要求cordova-android 的版本 >=4.0,推荐使用 cordova  5.0.0 或更高的版本，因为从cordova 5.0 开始cordova-android 4.0 是默认使用的android版本
 3.  请在cordova的deviceready事件触发以后再调用本插件！！！		
-4. <del>在低于5.1.1的cordova版本中存在一个Bug，如果你有多个插件要修改iOS工程中的 “*-Info.plist” CFBundleURLTypes, 只有第一个安装的插件才会生效.所以安装完插件请务必在你的Xcode工程里面检查一下URLTypes。 关于这个bug的详情你可以在 [这里](https://issues.apache.org/jira/browse/CB-8007)找到</del> 建议安装使用5.1.1及以上的cordova版本 				
+4. <del>在低于5.1.1的cordova版本中存在一个Bug，如果你有多个插件要修改iOS工程中的 “*-Info.plist” CFBundleURLTypes, 只有第一个安装的插件才会生效.所以安装完插件请务必在你的Xcode工程里面检查一下URLTypes。 关于这个bug的详情你可以在 [这里](https://issues.apache.org/jira/browse/CB-8007)找到</del> 建议安装使用5.1.1及以上的cordova版本 	
+5. Android版本请确保你的签名是正确的			
 
 	
 ## 关于 iOS 9 适配					
 ###App Transport Security							
 在 iOS 9 中 Apple 默认要求使用HTTPS ，由于目前 QQ SDK 还不支持，安装完这个插件以后将不再默认使用HTTPS						
-### BitCode						
-在 iOS 9 中苹果引入了BitCode 技术，目前 QQ SDK 还不支持该技术，请安装完该插件以后打开Xcode，在Build Setting 里面将 ENABLE_BITCODE 设置为 No
 
 ##使用方式                								
 					     
