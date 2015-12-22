@@ -302,7 +302,7 @@ public class YCQQ extends CordovaPlugin {
         }
 
         @Override
-        public void onError(UiError uiError) {
+        public void onError(UiError e) {
             String msg = String.format("[%1$d]%2$s: %3$s", e.errorCode, e.errorMessage, e.errorDetail);
             YCQQ.this.webView.sendPluginResult(new PluginResult(
                     PluginResult.Status.ERROR, msg), currentCallbackContext.getCallbackId());
