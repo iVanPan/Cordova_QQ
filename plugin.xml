@@ -3,7 +3,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-qqsdk"
-  version="0.3.9">
+  version="0.4.0">
 
   <name>YCQQ</name>
   <description>Cordova YCQQ Plugin</description>
@@ -16,8 +16,8 @@
 
   <!--require cordova version -->
   <engines>
-    <engine name="cordova" version=">=3.5.0" />
-     <engine name="cordova-android" version=">=4.0.0-dev" />
+    <engine name="cordova" version=">=4.0.0" />
+     <engine name="cordova-android" version=">=4.0.0" />
   </engines>
 
   <!-- js module-->
@@ -59,13 +59,6 @@
       </array>
     </config-file>
 
-    <!--allow non-HTTPS traffic -->
-    <config-file platform="ios" target="*-Info.plist" parent="NSAppTransportSecurity">
-       <dict>
-        <key>NSAllowsArbitraryLoads</key>
-        <true/>
-      </dict>
-    </config-file>
     <!--scheme query whitlist-->
     <config-file platform="ios" target="*-Info.plist" parent="LSApplicationQueriesSchemes">
         <array>

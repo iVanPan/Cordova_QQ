@@ -12,6 +12,7 @@ var app = function () {
     YCQQ.ssoLogin(function (args) {
       alert(args.access_token);
       alert(args.userid);
+      alert(args.expires_time);
     }, function (failReason) {
       alert(failReason);
     }, checkClientIsInstalled);

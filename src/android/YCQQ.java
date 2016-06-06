@@ -82,7 +82,7 @@ public class YCQQ extends CordovaPlugin {
         currentCallbackContext = callbackContext;
         if (mTencent.isSessionValid()) {
             JSONObject jo = makeJson(mTencent.getAccessToken(),
-                    mTencent.getOpenId());
+                    mTencent.getOpenId(),mTencent.getExpiresIn());
             this.webView.sendPluginResult(new PluginResult(
                     PluginResult.Status.OK, jo), callbackContext.getCallbackId());
             return true;
@@ -296,7 +296,7 @@ public class YCQQ extends CordovaPlugin {
             }
             initOpenidAndToken(jsonResponse);
             JSONObject jo = makeJson(mTencent.getAccessToken(),
-                    mTencent.getOpenId());
+                    mTencent.getOpenId(),mTencent.getExpiresIn());
             YCQQ.this.webView.sendPluginResult(new PluginResult(
                     PluginResult.Status.OK, jo), currentCallbackContext.getCallbackId());
         }
@@ -394,9 +394,12 @@ public class YCQQ extends CordovaPlugin {
      * @param userid
      * @return
      */
-    private JSONObject makeJson(String access_token, String userid) {
+    private JSONObject makeJson(String access_token, String userid, long expires_time) {
         String json = "{\"access_token\": \"" + access_token
-                + "\",  \"userid\": \"" + userid + "\"}";
+                + "\", " +
+                " \"userid\": \"" + userid + "\"" +
+                " \"expires_time\": \"" + expires_time + "\"" +
+                "}";
         JSONObject jo = null;
         try {
             jo = new JSONObject(json);
