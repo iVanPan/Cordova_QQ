@@ -1,5 +1,5 @@
 # Cordova_QQ_插件
-[![version](https://img.shields.io/badge/version-0.3.9-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
+[![version](https://img.shields.io/badge/version-0.4.0-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)
@@ -17,22 +17,18 @@
 ##安装要求
 - Cordova Version >=3.5
 - Cordova-Android >=4.0
+- Cordova-iOS >=4.0
 
 ##安装
 1. 命令行运行      ```cordova plugin add https://github.com/iVanPan/Cordova_QQ.git --variable QQ_APP_ID=YOUR_QQ_APPID```  或者  ```cordova plugin add cordova-plugin-qqsdk --variable QQ_APP_ID=YOUR_QQ_APPID```              
-2. 命令行运行 cordova build     
+2. 命令行运行 cordova build --device     
  		
-##注意事项			
-1. <del>在安装过程中遇到如下错误"platforms/android/libs/android-support-v4.jar" already exists!",请将你android工程中的 android-support-v4.jar 文件删除再安装本插件 .</del> 已经通过 hook 脚本解决		        		
-2. 这个插件要求cordova-android 的版本 >=4.0,推荐使用 cordova  5.0.0 或更高的版本，因为从cordova 5.0 开始cordova-android 4.0 是默认使用的android版本
-3.  请在cordova的deviceready事件触发以后再调用本插件！！！		
-4. <del>在低于5.1.1的cordova版本中存在一个Bug，如果你有多个插件要修改iOS工程中的 “*-Info.plist” CFBundleURLTypes, 只有第一个安装的插件才会生效.所以安装完插件请务必在你的Xcode工程里面检查一下URLTypes。 关于这个bug的详情你可以在 [这里](https://issues.apache.org/jira/browse/CB-8007)找到</del> 建议安装使用5.1.1及以上的cordova版本 	
-5. Android版本请确保你的签名是正确的			
-
-	
-## 关于 iOS 9 适配					
-###App Transport Security							
-在 iOS 9 中 Apple 默认要求使用HTTPS ，由于目前 QQ SDK 还不支持，安装完这个插件以后将不再默认使用HTTPS						
+##注意事项					        	
+1. 这个插件要求cordova-android 的版本 >=4.0,推荐使用 cordova  5.0.0 或更高的版本，因为从cordova 5.0 开始cordova-android 4.0 是默认使用的android版本
+2.  请在cordova的deviceready事件触发以后再调用本插件！！！		
+3. <del>在低于5.1.1的cordova版本中存在一个Bug，如果你有多个插件要修改iOS工程中的 “*-Info.plist” CFBundleURLTypes, 只有第一个安装的插件才会生效.所以安装完插件请务必在你的Xcode工程里面检查一下URLTypes。 关于这个bug的详情你可以在 [这里](https://issues.apache.org/jira/browse/CB-8007)找到</del> 建议安装使用5.1.1及以上的cordova版本 	
+4. Android版本请确保你的签名是正确的			
+				
 
 ##使用方式                								
 					     
@@ -40,8 +36,9 @@
 ```Javascript
 var checkClientIsInstalled = 1;//默认值是 0,仅仅针对 iOS平台有效![]()
 YCQQ.ssoLogin(function(args){
-         alert(args.access_token);
-         alert(args.userid);
+      alert("token is " + args.access_token);
+      alert("userid is " +args.userid);
+      alert("expires_time is "+ new Date(parseInt(args.expires_time)) + " TimeStamp is " +args.expires_time);
       },function(failReason){
          console.log(failReason);
 },checkClientIsInstalled);

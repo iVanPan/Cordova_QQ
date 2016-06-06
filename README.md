@@ -1,5 +1,5 @@
 # Cordova Plugin For QQ SDK
-[![version](https://img.shields.io/badge/version-0.3.9-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
+[![version](https://img.shields.io/badge/version-0.4.0-blue.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)					
@@ -16,23 +16,19 @@ I also write a cordova plugin for WeiboSDK [here](https://github.com/iVanPan/cor
 
 ## Requirements
 - Cordova Version 3.5+ 
-- Cordova-Android >=4.0			
+- Cordova-Android >=4.0
+- Cordova-iOS >=4.0			
 
 ##Installation
 1. ```cordova plugin add https://github.com/iVanPan/Cordova_QQ.git --variable QQ_APP_ID=YOUR_QQ_APPID``` or ```cordova plugin add cordova-plugin-qqsdk --variable QQ_APP_ID=YOUR_QQ_APPID```                  
-2. cordova build          			
+2. cordova build --device          			
 
-##Notes			
-1.  <del>you may get a error like this "platforms/android/libs/android-support-v4.jar" already exists!",because you may have duplicate android-support-v4.jar files in your android project. Remove android-support-v4.jar from the /libs folder of your project.	</del> fixed by hook	        		
-2. This plugin is required cordova-android version >=4.0,so using cordova  5.0.0 or higher is recommended
-3. This plugin should be used after the deviceready event has been fired!!!				
-4. ~~If cordova version  <5.1.1,when two cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007)~~ Update:This Bug is fixed in last cordova version(5.1.1)	
-5. For Android: make sure your signature is correct !!!
-
-## About iOS 9
-
-###App Transport Security    				
-iOS 9 introduces a new security feature that blocks non-HTTPS traffic in your app. However,   Tencent QQ SDK not support HTTPS yet, this Plugin will turn off https and allow non-HTTPS traffic						
+##Notes			     		
+1. This plugin is required cordova-android version >=4.0,so using cordova  5.0.0 or higher is recommended
+2. This plugin should be used after the deviceready event has been fired!!!				
+3. ~~If cordova version  <5.1.1,when two cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007)~~ Update:This Bug is fixed in last cordova version(5.1.1)	
+4. For Android: make sure your signature is correct !!!
+						
 
 ##Usage                								
 					     
@@ -40,8 +36,9 @@ iOS 9 introduces a new security feature that blocks non-HTTPS traffic in your ap
 ```Javascript
 var checkClientIsInstalled = 1;//default is 0,only for iOS
 YCQQ.ssoLogin(function(args){
-      alert(args.access_token);
-      alert(args.userid);
+      alert("token is " + args.access_token);
+      alert("userid is " +args.userid);
+      alert("expires_time is "+ new Date(parseInt(args.expires_time)) + " TimeStamp is " +args.expires_time);
       },function(failReason){
        console.log(failReason);
 },checkClientIsInstalled);
