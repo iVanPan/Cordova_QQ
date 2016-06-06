@@ -10,9 +10,9 @@ var app = function () {
   this.ssoLogin = function () {
     var checkClientIsInstalled = 0;//default is 0,only for iOS
     YCQQ.ssoLogin(function (args) {
-      alert(args.access_token);
-      alert(args.userid);
-      alert(args.expires_time);
+      alert("token is " + args.access_token);
+      alert("userid is " +args.userid);
+      alert("expires_time is "+ new Date(parseInt(args.expires_time)) + " TimeStamp is " +args.expires_time);
     }, function (failReason) {
       alert(failReason);
     }, checkClientIsInstalled);

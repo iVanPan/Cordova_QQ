@@ -392,13 +392,13 @@ public class YCQQ extends CordovaPlugin {
      *
      * @param access_token
      * @param userid
+     * @param expires_time
      * @return
      */
     private JSONObject makeJson(String access_token, String userid, long expires_time) {
-        String json = "{\"access_token\": \"" + access_token
-                + "\", " +
-                " \"userid\": \"" + userid + "\"" +
-                " \"expires_time\": \"" + expires_time + "\"" +
+        String json = "{\"access_token\": \"" + access_token + "\", " +
+                " \"userid\": \"" + userid + "\", " +
+                " \"expires_time\": \"" + String.valueOf(expires_time) + "\"" +
                 "}";
         JSONObject jo = null;
         try {

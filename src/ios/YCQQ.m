@@ -176,7 +176,7 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
         NSMutableDictionary *Dic = [NSMutableDictionary dictionaryWithCapacity:2];
         [Dic setObject:self.tencentOAuth.openId forKey:@"userid"];
         [Dic setObject:self.tencentOAuth.accessToken forKey:@"access_token"];
-        [Dic setObject:self.tencentOAuth.expirationDate forKey:@"expires_time"];
+        [Dic setObject:[NSString stringWithFormat:@"%f",[self.tencentOAuth.expirationDate timeIntervalSince1970] * 1000] forKey:@"expires_time"];
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:Dic];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
     }
@@ -267,7 +267,7 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
         NSMutableDictionary *Dic = [NSMutableDictionary dictionaryWithCapacity:2];
         [Dic setObject:self.tencentOAuth.openId forKey:@"userid"];
         [Dic setObject:self.tencentOAuth.accessToken forKey:@"access_token"];
-        [Dic setObject:self.tencentOAuth.expirationDate forKey:@"expires_time"];
+        [Dic setObject:[NSString stringWithFormat:@"%f",[self.tencentOAuth.expirationDate timeIntervalSince1970] * 1000] forKey:@"expires_time"];
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:Dic];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
     }
