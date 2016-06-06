@@ -340,20 +340,6 @@ typedef enum
 - (BOOL)getVipRichInfo;
 
 /**
- * 获取微博好友名称输入提示,即通过字符串查找匹配的微博好友
- * \param params 参数字典,字典的关键字参见TencentOAuthObject.h中的\ref TCMatchNickTipsDic
- * \return 处理结果，YES表示API调用成功，NO表示API调用失败，登录态失败，重新登录
- */
-- (BOOL)matchNickTips:(NSMutableDictionary *)params;
-
-/**
- * 获取最近的微博好友
- * \param params 参数字典,字典的关键字参见TencentOAuthObject.h中的\ref TCGetIntimateFriendsDic
- * \return 处理结果，YES表示API调用成功，NO表示API调用失败，登录态失败，重新登录
- */
-- (BOOL)getIntimateFriends:(NSMutableDictionary *)params;
-
-/**
  * QZone定向分享，可以@到具体好友，完成后将触发responseDidReceived:forMessage:回调，message：“SendStory”
  * \param params 参数字典
  * \param fopenIdArray 第三方应用预传人好友列表，好友以openid标识
@@ -603,22 +589,6 @@ typedef enum
  * \param response API返回结果，具体定义参见sdkdef.h文件中\ref APIResponse
  */
 - (void)getVipRichInfoResponse:(APIResponse*) response;
-
-/**
- * 获取微博好友名称输入提示回调
- * \param response API返回结果，具体定义参见sdkdef.h文件中\ref APIResponse
- * \remarks 正确返回示例: \snippet example/matchNickTipsResponse.exp success
- *          错误返回示例: \snippet example/matchNickTipsResponse.exp fail
- */
-- (void)matchNickTipsResponse:(APIResponse*) response;
-
-/**
- * 获取最近的微博好友回调
- * \param response API返回结果，具体定义参见sdkdef.h文件中\ref APIResponse
- * \remarks 正确返回示例: \snippet example/getIntimateFriendsResponse.exp success
- *          错误返回示例: \snippet example/getIntimateFriendsResponse.exp fail
- */
-- (void)getIntimateFriendsResponse:(APIResponse*) response;
 
 /**
  * sendStory分享的回调（已废弃，使用responseDidReceived:forMessage:）

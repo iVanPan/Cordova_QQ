@@ -11,9 +11,9 @@
   <keywords>cordova,qq</keywords>
   <repo>https://github.com/iVanPan/Cordova_QQ</repo>
   <issue>https://github.com/iVanPan/Cordova_QQ/issues</issue>
-  
+
   <preference name="QQ_APP_ID" />
-  
+
   <!--require cordova version -->
   <engines>
     <engine name="cordova" version=">=3.5.0" />
@@ -58,7 +58,7 @@
         </dict>
       </array>
     </config-file>
-  
+
     <!--allow non-HTTPS traffic -->
     <config-file platform="ios" target="*-Info.plist" parent="NSAppTransportSecurity">
        <dict>
@@ -101,11 +101,11 @@
     <framework src="CoreTelephony.framework" />
     <framework src="SystemConfiguration.framework" />
     <framework src="Security.framework" />
-    <framework src="libiconv.dylib" />
-    <framework src="libsqlite3.dylib" />
-    <framework src="libstdc++.dylib" />
-    <framework src="libz.dylib" />
-    <!--QQ SDK version 2.9.3-->
+    <framework src="libiconv.tbd" />
+    <framework src="libsqlite3.tbd" />
+    <framework src="libstdc++.tbd" />
+    <framework src="libz.tbd" />
+    <!--QQ SDK version 3.1.0-->
     <framework src="src/ios/TencentOpenAPI.framework" custom="true" framework="true"/>
     <resource-file src="src/ios/TencentOpenApi_IOS_Bundle.bundle" />
 
@@ -113,10 +113,10 @@
       安装完插件，请用XCode打开工程，查看URL Types里面QQ的URL type有没有，如果没有请手动添加.after installing this plugin,check the URL Types in your Xcode project.If you don't find URL Types for qqsdk，manually add it.
     </info>
   </platform>
-    
+
   <!-- android -->
   <platform name="android">
-    <hook type="before_plugin_install" src="scripts/android/android-hook.js" />
+    <!-- <hook type="before_plugin_install" src="scripts/android/android-hook.js" /> -->
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="YCQQ" >
         <param name="android-package" value="org.zy.yuancheng.qq.YCQQ"/>
@@ -137,7 +137,7 @@
   <config-file target="AndroidManifest.xml" parent="/manifest">
       <uses-permission android:name="android.permission.INTERNET" />
       <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> 
+      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     </config-file>
   <!--QQ webview Auth Activity -->
   <config-file target="AndroidManifest.xml" parent="/manifest/application">
@@ -160,9 +160,9 @@
     </activity>
   </config-file>
   <source-file src="src/android/YCQQ.java" target-dir="src/org/zy/yuancheng/qq" />
-  <!--QQ SDK version 2.9.4-->
-  <source-file src="src/android/open_sdk_r5509.jar" target-dir="libs/" />
-    <source-file src="src/android/mta-sdk-1.6.2.jar" target-dir="libs/" />
-  <source-file src="src/android/android-support-v4.jar" target-dir="libs/" />
+  <!--QQ SDK version 3.1.0-->
+  <source-file src="src/android/open_sdk_r5756.jar" target-dir="libs/" />
+  <source-file src="src/android/mta-sdk-1.6.2.jar" target-dir="libs/" />
+  <framework src="com.android.support:support-v4:23.3.0+" />
   </platform>
 </plugin>

@@ -28,6 +28,8 @@ typedef enum
     EQQAPIQZONENOTSUPPORTTEXT = 10000,
     //qzone分享不支持image类型分享
     EQQAPIQZONENOTSUPPORTIMAGE = 10001,
+    //当前QQ版本太低，需要更新至新版本才可以支持
+    EQQAPIVERSIONNEEDUPDATE = 10002,
 } QQApiSendResultCode;
 
 #pragma mark - QQApiObject(分享对象类型)
@@ -440,6 +442,19 @@ typedef enum QQApiURLTargetType{
 
 -(id)initWithGameConsortium:(NSString*)signature unionid:(NSString*)unionid zoneID:(NSString*)zoneID appDisplayName:(NSString*)appDisplayName; ///<初始化方法
 +(id)objectWithGameConsortium:(NSString*)signature unionid:(NSString*)unionid zoneID:(NSString*)zoneID appDisplayName:(NSString*)appDisplayName; ///<工厂方法，获取一个QQApiAddFriendObject对象.
+
+@end
+
+// QQApiGameConsortiumBindingGroupObject
+/** \brief 加入群
+ */
+@interface QQApiJoinGroupObject : QQApiObject
+@property (nonatomic,retain)NSString* groupUin;
+@property (nonatomic,retain)NSString* groupKey;
+
+- (id)initWithGroupInfo:(NSString*)groupUin key:(NSString*)groupKey; ///<初始化方法
++ (id)objectWithGroupInfo:(NSString*)groupUin key:(NSString*)groupKey; ///<同时提供群号和群KEY 工厂方法，获取一个QQApiAddFriendObject对象.
++ (id)objectWithGroupKey:(NSString*)groupKey; ///<只需要群的KEY 工厂方法，获取一个QQApiAddFriendObject对象.
 
 @end
 
