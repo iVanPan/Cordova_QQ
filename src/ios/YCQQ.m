@@ -6,13 +6,15 @@ NSString *QQ_PARAM_NOT_FOUND = @"param is not found";
 NSString *QQ_LOGIN_ERROR = @"QQ login error";
 NSString *QQ_LOGIN_CANCEL = @"QQ login cancelled";
 NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
+NSString *QQ_SHARE_CANCEL = @"QQ share cancelled by user";
+NSString *appId=@"";
 
 @implementation YCQQ
 /**
  *  插件初始化，主要用户appkey注册
  */
 - (void)pluginInitialize {
-    NSString *appId = [[self.commandDelegate settings] objectForKey:@"qq_app_id"];
+    appId = [[self.commandDelegate settings] objectForKey:@"qq_app_id"];
     if (nil == self.tencentOAuth) {
         self.tencentOAuth = [[TencentOAuth alloc] initWithAppId:appId andDelegate:self];
     }
@@ -79,8 +81,7 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
     if (args) {
         QQApiNewsObject *newsObj = [self makeNewsObject:args with:1];
         SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:newsObj];
-        QQApiSendResultCode sent = [QQApiInterface sendReq:req];
-        [self handleSendResult:sent];
+        [QQApiInterface sendReq:req];
     }
     else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
@@ -99,8 +100,7 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
     if (args) {
         QQApiNewsObject *newsObj = [self makeNewsObject:args with:2];
         SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:newsObj];
-        QQApiSendResultCode sent = [QQApiInterface SendReqToQZone:req];
-        [self handleSendResult:sent];
+        [QQApiInterface SendReqToQZone:req];
     }
     else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
@@ -120,8 +120,7 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
         QQApiNewsObject *newsObj = [self makeNewsObject:args with:1];
         [newsObj setCflag:kQQAPICtrlFlagQQShareFavorites];
         SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:newsObj];
-        QQApiSendResultCode sent = [QQApiInterface sendReq:req];
-        [self handleSendResult:sent];
+        [QQApiInterface sendReq:req];
     }
     else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
@@ -165,10 +164,43 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
  */
 - (void)handleOpenURL:(NSNotification *)notification {
     NSURL *url = [notification object];
-    if ([url isKindOfClass:[NSURL class]]) {
+    NSString *schemaPrefix = [@"tencent" stringByAppendingString:appId];
+    if ([url isKindOfClass:[NSURL class]] && [[url absoluteString] hasPrefix:[schemaPrefix stringByAppendingString:@"://response_from_qq"]]) {
+        [QQApiInterface handleOpenURL:url delegate:self];
+    } else {
         [TencentOAuth HandleOpenURL:url];
     }
 }
+
+#pragma mark - QQApiInterfaceDelegate
+- (void)onReq:(QQBaseReq *)req {
+    NSLog(@"req is %@",req);
+}
+- (void)onResp:(QQBaseResp *)resp {
+    NSLog(@" ----resp %@",resp.result);
+    switch ([resp.result integerValue]) {
+        case 0: {
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
+            break;
+        }
+        case -4: {
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_SHARE_CANCEL];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
+            break;
+        }
+        default:{
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
+            break;
+        }
+    }
+}
+- (void)isOnlineResponse:(NSDictionary *)response {
+     NSLog(@"response is %@",response);
+}
+
+
 
 #pragma mark - TencentSessionDelegate
 - (void)tencentDidLogin {
@@ -202,45 +234,6 @@ NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_LOGIN_NETWORK_ERROR];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
 }
-/**
- *  QQ 请求回调函数
- *
- *  @param sendResult 请求返回码
- */
-- (void)handleSendResult:(QQApiSendResultCode)sendResult {
-    switch (sendResult) {
-        case EQQAPIAPPNOTREGISTED:
-        case EQQAPIMESSAGECONTENTINVALID:
-        case EQQAPIMESSAGECONTENTNULL:
-        case EQQAPIMESSAGETYPEINVALID:
-        case EQQAPIQQNOTINSTALLED:
-        case EQQAPIQQNOTSUPPORTAPI:
-        case EQQAPISENDFAILD: {
-            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-            [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
-            break;
-        }
-
-        case EQQAPISENDSUCESS: {
-            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-            [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
-            break;
-        }
-
-        case EQQAPIAPPSHAREASYNC: {
-            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-            [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
-            break;
-        }
-
-        default: {
-            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-            [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
-            break;
-        }
-    }
-}
-
 /**
  *  QQ 登录
  *
