@@ -139,6 +139,9 @@ public class YCQQ extends CordovaPlugin {
             if (imgUrl.startsWith("http://") || imgUrl.startsWith("https://")) {
                 params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, imgUrl);
             }
+            else {
+                params.putString(QQShare.SHARE_TO_QQ_IMAGE_LOCAL_URL, imgUrl);
+            }
         }
         if (json.has("appName") && !json.getString("appName").equalsIgnoreCase("")) {
             params.putString(QQShare.SHARE_TO_QQ_APP_NAME, json.getString("appName"));
@@ -185,6 +188,9 @@ public class YCQQ extends CordovaPlugin {
         for (int i = 0; i < imgUrl.length(); i++) {
             if (imgUrl.get(i) != null && !imgUrl.get(i).toString().equalsIgnoreCase("")) {
                 if (imgUrl.get(i).toString().startsWith("http://") || imgUrl.get(i).toString().startsWith("https://")) {
+                    imageUrls.add(imgUrl.get(i).toString());
+                }
+                else {
                     imageUrls.add(imgUrl.get(i).toString());
                 }
             }
