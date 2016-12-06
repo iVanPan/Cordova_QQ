@@ -9,9 +9,12 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
-     document.addEventListener("deviceready", function(){
-      alert('device ready now');
+     document.addEventListener("deviceready", function() {
       appintance = new app();
+
+      appintance.prepareImage();
+      
+      alert('device ready now');
      }, true); 
 </script>
 <title>Corodva QQ Plugin Exmaple</title>
@@ -23,7 +26,9 @@
           <button type="button" class="btn btn-primary btn-block" onclick="appintance.ssoLogin()">QQ登录</button>
           <button type="button" class="btn btn-primary btn-block" onclick="appintance.logout()">QQ登出</button>
           <button type="button" class="btn btn-primary btn-block" onclick="appintance.shareToQQ()">QQ分享</button>
+          <button type="button" class="btn btn-primary btn-block" onclick="appintance.shareLocalImageToQQ()">QQ分享本地图片</button>
           <button type="button" class="btn btn-primary btn-block" onclick="appintance.shareToQzone()">QZone分享</button>
+          <button type="button" class="btn btn-primary btn-block" onclick="appintance.shareLocalImageToQzone()">QZone分享本地图片</button>
           <button type="button" class="btn btn-primary btn-block" onclick="appintance.addToFavirtes()">QQ收藏</button>
         </div>
       </div>

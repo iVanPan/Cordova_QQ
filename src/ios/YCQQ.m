@@ -142,18 +142,40 @@ NSString *appId=@"";
     }
     NSString *url = [args objectForKey:@"url"];
     NSString *previewImageUrl;
+    NSData *previewImageData;
     if (shareType == 1) {
         previewImageUrl = [args objectForKey:@"imageUrl"];
+        if (NSNotFound == [previewImageUrl rangeOfString:@"http://" options:NSCaseInsensitiveSearch].location &&
+            NSNotFound == [previewImageUrl rangeOfString:@"https://" options:NSCaseInsensitiveSearch].location) {
+            previewImageData = [NSData dataWithContentsOfFile:previewImageUrl];
+            previewImageUrl = nil;
+        }
     }
     else if (shareType == 2) {
         previewImageUrl = [[args objectForKey:@"imageUrl"] objectAtIndex:0];
+        if (NSNotFound == [previewImageUrl rangeOfString:@"http://" options:NSCaseInsensitiveSearch].location &&
+            NSNotFound == [previewImageUrl rangeOfString:@"https://" options:NSCaseInsensitiveSearch].location) {
+            previewImageData = [NSData dataWithContentsOfFile:previewImageUrl];
+            previewImageUrl = nil;
+        }
     }
 
-    QQApiNewsObject *newsObj = [QQApiNewsObject
+    QQApiNewsObject *newsObj;
+    if (previewImageUrl) {
+        newsObj = [QQApiNewsObject
             objectWithURL:[NSURL URLWithString:url]
                     title:[args objectForKey:@"title"]
               description:[args objectForKey:@"description"]
           previewImageURL:[NSURL URLWithString:previewImageUrl]];
+    }
+    else {
+        newsObj = [QQApiNewsObject
+            objectWithURL:[NSURL URLWithString:url]
+                    title:[args objectForKey:@"title"]
+              description:[args objectForKey:@"description"]
+         previewImageData:previewImageData];
+    }
+
     return newsObj;
 }
 
