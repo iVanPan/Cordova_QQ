@@ -3,10 +3,10 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-qqsdk"
-  version="0.4.0">
+  version="0.8.0">
 
-  <name>YCQQ</name>
-  <description>Cordova YCQQ Plugin</description>
+  <name>cordova-plugin-qqsdk</name>
+  <description>Cordova Plugin QQSDK</description>
   <license>MIT</license>
   <keywords>cordova,qq</keywords>
   <repo>https://github.com/iVanPan/Cordova_QQ</repo>
@@ -21,25 +21,25 @@
   </engines>
 
   <!-- js module-->
-  <js-module src="www/ycqq.js" name="ycqq">
-    <clobbers target="YCQQ" />
+  <js-module src="www/qq.js" name="QQSDK">
+    <clobbers target="QQSDK" />
   </js-module>
 
   <!-- ios -->
   <platform name="ios">
     <config-file target="config.xml" parent="/*">
-        <feature name="YCQQ">
-         <param name="ios-package" value="YCQQ"/>
+        <feature name="QQSDK">
+         <param name="ios-package" value="QQSDK"/>
        </feature>
        <!--whitelist for QQ SDK-->
-      <access origin = "https://openmobile.qq.com/*"/>
+<!--       <access origin = "https://openmobile.qq.com/*"/>
       <access origin = "http://qzonestyle.gtimg.cn/*"/>
       <access origin = "http://pub.idqqimg.com/*"/>
       <access origin = "http://qzs.qq.com/*"/>
       <access origin = "http://m.qzone.com/*"/>
       <access origin = "http://*.ptlogin2.qq.com/*"/>
       <access origin = "http://*.qq.com/*"/>
-      <access origin = "http://q2.qlogo.cn/*" />
+      <access origin = "http://q2.qlogo.cn/*" /> -->
        <preference name="QQ_APP_ID" value="$QQ_APP_ID" />
      </config-file>
 
@@ -72,6 +72,7 @@
             <string>mqqopensdkapi</string>
             <string>mqqopensdkapiV2</string>
             <string>mqqopensdkapiV3</string>
+            <string>mqqopensdkapiV4</string>
             <string>mqzoneopensdk</string>
             <string>wtloginmqq</string>
             <string>wtloginmqq2</string>
@@ -87,8 +88,8 @@
             <string>mqzoneopensdk</string>
         </array>
     </config-file>
-    <header-file src="src/ios/YCQQ.h"/>
-    <source-file src="src/ios/YCQQ.m"/>
+    <header-file src="src/ios/CDVQQSDK.h"/>
+    <source-file src="src/ios/CDVQQSDK.m"/>
     <!--required frameworks for qq sdk-->
     <framework src="CoreGraphics.framework" />
     <framework src="CoreTelephony.framework" />
@@ -98,7 +99,7 @@
     <framework src="libsqlite3.tbd" />
     <framework src="libstdc++.tbd" />
     <framework src="libz.tbd" />
-    <!--QQ SDK version 3.1.0-->
+    <!--QQ SDK version 3.1.3-->
     <framework src="src/ios/TencentOpenAPI.framework" custom="true" framework="true"/>
     <resource-file src="src/ios/TencentOpenApi_IOS_Bundle.bundle" />
 
@@ -109,10 +110,9 @@
 
   <!-- android -->
   <platform name="android">
-    <!-- <hook type="before_plugin_install" src="scripts/android/android-hook.js" /> -->
     <config-file target="res/xml/config.xml" parent="/*">
-      <feature name="YCQQ" >
-        <param name="android-package" value="org.zy.yuancheng.qq.YCQQ"/>
+      <feature name="QQSDK" >
+        <param name="android-package" value="me.vanpan.qqsdk.QQSDKPlugin"/>
       </feature>
       <!--whitelist for QQ SDK-->
       <access origin = "https://openmobile.qq.com/*"/>
@@ -152,7 +152,7 @@
       android:theme="@android:style/Theme.Translucent.NoTitleBar" >
     </activity>
   </config-file>
-  <source-file src="src/android/YCQQ.java" target-dir="src/org/zy/yuancheng/qq" />
+  <source-file src="src/android/QQSDKPlugin.java" target-dir="src/me/vanpan/qqsdk" />
   <!--QQ SDK version 3.1.0-->
   <source-file src="src/android/open_sdk_r5756.jar" target-dir="libs/" />
   <source-file src="src/android/mta-sdk-1.6.2.jar" target-dir="libs/" />
