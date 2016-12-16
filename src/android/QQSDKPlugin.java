@@ -57,6 +57,7 @@ class ImageType {
 }
 
 public class QQSDKPlugin extends CordovaPlugin  {
+    public static final String TAG = "cordova-plugin-qqsdk";
     private static Tencent mTencent;
     private CallbackContext currentCallbackContext;
     private String APP_ID;
@@ -78,6 +79,7 @@ public class QQSDKPlugin extends CordovaPlugin  {
     @Override
     public boolean execute(String action, final JSONArray args,
                            final CallbackContext callbackContext) throws JSONException {
+        Log.d(TAG, String.format("%s is called. Callback ID: %s.", action, callbackContext.getCallbackId()));
         if (action.equalsIgnoreCase("checkClientInstalled")) {
             return checkClientInstalled(callbackContext);
         }
