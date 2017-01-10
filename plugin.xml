@@ -153,8 +153,8 @@
     </activity>
   </config-file>
   <source-file src="src/android/QQSDKPlugin.java" target-dir="src/me/vanpan/qqsdk" />
-  <!--QQ SDK version 3.1.0-->
-  <source-file src="src/android/open_sdk_r5756.jar" target-dir="libs/" />
+  <!--QQ SDK version 3.1.1-->
+  <source-file src="src/android/open_sdk_r5778.jar" target-dir="libs/" />
   <source-file src="src/android/mta-sdk-1.6.2.jar" target-dir="libs/" />
   <framework src="com.android.support:support-v4:23.3.0+" />
   </platform>
