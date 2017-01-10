@@ -52,8 +52,7 @@ NSString *appId=@"";
     if ([TencentOAuth iphoneQQInstalled] && [TencentOAuth iphoneQQSupportSSOLogin]) {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-    }
-    else {
+    } else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
@@ -106,178 +105,110 @@ NSString *appId=@"";
     }
 }
 
-- (void)shareText:(NSString *)text
-      shareScene:(QQShareScene)scene
-         command:(CDVInvokedUrlCommand *)command {
+- (void)shareText:(CDVInvokedUrlCommand *)command {
     self.callback = command.callbackId;
-    [self shareObjectWithData:@{@"text":text} Type:TextMessage Scene:scene];
+    NSDictionary *args = [command.arguments objectAtIndex:0];
+    if (args) {
+        NSString *text = [args objectForKey:@"text"];
+        int scene =[[args valueForKey:@"scene"] intValue];
+        [self shareObjectWithData:@{@"text":text} Type:TextMessage Scene:scene];
+    } else {
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
+   
 }
 
-- (void)shareImage:(NSString *)image
-    withImageType:(NSInteger)type
-            title:(NSString *)title
-      description:(NSString *)description
-       shareScene:(QQShareScene)scene
-          command:(CDVInvokedUrlCommand *)command {
+- (void)shareImage:(CDVInvokedUrlCommand *)command {
     self.callback = command.callbackId;
-    switch (type) {
-        case Local: {
-            NSData* imageData = [NSData dataWithContentsOfFile:image];
-            [self shareObjectWithData:@{@"image":imageData,
-                                        @"title":title,
-                                        @"description":description}
-                                 Type:ImageMesssage
-                                Scene:scene];
-        }
-            break;
-        case Network:{
-            NSURL* url = [NSURL URLWithString:[image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            NSData *data = [NSData dataWithContentsOfURL:url];
-            [self shareObjectWithData:@{@"image":data,
-                                        @"title":title,
-                                        @"description":description}
-                                 Type:ImageMesssage Scene:scene];
-        }
-            break;
-        case Base64:{
-            NSData* imageData = [[NSData alloc] initWithBase64EncodedString:image options:0];
-            [self shareObjectWithData:@{@"image":imageData,
-                                        @"title":title,
-                                        @"description":description}
-                                 Type:ImageMesssage Scene:scene];
-        }
-            break;
+    NSDictionary *args = [command.arguments objectAtIndex:0];
+    if (args) {
+        NSString *title = [args objectForKey:@"title"];
+        NSString *image = [args objectForKey:@"image"];
+        NSString *description = [args objectForKey:@"description"];
+        int scene =[[args valueForKey:@"text"] intValue];
+        NSData *imageData = [self processImage:image];
+        [self shareObjectWithData:@{@"image":imageData,
+                                    @"title":title,
+                                    @"description":description}
+                             Type:ImageMesssage
+                            Scene:scene];
+    } else {
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
+
+
+}
+- (void)shareNews:(CDVInvokedUrlCommand *)command {
+    self.callback = command.callbackId;
+    NSDictionary *args = [command.arguments objectAtIndex:0];
+    if (args) {
+        NSString *title = [args objectForKey:@"title"];
+        NSString *image = [args objectForKey:@"image"];
+        NSString *url = [args objectForKey:@"url"];
+        NSString *description = [args objectForKey:@"description"];
+        int scene =[[args valueForKey:@"text"] intValue];
+        NSData *imageData = [self processImage:image];
+        [self shareObjectWithData:@{@"url":url,
+                                    @"image":imageData,
+                                    @"title":title,
+                                    @"description":description}
+                             Type:NewsMessageWithLocalImage
+                            Scene:scene];
+    } else {
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
 }
-- (void)shareNews:(NSString *)url
-            image:(NSString *)image
-    withImageType:(NSInteger)type
-            title:(NSString *)title
-      description:(NSString *)description
-       shareScene:(QQShareScene)scene
-          command:(CDVInvokedUrlCommand *)command {
+- (void)shareAudio:(CDVInvokedUrlCommand *)command {
     self.callback = command.callbackId;
-    switch (type) {
-        case Local: {
-            NSData* imageData = [NSData dataWithContentsOfFile:image];
-            [self shareObjectWithData:@{@"url":url,
-                                        @"image":imageData,
-                                        @"title":title,
-                                        @"description":description}
-                                 Type:NewsMessageWithLocalImage
-                                Scene:scene];
-        }
-            break;
-        case Network:
-            [self shareObjectWithData:@{@"url":url,
-                                        @"image":image,
-                                        @"title":title,
-                                        @"description":description}
-                                 Type:NewsMessageWithNetworkImage
-                                Scene:scene];
-            break;
-        case Base64: {
-            NSData* imageData =[[NSData alloc] initWithBase64EncodedString:image options:0];;
-            [self shareObjectWithData:@{@"url":url,
-                                        @"image":imageData,
-                                        @"title":title,
-                                        @"description":description}
-                                 Type:NewsMessageWithLocalImage
-                                Scene:scene];
-        }
-            break;
+    NSDictionary *args = [command.arguments objectAtIndex:0];
+    if (args) {
+        NSString *title = [args objectForKey:@"title"];
+        NSString *image = [args objectForKey:@"image"];
+        NSString *url = [args objectForKey:@"url"];
+        NSString *description = [args objectForKey:@"description"];
+        NSString *flashUrl = [args objectForKey:@"flashUrl"];
+        int scene =[[args valueForKey:@"text"] intValue];
+        NSData *imageData = [self processImage:image];
+        [self shareObjectWithData:@{@"url":url,
+                                    @"image":imageData,
+                                    @"flashUrl":flashUrl,
+                                    @"title":title,
+                                    @"description":description}
+                             Type:AudioMessage
+                            Scene:scene];
+    } else {
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
-}
-- (void)shareAudio:(NSString *)previewUrl
-          flashUrl:(NSString *)flashUrl
-             image:(NSString *)image
-     withImageType:(NSInteger)type
-             title:(NSString *)title
-       description:(NSString *)description
-        shareScene:(QQShareScene)scene
-           command:(CDVInvokedUrlCommand *)command {
-    self.callback = command.callbackId;
-    switch (type) {
-        case Local: {
-            NSData* imageData = [NSData dataWithContentsOfFile:image];
-            [self shareObjectWithData:@{@"url":previewUrl,
-                                        @"flashUrl":flashUrl,
-                                        @"image":imageData,
-                                        @"title":title,
-                                        @"description":description}
-                                 Type:AudioMessage
-                                Scene:scene];
-        }
-            break;
-        case Network:{
-            NSData* imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-            [self shareObjectWithData:@{@"url":previewUrl,
-                                        @"flashUrl":flashUrl,
-                                        @"image":imageData,
-                                        @"title":title,
-                                        @"description":description}
-                                 Type:AudioMessage
-                                Scene:scene];
-        }
-            break;
-        case Base64: {
-            NSData* imageData =[[NSData alloc] initWithBase64EncodedString:image options:0];;
-            [self shareObjectWithData:@{@"url":previewUrl,
-                                        @"flashUrl":flashUrl,
-                                        @"image":imageData,
-                                        @"title":title,
-                                        @"description":description}
-                                 Type:AudioMessage
-                                Scene:scene];
-        }
-            break;
-    }
+
 }
 
-- (void) shareVideo:(NSString *)previewUrl
-           flashUrl:(NSString *)flashUrl
-              image:(NSString *)image
-      withImageType:(NSInteger)type
-              title:(NSString *)title
-        description:(NSString *)description
-         shareScene:(QQShareScene)scene
-            command:(CDVInvokedUrlCommand *)command {
+- (void) shareVideo:(CDVInvokedUrlCommand *)command {
     self.callback = command.callbackId;
-    switch (type) {
-        case Local: {
-            NSData* imageData = [NSData dataWithContentsOfFile:image];
-            [self shareObjectWithData:@{@"url":previewUrl,
-                                        @"flashUrl":flashUrl,
-                                        @"image":imageData,
-                                        @"title":title,
-                                        @"description":description}
-                                 Type:VideoMessage
-                                Scene:scene];
-        }
-            break;
-        case Network:{
-            NSData* imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-            [self shareObjectWithData:@{@"url":previewUrl,
-                                        @"flashUrl":flashUrl,
-                                        @"image":imageData,
-                                        @"title":title,
-                                        @"description":description}
-                                 Type:VideoMessage
-                                Scene:scene];
-        }
-            break;
-        case Base64: {
-            NSData* imageData =[[NSData alloc] initWithBase64EncodedString:image options:0];;
-            [self shareObjectWithData:@{@"url":previewUrl,
-                                        @"flashUrl":flashUrl,
-                                        @"image":imageData,
-                                        @"title":title,
-                                        @"description":description}
-                                 Type:VideoMessage
-                                Scene:scene];
-        }
-            break;
+    NSDictionary *args = [command.arguments objectAtIndex:0];
+    if (args) {
+        NSString *title = [args objectForKey:@"title"];
+        NSString *image = [args objectForKey:@"image"];
+        NSString *url = [args objectForKey:@"url"];
+        NSString *description = [args objectForKey:@"description"];
+        NSString *flashUrl = [args objectForKey:@"flashUrl"];
+        int scene =[[args valueForKey:@"text"] intValue];
+        NSData *imageData = [self processImage:image];
+        [self shareObjectWithData:@{@"url":url,
+                                    @"image":imageData,
+                                    @"flashUrl":flashUrl,
+                                    @"title":title,
+                                    @"description":description}
+                             Type:VideoMessage
+                            Scene:scene];
+    } else {
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
+
 }
 
 -(void)shareTextToQQZone:(NSString *)text {
@@ -342,31 +273,6 @@ NSString *appId=@"";
                                                                 title:title
                                                           description:description
                                                      previewImageData:data];
-            switch (scene) {
-                case QQZone:
-                    [newsObj setCflag:kQQAPICtrlFlagQZoneShareOnStart];
-                    break;
-                case Favorite:
-                    [newsObj setCflag:kQQAPICtrlFlagQQShareFavorites];
-                    break;
-                default:
-                    [newsObj setCflag:kQQAPICtrlFlagQQShare];
-                    break;
-            }
-            SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:newsObj];
-            QQApiSendResultCode sent =[QQApiInterface sendReq:req];
-            [self handleSendResult:sent];
-        }
-            break;
-        case NewsMessageWithNetworkImage:{
-            NSURL* previewURL = [NSURL URLWithString:[shareData objectForKey:@"image"]];
-            NSURL* url = [NSURL URLWithString:[[shareData objectForKey:@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            NSString* title = [shareData objectForKey:@"title"];
-            NSString* description = [shareData objectForKey:@"description"];
-            QQApiNewsObject* newsObj = [QQApiNewsObject objectWithURL:url
-                                                                title:title
-                                                          description:description
-                                                      previewImageURL:previewURL];
             switch (scene) {
                 case QQZone:
                     [newsObj setCflag:kQQAPICtrlFlagQZoneShareOnStart];
@@ -557,6 +463,30 @@ NSString *appId=@"";
 - (void)tencentDidNotNetWork {
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_LOGIN_NETWORK_ERROR];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
+}
+
+-(NSData*)processImage:(NSString *)image {
+    if([self isBase64Data:image]) {
+        return [[NSData alloc] initWithBase64EncodedString:image options:0];;
+    } else if([image hasPrefix:@"http://"] || [image hasPrefix:@"https://"]){
+        NSURL* url = [NSURL URLWithString:[image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        return [NSData dataWithContentsOfURL:url];
+    } else {
+        return [NSData dataWithContentsOfFile:image];
+    }
+}
+-(BOOL)isBase64Data:(NSString *)data {
+    data=[[data componentsSeparatedByCharactersInSet:
+           [NSCharacterSet whitespaceAndNewlineCharacterSet]]
+          componentsJoinedByString:@""];
+    if ([data length] % 4 == 0) {
+        static NSCharacterSet *invertedBase64CharacterSet = nil;
+        if (invertedBase64CharacterSet == nil) {
+            invertedBase64CharacterSet = [[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="]invertedSet];
+        }
+        return [data rangeOfCharacterFromSet:invertedBase64CharacterSet options:NSLiteralSearch].location == NSNotFound;
+    }
+    return NO;
 }
 
 @end

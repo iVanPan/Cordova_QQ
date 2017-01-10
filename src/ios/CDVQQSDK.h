@@ -23,11 +23,7 @@ typedef NS_ENUM(NSInteger, QQShareType) {
     AudioMessage,
     VideoMessage,
 };
-typedef NS_ENUM(NSInteger, QQShareImageType) {
-    Local,
-    Base64,
-    Network,
-};
+
 
 @interface CDVQQSDK : CDVPlugin<TencentSessionDelegate,QQApiInterfaceDelegate>
 
@@ -39,13 +35,12 @@ typedef NS_ENUM(NSInteger, QQShareImageType) {
 
 - (void)logout:(CDVInvokedUrlCommand *)command;
 
-- (void)shareText:(NSString *)text shareScene:(QQShareScene)scene command:(CDVInvokedUrlCommand *)command;
+- (void)shareText:(CDVInvokedUrlCommand *)command;
 
-- (void)shareImage:(NSString *)image withImageType:(NSInteger)type title:(NSString *)title description:(NSString *)description shareScene:(QQShareScene)scene command:(CDVInvokedUrlCommand *)command;
+- (void)shareImage:(CDVInvokedUrlCommand *)command;
 
-- (void)shareNews:(NSString *)url image:(NSString *)image withImageType:(NSInteger)type title:(NSString *)title description:(NSString *)description
-       shareScene:(QQShareScene)scene command:(CDVInvokedUrlCommand *)command;
+- (void)shareNews:(CDVInvokedUrlCommand *)command;
 
-- (void)shareAudio:(NSString *)previewUrl flashUrl:(NSString *)flashUrl image:(NSString *)image withImageType:(NSInteger)type title:(NSString *)title description:(NSString *)description shareScene:(QQShareScene)scene command:(CDVInvokedUrlCommand *)command;
+//- (void)shareAudio:(NSString *)previewUrl flashUrl:(NSString *)flashUrl image:(NSString *)image withTitle:(NSString *)title description:(NSString *)description shareScene:(QQShareScene)scene command:(CDVInvokedUrlCommand *)command;
 
 @end

@@ -29,7 +29,7 @@
   <platform name="ios">
     <config-file target="config.xml" parent="/*">
         <feature name="QQSDK">
-         <param name="ios-package" value="QQSDK"/>
+         <param name="ios-package" value="CDVQQSDK"/>
        </feature>
        <!--whitelist for QQ SDK-->
 <!--       <access origin = "https://openmobile.qq.com/*"/>
