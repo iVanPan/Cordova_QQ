@@ -29,8 +29,8 @@
 - [关于SDK](#关于sdk) 
 - [注意事项 ](#注意事项 ) 
 - [Demo](#demo) 
-- [Contributing](#contributing) 
-- [License](#license) 
+- [贡献代码](#贡献代码) 
+- [开源证书](#开源证书) 
 
 ## 功能
 - QQ 登录
@@ -86,10 +86,10 @@
 详情查看[这里](http://wiki.open.qq.com/wiki/mobile/API%E8%B0%83%E7%94%A8%E8%AF%B4%E6%98%8E#6._.E8.BF.94.E5.9B.9E.E7.A0.81.E8.AF.B4.E6.98.8E%E3%80%82) 
 
 ###关于图片
- This plugin support three Image types:
-  1. Network URL
+ 这个插件中的图片分享、新闻分享、音乐分享功能都要使用到图片，以下类型的图片在这些功能中都支持
+  1. 网络图片
   2. Base64
-  3. Absolute file path         
+  3. 本地图片(图片的绝对路径)         
  
 ###使用方式
 #####检查客户端是否安装
@@ -200,13 +200,12 @@
 在安装完这个插件以后，把 cordova 工程中的代码替换为 example_www中的代码，安装Cordova相机插件，在build以后可以进行各个功能测试，以下为运行效果图：
 <div style="text-align:center"><img src="https://github.com/iVanPan/Cordova_QQ/blob/master/ScreenShot.png?raw=true" alt="example" style="width:300px"></div>    
 
-## Contributing
-Feel free to contribute
+## 贡献代码
+欢迎提交PR，贡献你的代码，如果有新功能，请提供Demo。
 
-## License
+## 开源证书
 
-**cordova-plugin-qqsdk** is released under the **MIT** license. See [LICENSE](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE) file for more information.
-
+**cordova-plugin-qqsdk** 遵照了 **MIT** 证书. 详情可以查看 [证书](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE) 文件
  
  		
 	
