@@ -13,6 +13,7 @@ I also write a cordova plugin for WeiboSDK [here](https://github.com/iVanPan/cor
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Documentation](#documentation)     
+  - [Error Code](#error-code)
   - [Support API](#support-api)
   - [Image](#image)  
   - [Usage](#usage)
@@ -33,9 +34,9 @@ I also write a cordova plugin for WeiboSDK [here](https://github.com/iVanPan/cor
 ## Feature
 1. QQ SSO Login
 2. QQ Logout 
-3. QQ Share 
-4. QQZone Share
-5. QQ Favorites
+3. QQ Share （Text、Image、News、Audio）
+4. QQZone Share（Text、Image、News、Audio）
+5. QQ Favorites（Text、Image、News、Audio）
 6. checkClientInstalled		
 
 ## Requirements
@@ -166,14 +167,14 @@ When you use qq login,you may get an error code.If you get one, find detail erro
   http.get(url)
 ```
 
+## About SDK 
+This plugin use 3.1.1 version sdk for Android,3.1.3 version sdk for iOS. You can download lastest version sdk [here](http://wiki.connect.qq.com/sdk%E4%B8%8B%E8%BD%BD)
+
 ##Notes             
 1. This plugin is required cordova-android version >=4.0,so using cordova  5.0.0 or higher is recommended
 2. This plugin should be used after the deviceready event has been fired!!!       
 3. ~~If cordova version  <5.1.1,when two cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007)~~ Update:This Bug is fixed in last cordova version(5.1.1) 
 4. For Android: make sure your signature is correct !!!
-
-## About SDK 
-This plugin use 3.1.1 version sdk for Android,3.1.3 version sdk for iOS. You can download lastest version sdk [here](http://wiki.connect.qq.com/sdk%E4%B8%8B%E8%BD%BD)
 
 ##Demo     
 1. install this plugin
