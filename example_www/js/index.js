@@ -34,12 +34,11 @@ var app = function () {
         },args);
     };
     this.shareImage = function () {
-        console.log('file path is',appintance.localImageUrl);
         var args = {};
         args.scene = QQSDK.Scene.QQ;
         args.title = "这个是Cordova QQ图片分享的标题";
         args.description = "这个是Cordova QQ图片分享的描述";
-        args.image = "https://cordova.apache.org/static/img/cordova_bot.png";//appintance.localImageUrl;
+        args.image = "https://cordova.apache.org/static/img/cordova_bot.png";
         QQSDK.shareImage(function () {
             alert('shareImage success');
         }, function (failReason) {
