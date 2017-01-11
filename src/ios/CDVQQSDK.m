@@ -122,11 +122,12 @@ NSString *appId=@"";
 - (void)shareImage:(CDVInvokedUrlCommand *)command {
     self.callback = command.callbackId;
     NSDictionary *args = [command.arguments objectAtIndex:0];
+    NSLog(@"参数 是 %@",args);
     if (args) {
         NSString *title = [args objectForKey:@"title"];
         NSString *image = [args objectForKey:@"image"];
         NSString *description = [args objectForKey:@"description"];
-        int scene =[[args valueForKey:@"text"] intValue];
+        int scene =[[args valueForKey:@"scene"] intValue];
         NSData *imageData = [self processImage:image];
         [self shareObjectWithData:@{@"image":imageData,
                                     @"title":title,
@@ -148,7 +149,7 @@ NSString *appId=@"";
         NSString *image = [args objectForKey:@"image"];
         NSString *url = [args objectForKey:@"url"];
         NSString *description = [args objectForKey:@"description"];
-        int scene =[[args valueForKey:@"text"] intValue];
+        int scene =[[args valueForKey:@"scene"] intValue];
         NSData *imageData = [self processImage:image];
         [self shareObjectWithData:@{@"url":url,
                                     @"image":imageData,
@@ -170,7 +171,7 @@ NSString *appId=@"";
         NSString *url = [args objectForKey:@"url"];
         NSString *description = [args objectForKey:@"description"];
         NSString *flashUrl = [args objectForKey:@"flashUrl"];
-        int scene =[[args valueForKey:@"text"] intValue];
+        int scene =[[args valueForKey:@"scene"] intValue];
         NSData *imageData = [self processImage:image];
         [self shareObjectWithData:@{@"url":url,
                                     @"image":imageData,
@@ -195,7 +196,7 @@ NSString *appId=@"";
         NSString *url = [args objectForKey:@"url"];
         NSString *description = [args objectForKey:@"description"];
         NSString *flashUrl = [args objectForKey:@"flashUrl"];
-        int scene =[[args valueForKey:@"text"] intValue];
+        int scene =[[args valueForKey:@"scene"] intValue];
         NSData *imageData = [self processImage:image];
         [self shareObjectWithData:@{@"url":url,
                                     @"image":imageData,
