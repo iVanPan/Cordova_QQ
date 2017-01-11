@@ -34,7 +34,7 @@ I also write a cordova plugin for WeiboSDK [here](https://github.com/iVanPan/cor
 1. QQ SSO Login
 2. QQ Logout 
 3. QQ Share 
-4. QZone Share
+4. QQZone Share
 5. QQ Favorites
 6. checkClientInstalled		
 
