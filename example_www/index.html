@@ -12,7 +12,7 @@
      document.addEventListener("deviceready", function() {
       appintance = new app();
         alert('deviceready');
-        appintance.prepareImage();
+        console.log(navigator.camera);
      }, true); 
 </script>
 <title>Corodva QQ Plugin Exmaple</title>
@@ -24,7 +24,9 @@
           <button type="button" class="btn btn-primary btn-block" onclick="appintance.ssoLogin()">QQ登录</button>
           <button type="button" class="btn btn-primary btn-block" onclick="appintance.logout()">QQ登出</button>
           <button type="button" class="btn btn-primary btn-block" onclick="appintance.shareText()">文本分享</button>
-          <button type="button" class="btn btn-primary btn-block" onclick="appintance.shareImage()">图片分享</button>
+          <button type="button" class="btn btn-primary btn-block" onclick="appintance.shareImage()">网络图片分享</button>
+          <button type="button" class="btn btn-primary btn-block" onclick="appintance.shareLocalImage()">拍照分享图片</button>
+          <button type="button" class="btn btn-primary btn-block" onclick="appintance.shareBase64Image()">Base64图片分享</button>
           <button type="button" class="btn btn-primary btn-block" onclick="appintance.shareNews()">新闻分享</button>
           <button type="button" class="btn btn-primary btn-block" onclick="appintance.shareAudio()">音乐分享</button>
         </div>
