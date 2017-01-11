@@ -108,7 +108,7 @@ When you use qq login,you may get an error code.If you get one, find detail erro
 #####shareText
   ```js
   var args = {};
-  args.scene = QQSDK.Scene.QQ;
+  args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.text = "这个是Cordova QQ分享文字";
   QQSDK.shareText(function () {
       alert('shareText success');
@@ -120,7 +120,7 @@ When you use qq login,you may get an error code.If you get one, find detail erro
 #####shareImage
   ```js
   var args = {};
-  args.scene = QQSDK.Scene.QQ;
+  args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.title = "这个是Cordova QQ图片分享的标题";
   args.description = "这个是Cordova QQ图片分享的描述";
   args.image = "https://cordova.apache.org/static/img/cordova_bot.png";
@@ -134,7 +134,7 @@ When you use qq login,you may get an error code.If you get one, find detail erro
 #####shareNews
   ```js
   var args = {};
-  args.scene = QQSDK.Scene.QQ;
+  args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.url = "https://cordova.apache.org/";
   args.title = "这个是Cordova QQ新闻分享的标题";
   args.description = "这个是Cordova QQ新闻分享的描述";
@@ -149,7 +149,7 @@ When you use qq login,you may get an error code.If you get one, find detail erro
 #####shareAudio
   ```js
   var args = {};
-  args.scene = QQSDK.Scene.QQ;
+  args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.url = "https://y.qq.com/portal/song/001OyHbk2MSIi4.html";
   args.title = "十年";
   args.description = "陈奕迅";
@@ -175,6 +175,7 @@ This plugin use 3.1.1 version sdk for Android,3.1.3 version sdk for iOS. You can
 2. This plugin should be used after the deviceready event has been fired!!!       
 3. ~~If cordova version  <5.1.1,when two cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007)~~ Update:This Bug is fixed in last cordova version(5.1.1) 
 4. For Android: make sure your signature is correct !!!
+5. long share URL and large image shoud be avoid.       
 
 ##Demo     
 1. install this plugin

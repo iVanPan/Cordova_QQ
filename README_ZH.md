@@ -125,7 +125,7 @@
 #####分享文字
   ```js
   var args = {};
-  args.scene = QQSDK.Scene.QQ;
+  args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.text = "这个是Cordova QQ分享文字";
   QQSDK.shareText(function () {
       alert('shareText success');
@@ -137,7 +137,7 @@
 #####分享图片
   ```js
   var args = {};
-  args.scene = QQSDK.Scene.QQ;
+  args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.title = "这个是Cordova QQ图片分享的标题";
   args.description = "这个是Cordova QQ图片分享的描述";
   args.image = "https://cordova.apache.org/static/img/cordova_bot.png";
@@ -151,7 +151,7 @@
 #####分享新闻
   ```js
   var args = {};
-  args.scene = QQSDK.Scene.QQ;
+  args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.url = "https://cordova.apache.org/";
   args.title = "这个是Cordova QQ新闻分享的标题";
   args.description = "这个是Cordova QQ新闻分享的描述";
@@ -166,7 +166,7 @@
 #####分享音乐
   ```js
   var args = {};
-  args.scene = QQSDK.Scene.QQ;
+  args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.url = "https://y.qq.com/portal/song/001OyHbk2MSIi4.html";
   args.title = "十年";
   args.description = "陈奕迅";
@@ -192,7 +192,8 @@
 1. 这个插件要求cordova-android 的版本 >=4.0,推荐使用 cordova  5.0.0 或更高的版本，因为从cordova 5.0 开始cordova-android 4.0 是默认使用的android版本
 2.  请在cordova的deviceready事件触发以后再调用本插件！！！    
 3. <del>在低于5.1.1的cordova版本中存在一个Bug，如果你有多个插件要修改iOS工程中的 “*-Info.plist” CFBundleURLTypes, 只有第一个安装的插件才会生效.所以安装完插件请务必在你的Xcode工程里面检查一下URLTypes。 关于这个bug的详情你可以在 [这里](https://issues.apache.org/jira/browse/CB-8007)找到</del> 建议安装使用5.1.1及以上的cordova版本   
-4. Android版本请确保你的签名是正确的   
+4. Android版本请确保你的签名是正确的 
+5. 分享的URL长度不要过长，图片不要太大，不然会分享失败，因为SDK做了限制          
 
 
 
