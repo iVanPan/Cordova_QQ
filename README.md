@@ -76,94 +76,94 @@ When you use qq login,you may get an error code.If you get one, find detail erro
 ###Usage
 #####checkClientInstalled
   ```js
-        QQSDK.checkClientInstalled(function () {
-            alert('client is installed');
-        }, function () {
-        // if installed QQ Client version is not supported sso,also will get this error
-            alert('client is not installed');
-        });
+  QQSDK.checkClientInstalled(function () {
+      alert('client is installed');
+  }, function () {
+      // if installed QQ Client version is not supported sso,also will get this error
+      alert('client is not installed');
+  });
 
   ```
 #####ssoLogin
   ```js
-        QQSDK.ssoLogin(function (args) {
-            alert("token is " + args.access_token);
-            alert("userid is " +args.userid);
-            alert("expires_time is "+ new Date(parseInt(args.expires_time)) + " TimeStamp is " +args.expires_time);
-        }, function (failReason) {
-            alert(failReason);
-        });
+  QQSDK.ssoLogin(function (args) {
+      alert("token is " + args.access_token);
+      alert("userid is " +args.userid);
+      alert("expires_time is "+ new Date(parseInt(args.expires_time)) + " TimeStamp is " +args.expires_time);
+  }, function (failReason) {
+      alert(failReason);
+  });
 
   ```
 #####logout
   ```js
-        QQSDK.logout(function () {
-            alert('logout success');
-        }, function (failReason) {
-            alert(failReason);
-        });
+  QQSDK.logout(function () {
+      alert('logout success');
+  }, function (failReason) {
+      alert(failReason);
+  });
 
   ```
 #####shareText
   ```js
-        var args = {};
-        args.scene = QQSDK.Scene.QQ;
-        args.text = "这个是Cordova QQ分享文字";
-        QQSDK.shareText(function () {
-            alert('shareText success');
-        }, function (failReason) {
-            alert(failReason);
-        },args);
+  var args = {};
+  args.scene = QQSDK.Scene.QQ;
+  args.text = "这个是Cordova QQ分享文字";
+  QQSDK.shareText(function () {
+      alert('shareText success');
+  }, function (failReason) {
+      alert(failReason);
+  },args);
 
   ```
 #####shareImage
   ```js
-        var args = {};
-        args.scene = QQSDK.Scene.QQ;
-        args.title = "这个是Cordova QQ图片分享的标题";
-        args.description = "这个是Cordova QQ图片分享的描述";
-        args.image = "https://cordova.apache.org/static/img/cordova_bot.png";
-        QQSDK.shareImage(function () {
-            alert('shareImage success');
-        }, function (failReason) {
-            alert(failReason);
-        },args); 
+  var args = {};
+  args.scene = QQSDK.Scene.QQ;
+  args.title = "这个是Cordova QQ图片分享的标题";
+  args.description = "这个是Cordova QQ图片分享的描述";
+  args.image = "https://cordova.apache.org/static/img/cordova_bot.png";
+  QQSDK.shareImage(function () {
+      alert('shareImage success');
+  }, function (failReason) {
+      alert(failReason);
+  },args); 
 
   ```
 #####shareNews
   ```js
-        var args = {};
-        args.scene = QQSDK.Scene.QQ;
-        args.url = "https://cordova.apache.org/";
-        args.title = "这个是Cordova QQ新闻分享的标题";
-        args.description = "这个是Cordova QQ新闻分享的描述";
-        args.image = "https://cordova.apache.org/static/img/cordova_bot.png";
-        QQSDK.shareNews(function () {
-            alert('shareNews success');
-        }, function (failReason) {
-            alert(failReason);
-        },args);
+  var args = {};
+  args.scene = QQSDK.Scene.QQ;
+  args.url = "https://cordova.apache.org/";
+  args.title = "这个是Cordova QQ新闻分享的标题";
+  args.description = "这个是Cordova QQ新闻分享的描述";
+  args.image = "https://cordova.apache.org/static/img/cordova_bot.png";
+  QQSDK.shareNews(function () {
+      alert('shareNews success');
+  }, function (failReason) {
+      alert(failReason);
+  },args);
 
   ```
 #####shareAudio
   ```js
-        var args = {};
-        args.scene = QQSDK.Scene.QQ;
-        args.url = "https://y.qq.com/portal/song/001OyHbk2MSIi4.html";
-        args.title = "十年";
-        args.description = "陈奕迅";
-        args.image = "https://y.gtimg.cn/music/photo_new/T001R300x300M000003Nz2So3XXYek.jpg";
-        args.flashUrl = "http://stream20.qqmusic.qq.com/30577158.mp3";
-        QQSDK.shareAudio(function () {
-            alert('shareAudio success');
-        }, function (failReason) {
-            alert(failReason);
-        },args);
+  var args = {};
+  args.scene = QQSDK.Scene.QQ;
+  args.url = "https://y.qq.com/portal/song/001OyHbk2MSIi4.html";
+  args.title = "十年";
+  args.description = "陈奕迅";
+  args.image = "https://y.gtimg.cn/music/photo_new/T001R300x300M000003Nz2So3XXYek.jpg";
+  args.flashUrl = "http://stream20.qqmusic.qq.com/30577158.mp3";
+  QQSDK.shareAudio(function () {
+      alert('shareAudio success');
+  }, function (failReason) {
+      alert(failReason);
+  },args);
   ```
 #####getUserInfo
 ```js
-var url = "https://graph.qq.com/user/get_user_info?access_token=" + accessToken + "&oauth_consumer_key= APPID &openid=" + userId;
-http.get(url)
+  var url = "https://graph.qq.com/user/get_user_info?access_token=" + accessToken + "&oauth_consumer_key= APPID &openid=" + userId;
+  http.get(url)
 ```
 
 ##Notes             
@@ -179,7 +179,8 @@ This plugin use 3.1.1 version sdk for Android,3.1.3 version sdk for iOS. You can
 1. install this plugin
 2. backup www folder in your cordova project
 3. replace www by example_www
-4. cordova build & test     
+4. install cordova-plugin-camera
+5. cordova build & test     
 <div style="text-align:center"><img src="https://github.com/iVanPan/Cordova_QQ/blob/master/ScreenShot.png?raw=true" alt="example" style="width:300px"></div>
 
 ## Contributing
