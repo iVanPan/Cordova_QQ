@@ -5,7 +5,7 @@
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat-square)](http://VanPan.me)  
 	
 这个一个QQ SDK的Cordova 插件。 [English](https://github.com/iVanPan/Cordova_QQ)				
-如果你希望使用一个微博的cordova插件可以查看[这里](https://github.com/iVanPan/cordova_weibo).
+如果你希望使用一个微博的cordova插件可以查看[这里](https://github.com/iVanPan/cordova_weibo).                     
 
 
 ## Table of Contents
@@ -180,12 +180,12 @@
   ```
 #####获取用户信息
 ```js
-  var url = "https://graph.qq.com/user/get_user_info?access_token=" + accessToken + "&oauth_consumer_key= APPID &openid=" + userId;
+  var url = "https://graph.qq.com/user/get_user_info?access_token=" + accessToken + "&oauth_consumer_key=" + QQ_APP_ID + "&openid=" + userId;
   http.get(url)
 ```
 
 ##关于SDK 
-本插件 Android SDK 的版本是3.1.1，iOS SDK的版本是3.1.3，你可以在[这里](http://wiki.connect.qq.com/sdk%E4%B8%8B%E8%BD%BD)下载最新版本的SDK
+本插件 Android SDK 的版本是3.1.1，iOS SDK的版本是3.1.3，你可以在[这里](http://wiki.connect.qq.com/sdk%E4%B8%8B%E8%BD%BD)下载最新版本的SDK          
 
 ##注意事项  
 **请认真阅读文档，请认真阅读文档，请认真阅读文档**                 

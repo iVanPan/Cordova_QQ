@@ -5,7 +5,7 @@
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat-square)](http://VanPan.me)					
 
 A Cordova wrapper around the Tencent QQ SDK for Android and iOS. Provides access to QQ ssoLogin, QQ Sharing, QQ Zone Sharing etc.. [简体中文](https://github.com/iVanPan/Cordova_QQ/blob/master/README_ZH.md).     
-I also write a cordova plugin for WeiboSDK [here](https://github.com/iVanPan/cordova_weibo).
+I also write a cordova plugin for WeiboSDK [here](https://github.com/iVanPan/cordova_weibo).            
 
 ## Table of Contents
 
@@ -163,12 +163,12 @@ When you use qq login,you may get an error code.If you get one, find detail erro
   ```
 #####getUserInfo
 ```js
-  var url = "https://graph.qq.com/user/get_user_info?access_token=" + accessToken + "&oauth_consumer_key= APPID &openid=" + userId;
+  var url = "https://graph.qq.com/user/get_user_info?access_token=" + accessToken + "&oauth_consumer_key=" + QQ_APP_ID + "&openid=" + userId;
   http.get(url)
 ```
 
 ## About SDK 
-This plugin use 3.1.1 version sdk for Android,3.1.3 version sdk for iOS. You can download lastest version sdk [here](http://wiki.connect.qq.com/sdk%E4%B8%8B%E8%BD%BD)
+This plugin use 3.1.1 version sdk for Android,3.1.3 version sdk for iOS. You can download lastest version sdk [here](http://wiki.connect.qq.com/sdk%E4%B8%8B%E8%BD%BD)              
 
 ##Notes             
 1. This plugin is required cordova-android version >=4.0,so using cordova  5.0.0 or higher is recommended
@@ -183,10 +183,11 @@ This plugin use 3.1.1 version sdk for Android,3.1.3 version sdk for iOS. You can
 3. replace www by example_www
 4. install cordova-plugin-camera
 5. cordova build & test     
-<div style="text-align:center"><img src="https://github.com/iVanPan/Cordova_QQ/blob/master/ScreenShot.png?raw=true" alt="example" style="width:300px"></div>
+<div style="text-align:center"><img src="https://github.com/iVanPan/Cordova_QQ/blob/master/ScreenShot.png?raw=true" alt="example" style="width:300px"></div>                                
+
 
 ## Contributing
-Feel free to contribute
+Feel free to contribute                 
 
 ## License
 
