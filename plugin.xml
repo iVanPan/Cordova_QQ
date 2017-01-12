@@ -147,6 +147,6 @@
   <!--QQ SDK version 3.1.1-->
   <source-file src="src/android/open_sdk_r5778.jar" target-dir="libs/" />
   <source-file src="src/android/mta-sdk-1.6.2.jar" target-dir="libs/" />
-  <framework src="com.android.support:support-v4:23.3.0+" />
+  <framework src="com.android.support:support-v4:24.1.1+" />
   </platform>
 </plugin>
