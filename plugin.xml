@@ -3,7 +3,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-qqsdk"
-  version="0.8.0">
+  version="0.8.3">
 
   <name>cordova-plugin-qqsdk</name>
   <description>Cordova Plugin QQSDK</description>
@@ -145,7 +145,7 @@
   </config-file>
   <source-file src="src/android/QQSDKPlugin.java" target-dir="src/me/vanpan/qqsdk" />
   <!--QQ SDK version 3.1.1-->
-  <source-file src="src/android/open_sdk_r5778.jar" target-dir="libs/" />
+  <source-file src="src/android/open_sdk_r5781.jar" target-dir="libs/" />
   <source-file src="src/android/mta-sdk-1.6.2.jar" target-dir="libs/" />
   <framework src="com.android.support:support-v4:24.1.1+" />
   </platform>
