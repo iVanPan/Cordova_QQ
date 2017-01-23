@@ -1,11 +1,12 @@
 # cordova-plugin-qqsdk
-[![version](https://img.shields.io/badge/version-0.8.1-blue.svg?style=flat-square)](https://github.com/iVanPan/Cordova_QQ)
+[![version](https://img.shields.io/badge/version-0.8.3-blue.svg?style=flat-square)](https://github.com/iVanPan/Cordova_QQ)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat-square)](https://github.com/iVanPan/Cordova_QQ)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat-square)](http://VanPan.me)					
 
 A Cordova wrapper around the Tencent QQ SDK for Android and iOS. Provides access to QQ ssoLogin, QQ Sharing, QQ Zone Sharing etc.. [简体中文](https://github.com/iVanPan/Cordova_QQ/blob/master/README_ZH.md).     
-I also write a cordova plugin for WeiboSDK [here](https://github.com/iVanPan/cordova_weibo).            
+I also write a cordova plugin for WeiboSDK [here](https://github.com/iVanPan/cordova_weibo).                    
+
 
 ## Table of Contents
 
@@ -168,7 +169,7 @@ When you use qq login,you may get an error code.If you get one, find detail erro
 ```
 
 ## About SDK 
-This plugin use 3.1.1 version sdk for Android,3.1.3 version sdk for iOS. You can download lastest version sdk [here](http://wiki.connect.qq.com/sdk%E4%B8%8B%E8%BD%BD)              
+This plugin use 3.1.2 version sdk for Android,3.1.3 version sdk for iOS. You can download lastest version sdk [here](http://wiki.connect.qq.com/sdk%E4%B8%8B%E8%BD%BD)              
 
 ##Notes             
 1. This plugin is required cordova-android version >=4.0,so using cordova  5.0.0 or higher is recommended
