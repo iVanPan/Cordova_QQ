@@ -7,13 +7,14 @@
 //
 
 #import "CDVQQSDK.h"
+
 NSString *QQ_NOT_INSTALLED = @"QQ Client is not installed";
 NSString *QQ_PARAM_NOT_FOUND = @"param is not found";
 NSString *QQ_LOGIN_ERROR = @"QQ login error";
 NSString *QQ_LOGIN_CANCEL = @"QQ login cancelled";
 NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
 NSString *QQ_SHARE_CANCEL = @"QQ share cancelled by user";
-NSString *appId=@"";
+NSString *appId = @"";
 
 @implementation CDVQQSDK {
     TencentOAuth *tencentOAuth;
@@ -67,80 +68,94 @@ NSString *appId=@"";
     self.callback = command.callbackId;
     [tencentOAuth logout:self];
 }
+
 /**
  *  QQ 登录
  *
  *  @param command CDVInvokedUrlCommand
  */
-- (void )ssoLogin:(CDVInvokedUrlCommand *)command {
-    if(nil == tencentOAuth) {
+- (void)ssoLogin:(CDVInvokedUrlCommand *)command {
+    if (nil == tencentOAuth) {
         tencentOAuth = [[TencentOAuth alloc] initWithAppId:appId andDelegate:self];
     }
     if (tencentOAuth.isSessionValid) {
         NSMutableDictionary *Dic = [NSMutableDictionary dictionaryWithCapacity:2];
         [Dic setObject:tencentOAuth.openId forKey:@"userid"];
         [Dic setObject:tencentOAuth.accessToken forKey:@"access_token"];
-        [Dic setObject:[NSString stringWithFormat:@"%f",[tencentOAuth.expirationDate timeIntervalSince1970] * 1000] forKey:@"expires_time"];
+        [Dic setObject:[NSString stringWithFormat:@"%f", [tencentOAuth.expirationDate timeIntervalSince1970] * 1000] forKey:@"expires_time"];
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:Dic];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
     } else {
         self.callback = command.callbackId;
         NSArray *permissions = [NSArray arrayWithObjects:
-                                kOPEN_PERMISSION_GET_USER_INFO,
-                                kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
-                                kOPEN_PERMISSION_ADD_ALBUM,
-                                kOPEN_PERMISSION_ADD_ONE_BLOG,
-                                kOPEN_PERMISSION_ADD_SHARE,
-                                kOPEN_PERMISSION_ADD_TOPIC,
-                                kOPEN_PERMISSION_CHECK_PAGE_FANS,
-                                kOPEN_PERMISSION_GET_INFO,
-                                kOPEN_PERMISSION_GET_OTHER_INFO,
-                                kOPEN_PERMISSION_LIST_ALBUM,
-                                kOPEN_PERMISSION_UPLOAD_PIC,
-                                kOPEN_PERMISSION_GET_VIP_INFO,
-                                kOPEN_PERMISSION_GET_VIP_RICH_INFO,
-                                nil];
-        
-        [tencentOAuth authorize: permissions];
+                                            kOPEN_PERMISSION_GET_USER_INFO,
+                                            kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
+                                            kOPEN_PERMISSION_ADD_ALBUM,
+                                            kOPEN_PERMISSION_ADD_ONE_BLOG,
+                                            kOPEN_PERMISSION_ADD_SHARE,
+                                            kOPEN_PERMISSION_ADD_TOPIC,
+                                            kOPEN_PERMISSION_CHECK_PAGE_FANS,
+                                            kOPEN_PERMISSION_GET_INFO,
+                                            kOPEN_PERMISSION_GET_OTHER_INFO,
+                                            kOPEN_PERMISSION_LIST_ALBUM,
+                                            kOPEN_PERMISSION_UPLOAD_PIC,
+                                            kOPEN_PERMISSION_GET_VIP_INFO,
+                                            kOPEN_PERMISSION_GET_VIP_RICH_INFO,
+                                            nil];
+
+        [tencentOAuth authorize:permissions];
     }
 }
 
+/**
+ 分享文本
+
+ @param command cordova参数
+ */
 - (void)shareText:(CDVInvokedUrlCommand *)command {
     self.callback = command.callbackId;
     NSDictionary *args = [command.arguments objectAtIndex:0];
     if (args) {
         NSString *text = [args objectForKey:@"text"];
-        int scene =[[args valueForKey:@"scene"] intValue];
-        [self shareObjectWithData:@{@"text":text} Type:TextMessage Scene:scene];
+        int scene = [[args valueForKey:@"scene"] intValue];
+        [self shareObjectWithData:@{ @"text" : text } Type:TextMessage Scene:scene];
     } else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
-   
 }
 
+/**
+ 分享图片
+
+ @param command Cordova参数
+ */
 - (void)shareImage:(CDVInvokedUrlCommand *)command {
     self.callback = command.callbackId;
     NSDictionary *args = [command.arguments objectAtIndex:0];
-    NSLog(@"参数 是 %@",args);
+    NSLog(@"参数 是 %@", args);
     if (args) {
         NSString *title = [args objectForKey:@"title"];
         NSString *image = [args objectForKey:@"image"];
         NSString *description = [args objectForKey:@"description"];
-        int scene =[[args valueForKey:@"scene"] intValue];
+        int scene = [[args valueForKey:@"scene"] intValue];
         NSData *imageData = [self processImage:image];
-        [self shareObjectWithData:@{@"image":imageData,
-                                    @"title":title,
-                                    @"description":description}
+        [self shareObjectWithData:@{ @"image" : imageData,
+                                     @"title" : title,
+                                     @"description" : description }
                              Type:ImageMesssage
                             Scene:scene];
     } else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
-
-
 }
+
+/**
+ 分享新闻链接
+
+ @param command Cordova参数
+ */
 - (void)shareNews:(CDVInvokedUrlCommand *)command {
     self.callback = command.callbackId;
     NSDictionary *args = [command.arguments objectAtIndex:0];
@@ -149,12 +164,12 @@ NSString *appId=@"";
         NSString *image = [args objectForKey:@"image"];
         NSString *url = [args objectForKey:@"url"];
         NSString *description = [args objectForKey:@"description"];
-        int scene =[[args valueForKey:@"scene"] intValue];
+        int scene = [[args valueForKey:@"scene"] intValue];
         NSData *imageData = [self processImage:image];
-        [self shareObjectWithData:@{@"url":url,
-                                    @"image":imageData,
-                                    @"title":title,
-                                    @"description":description}
+        [self shareObjectWithData:@{ @"url" : url,
+                                     @"image" : imageData,
+                                     @"title" : title,
+                                     @"description" : description }
                              Type:NewsMessageWithLocalImage
                             Scene:scene];
     } else {
@@ -162,6 +177,12 @@ NSString *appId=@"";
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
 }
+
+/**
+ 分享音乐链接
+
+ @param command Cordova参数
+ */
 - (void)shareAudio:(CDVInvokedUrlCommand *)command {
     self.callback = command.callbackId;
     NSDictionary *args = [command.arguments objectAtIndex:0];
@@ -171,23 +192,27 @@ NSString *appId=@"";
         NSString *url = [args objectForKey:@"url"];
         NSString *description = [args objectForKey:@"description"];
         NSString *flashUrl = [args objectForKey:@"flashUrl"];
-        int scene =[[args valueForKey:@"scene"] intValue];
+        int scene = [[args valueForKey:@"scene"] intValue];
         NSData *imageData = [self processImage:image];
-        [self shareObjectWithData:@{@"url":url,
-                                    @"image":imageData,
-                                    @"flashUrl":flashUrl,
-                                    @"title":title,
-                                    @"description":description}
+        [self shareObjectWithData:@{ @"url" : url,
+                                     @"image" : imageData,
+                                     @"flashUrl" : flashUrl,
+                                     @"title" : title,
+                                     @"description" : description }
                              Type:AudioMessage
                             Scene:scene];
     } else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
-
 }
 
-- (void) shareVideo:(CDVInvokedUrlCommand *)command {
+/**
+ 分享视频链接
+
+ @param command Cordova参数
+ */
+- (void)shareVideo:(CDVInvokedUrlCommand *)command {
     self.callback = command.callbackId;
     NSDictionary *args = [command.arguments objectAtIndex:0];
     if (args) {
@@ -196,34 +221,45 @@ NSString *appId=@"";
         NSString *url = [args objectForKey:@"url"];
         NSString *description = [args objectForKey:@"description"];
         NSString *flashUrl = [args objectForKey:@"flashUrl"];
-        int scene =[[args valueForKey:@"scene"] intValue];
+        int scene = [[args valueForKey:@"scene"] intValue];
         NSData *imageData = [self processImage:image];
-        [self shareObjectWithData:@{@"url":url,
-                                    @"image":imageData,
-                                    @"flashUrl":flashUrl,
-                                    @"title":title,
-                                    @"description":description}
+        [self shareObjectWithData:@{ @"url" : url,
+                                     @"image" : imageData,
+                                     @"flashUrl" : flashUrl,
+                                     @"title" : title,
+                                     @"description" : description }
                              Type:VideoMessage
                             Scene:scene];
     } else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
-
 }
 
--(void)shareTextToQQZone:(NSString *)text {
-    QQApiImageArrayForQZoneObject * txtObj = [QQApiImageArrayForQZoneObject objectWithimageDataArray:nil title:text];
-    SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:txtObj];
-    QQApiSendResultCode sent =[QQApiInterface SendReqToQZone:req];
+/**
+ 分享文本到QQ空间
+
+ @param text 分享文本
+ */
+- (void)shareTextToQQZone:(NSString *)text {
+    QQApiImageArrayForQZoneObject *txtObj = [QQApiImageArrayForQZoneObject objectWithimageDataArray:nil title:text];
+    SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:txtObj];
+    QQApiSendResultCode sent = [QQApiInterface SendReqToQZone:req];
     [self handleSendResult:sent];
 }
 
-- (void)shareObjectWithData:(NSDictionary *)shareData Type:(QQShareType)type Scene:(QQShareScene) scene{
+/**
+ 分享方法
+
+ @param shareData 分享数据
+ @param type 分享的类型
+ @param scene 分享的场景
+ */
+- (void)shareObjectWithData:(NSDictionary *)shareData Type:(QQShareType)type Scene:(QQShareScene)scene {
     switch (type) {
         case TextMessage: {
-            NSString* msg = [shareData objectForKey:@"text"];
-            QQApiTextObject* txtObj = [QQApiTextObject objectWithText:msg];
+            NSString *msg = [shareData objectForKey:@"text"];
+            QQApiTextObject *txtObj = [QQApiTextObject objectWithText:msg];
             [txtObj setCflag:kQQAPICtrlFlagQZoneShareOnStart];
             switch (scene) {
                 case QQZone:
@@ -236,16 +272,15 @@ NSString *appId=@"";
                     [txtObj setCflag:kQQAPICtrlFlagQQShare];
                     break;
             }
-            SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:txtObj];
-            QQApiSendResultCode sent =[QQApiInterface sendReq:req];
+            SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:txtObj];
+            QQApiSendResultCode sent = [QQApiInterface sendReq:req];
             [self handleSendResult:sent];
-        }
-            break;
-        case ImageMesssage:{
-            NSData* data = [shareData objectForKey:@"image"];
-            NSString* title = [shareData objectForKey:@"title"];
-            NSString* description = [shareData objectForKey:@"description"];
-            QQApiImageObject* imgObj = [QQApiImageObject objectWithData:data
+        } break;
+        case ImageMesssage: {
+            NSData *data = [shareData objectForKey:@"image"];
+            NSString *title = [shareData objectForKey:@"title"];
+            NSString *description = [shareData objectForKey:@"description"];
+            QQApiImageObject *imgObj = [QQApiImageObject objectWithData:data
                                                        previewImageData:data
                                                                   title:title
                                                             description:description];
@@ -260,17 +295,16 @@ NSString *appId=@"";
                     [imgObj setCflag:kQQAPICtrlFlagQQShare];
                     break;
             }
-            SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:imgObj];
-            QQApiSendResultCode sent =[QQApiInterface sendReq:req];
+            SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:imgObj];
+            QQApiSendResultCode sent = [QQApiInterface sendReq:req];
             [self handleSendResult:sent];
-        }
-            break;
-        case NewsMessageWithLocalImage:{
-            NSData* data = [shareData objectForKey:@"image"];
-            NSURL* url = [NSURL URLWithString:[[shareData objectForKey:@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            NSString* title = [shareData objectForKey:@"title"];
-            NSString* description = [shareData objectForKey:@"description"];
-            QQApiNewsObject* newsObj = [QQApiNewsObject objectWithURL:url
+        } break;
+        case NewsMessageWithLocalImage: {
+            NSData *data = [shareData objectForKey:@"image"];
+            NSURL *url = [NSURL URLWithString:[[shareData objectForKey:@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            NSString *title = [shareData objectForKey:@"title"];
+            NSString *description = [shareData objectForKey:@"description"];
+            QQApiNewsObject *newsObj = [QQApiNewsObject objectWithURL:url
                                                                 title:title
                                                           description:description
                                                      previewImageData:data];
@@ -285,18 +319,17 @@ NSString *appId=@"";
                     [newsObj setCflag:kQQAPICtrlFlagQQShare];
                     break;
             }
-            SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:newsObj];
-            QQApiSendResultCode sent =[QQApiInterface sendReq:req];
+            SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:newsObj];
+            QQApiSendResultCode sent = [QQApiInterface sendReq:req];
             [self handleSendResult:sent];
-        }
-            break;
-        case AudioMessage:{
-            NSData* data = [shareData objectForKey:@"image"];
-            NSURL* url = [NSURL URLWithString:[shareData objectForKey:@"url"]];
-            NSString* title = [shareData objectForKey:@"title"];
-            NSString* description = [shareData objectForKey:@"description"];
-            NSURL* flashUrl = [NSURL URLWithString:[shareData objectForKey:@"url"]];
-            QQApiAudioObject* audioObj = [QQApiAudioObject objectWithURL:url
+        } break;
+        case AudioMessage: {
+            NSData *data = [shareData objectForKey:@"image"];
+            NSURL *url = [NSURL URLWithString:[shareData objectForKey:@"url"]];
+            NSString *title = [shareData objectForKey:@"title"];
+            NSString *description = [shareData objectForKey:@"description"];
+            NSURL *flashUrl = [NSURL URLWithString:[shareData objectForKey:@"url"]];
+            QQApiAudioObject *audioObj = [QQApiAudioObject objectWithURL:url
                                                                    title:title
                                                              description:description
                                                         previewImageData:data];
@@ -312,18 +345,17 @@ NSString *appId=@"";
                     [audioObj setCflag:kQQAPICtrlFlagQQShare];
                     break;
             }
-            SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:audioObj];
-            QQApiSendResultCode sent =[QQApiInterface sendReq:req];
+            SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:audioObj];
+            QQApiSendResultCode sent = [QQApiInterface sendReq:req];
             [self handleSendResult:sent];
-        }
-            break;
-        case VideoMessage:{
-            NSData* data = [shareData objectForKey:@"image"];
-            NSURL* url = [NSURL URLWithString:[shareData objectForKey:@"url"]];
-            NSString* title = [shareData objectForKey:@"title"];
-            NSString* description = [shareData objectForKey:@"description"];
-            NSURL* flashUrl = [NSURL URLWithString:[shareData objectForKey:@"url"]];
-            QQApiVideoObject* videoObj = [QQApiVideoObject objectWithURL:url
+        } break;
+        case VideoMessage: {
+            NSData *data = [shareData objectForKey:@"image"];
+            NSURL *url = [NSURL URLWithString:[shareData objectForKey:@"url"]];
+            NSString *title = [shareData objectForKey:@"title"];
+            NSString *description = [shareData objectForKey:@"description"];
+            NSURL *flashUrl = [NSURL URLWithString:[shareData objectForKey:@"url"]];
+            QQApiVideoObject *videoObj = [QQApiVideoObject objectWithURL:url
                                                                    title:title
                                                              description:description
                                                         previewImageData:data];
@@ -339,8 +371,8 @@ NSString *appId=@"";
                     [videoObj setCflag:kQQAPICtrlFlagQQShare];
                     break;
             }
-            SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:videoObj];
-            QQApiSendResultCode sent =[QQApiInterface sendReq:req];
+            SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:videoObj];
+            QQApiSendResultCode sent = [QQApiInterface sendReq:req];
             [self handleSendResult:sent];
         }
         default:
@@ -348,6 +380,11 @@ NSString *appId=@"";
     }
 }
 
+/**
+ 分析那个结果处理
+
+ @param sendResult 分享结果
+ */
 - (void)handleSendResult:(QQApiSendResultCode)sendResult {
     switch (sendResult) {
         case EQQAPISENDSUCESS:
@@ -386,12 +423,12 @@ NSString *appId=@"";
             [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
             break;
         }
-        case EQQAPIQZONENOTSUPPORTTEXT:{
+        case EQQAPIQZONENOTSUPPORTTEXT: {
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"QQZone不支持QQApiTextObject分享"];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
             break;
         }
-        case EQQAPIQZONENOTSUPPORTIMAGE:{
+        case EQQAPIQZONENOTSUPPORTIMAGE: {
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"QQZone不支持QQApiImageObject分享"];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
             break;
@@ -403,6 +440,7 @@ NSString *appId=@"";
         }
     }
 }
+
 #pragma mark - QQApiInterfaceDelegate
 - (void)onReq:(QQBaseReq *)req {
 }
@@ -419,7 +457,7 @@ NSString *appId=@"";
             [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
             break;
         }
-        default:{
+        default: {
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
             break;
@@ -436,11 +474,10 @@ NSString *appId=@"";
         NSMutableDictionary *Dic = [NSMutableDictionary dictionaryWithCapacity:2];
         [Dic setObject:tencentOAuth.openId forKey:@"userid"];
         [Dic setObject:tencentOAuth.accessToken forKey:@"access_token"];
-        [Dic setObject:[NSString stringWithFormat:@"%f",[tencentOAuth.expirationDate timeIntervalSince1970] * 1000] forKey:@"expires_time"];
+        [Dic setObject:[NSString stringWithFormat:@"%f", [tencentOAuth.expirationDate timeIntervalSince1970] * 1000] forKey:@"expires_time"];
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:Dic];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
-    }
-    else {
+    } else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_LOGIN_ERROR];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
     }
@@ -466,24 +503,38 @@ NSString *appId=@"";
     [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
 }
 
--(NSData*)processImage:(NSString *)image {
-    if([self isBase64Data:image]) {
-        return [[NSData alloc] initWithBase64EncodedString:image options:0];;
-    } else if([image hasPrefix:@"http://"] || [image hasPrefix:@"https://"]){
-        NSURL* url = [NSURL URLWithString:[image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+/**
+ 图片处理
+
+ @param image 图片数据
+ @return 图片NSdata数据
+ */
+- (NSData *)processImage:(NSString *)image {
+    if ([self isBase64Data:image]) {
+        return [[NSData alloc] initWithBase64EncodedString:image options:0];
+        ;
+    } else if ([image hasPrefix:@"http://"] || [image hasPrefix:@"https://"]) {
+        NSURL *url = [NSURL URLWithString:[image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         return [NSData dataWithContentsOfURL:url];
     } else {
         return [NSData dataWithContentsOfFile:image];
     }
 }
--(BOOL)isBase64Data:(NSString *)data {
-    data=[[data componentsSeparatedByCharactersInSet:
-           [NSCharacterSet whitespaceAndNewlineCharacterSet]]
-          componentsJoinedByString:@""];
+
+/**
+ 检查图片是不是Base64
+
+ @param data 图片数据
+ @return 结果true or false
+ */
+- (BOOL)isBase64Data:(NSString *)data {
+    data = [[data componentsSeparatedByCharactersInSet:
+                      [NSCharacterSet whitespaceAndNewlineCharacterSet]]
+        componentsJoinedByString:@""];
     if ([data length] % 4 == 0) {
         static NSCharacterSet *invertedBase64CharacterSet = nil;
         if (invertedBase64CharacterSet == nil) {
-            invertedBase64CharacterSet = [[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="]invertedSet];
+            invertedBase64CharacterSet = [[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="] invertedSet];
         }
         return [data rangeOfCharacterFromSet:invertedBase64CharacterSet options:NSLiteralSearch].location == NSNotFound;
     }

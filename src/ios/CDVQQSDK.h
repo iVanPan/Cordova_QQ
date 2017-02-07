@@ -9,6 +9,7 @@
 #import <Cordova/CDVPluginResult.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
+
 typedef NS_ENUM(NSInteger, QQShareScene) {
     QQ,
     QQZone,
@@ -24,10 +25,9 @@ typedef NS_ENUM(NSInteger, QQShareType) {
     VideoMessage,
 };
 
+@interface CDVQQSDK : CDVPlugin <TencentSessionDelegate, QQApiInterfaceDelegate>
 
-@interface CDVQQSDK : CDVPlugin<TencentSessionDelegate,QQApiInterfaceDelegate>
-
-@property(nonatomic, copy) NSString *callback;
+@property (nonatomic, copy) NSString *callback;
 
 - (void)checkClientInstalled:(CDVInvokedUrlCommand *)command;
 
@@ -41,6 +41,12 @@ typedef NS_ENUM(NSInteger, QQShareType) {
 
 - (void)shareNews:(CDVInvokedUrlCommand *)command;
 
-//- (void)shareAudio:(NSString *)previewUrl flashUrl:(NSString *)flashUrl image:(NSString *)image withTitle:(NSString *)title description:(NSString *)description shareScene:(QQShareScene)scene command:(CDVInvokedUrlCommand *)command;
+//- (void)shareAudio:(NSString *)previewUrl flashUrl:(NSString *)flashUrl
+//             image:(NSString *)image
+//         withTitle:(NSString *)title
+//       description:(NSString *)description
+//        shareScene:(QQShareScene)scene
+//           command:(CDVInvokedUrlCommand
+//                        *)command;
 
 @end
