@@ -115,7 +115,7 @@ NSString *appId = @"";
 - (void)shareText:(CDVInvokedUrlCommand *)command {
     self.callback = command.callbackId;
     NSDictionary *args = [command.arguments objectAtIndex:0];
-    if (args) {
+    if ([args objectForKey:@"text"]) {
         NSString *text = [args objectForKey:@"text"];
         int scene = [[args valueForKey:@"scene"] intValue];
         [self shareObjectWithData:@{ @"text" : text } Type:TextMessage Scene:scene];
@@ -512,7 +512,6 @@ NSString *appId = @"";
 - (NSData *)processImage:(NSString *)image {
     if ([self isBase64Data:image]) {
         return [[NSData alloc] initWithBase64EncodedString:image options:0];
-        ;
     } else if ([image hasPrefix:@"http://"] || [image hasPrefix:@"https://"]) {
         NSURL *url = [NSURL URLWithString:[image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         return [NSData dataWithContentsOfURL:url];
