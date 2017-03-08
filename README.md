@@ -1,5 +1,5 @@
 # cordova-plugin-qqsdk
-[![version](https://img.shields.io/badge/version-0.8.3-blue.svg?style=flat-square)](https://github.com/iVanPan/Cordova_QQ)
+[![version](https://img.shields.io/badge/version-0.8.5-blue.svg?style=flat-square)](https://github.com/iVanPan/Cordova_QQ)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat-square)](https://github.com/iVanPan/Cordova_QQ)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat-square)](http://VanPan.me)					
