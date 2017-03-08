@@ -10,6 +10,7 @@
 
 NSString *QQ_NOT_INSTALLED = @"QQ Client is not installed";
 NSString *QQ_PARAM_NOT_FOUND = @"param is not found";
+NSString *QQ_IMAGE_PARAM_INCORRECT = @"image param is incorrect";
 NSString *QQ_LOGIN_ERROR = @"QQ login error";
 NSString *QQ_LOGIN_CANCEL = @"QQ login cancelled";
 NSString *QQ_LOGIN_NETWORK_ERROR = @"QQ login network error";
@@ -35,7 +36,6 @@ NSString *appId = @"";
  */
 - (void)handleOpenURL:(NSNotification *)notification {
     NSURL *url = [notification object];
-    NSLog(@"qq url is %@", url);
     NSString *schemaPrefix = [@"tencent" stringByAppendingString:appId];
     if ([url isKindOfClass:[NSURL class]] && [[url absoluteString] hasPrefix:[schemaPrefix stringByAppendingString:@"://response_from_qq"]]) {
         [QQApiInterface handleOpenURL:url delegate:self];
@@ -133,18 +133,22 @@ NSString *appId = @"";
 - (void)shareImage:(CDVInvokedUrlCommand *)command {
     self.callback = command.callbackId;
     NSDictionary *args = [command.arguments objectAtIndex:0];
-    NSLog(@"参数 是 %@", args);
     if (args) {
-        NSString *title = [args objectForKey:@"title"];
-        NSString *image = [args objectForKey:@"image"];
-        NSString *description = [args objectForKey:@"description"];
+        NSString *title = [self check:@"title" in:args];
+        NSString *image = [self check:@"image" in:args];
+        NSString *description = [self check:@"description" in:args];
         int scene = [[args valueForKey:@"scene"] intValue];
         NSData *imageData = [self processImage:image];
-        [self shareObjectWithData:@{ @"image" : imageData,
-                                     @"title" : title,
-                                     @"description" : description }
-                             Type:ImageMesssage
-                            Scene:scene];
+        if(!imageData) {
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_IMAGE_PARAM_INCORRECT];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        } else {
+            [self shareObjectWithData:@{ @"image" : imageData,
+                                         @"title" : title,
+                                         @"description" : description }
+                                 Type:ImageMesssage
+                                Scene:scene];
+        }
     } else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -160,18 +164,23 @@ NSString *appId = @"";
     self.callback = command.callbackId;
     NSDictionary *args = [command.arguments objectAtIndex:0];
     if (args) {
-        NSString *title = [args objectForKey:@"title"];
-        NSString *image = [args objectForKey:@"image"];
-        NSString *url = [args objectForKey:@"url"];
-        NSString *description = [args objectForKey:@"description"];
+        NSString *title = [self check:@"title" in:args];
+        NSString *image = [self check:@"image" in:args];
+        NSString *description = [self check:@"description" in:args];
+        NSString *url = [self check:@"url" in:args];
         int scene = [[args valueForKey:@"scene"] intValue];
         NSData *imageData = [self processImage:image];
-        [self shareObjectWithData:@{ @"url" : url,
-                                     @"image" : imageData,
-                                     @"title" : title,
-                                     @"description" : description }
-                             Type:NewsMessageWithLocalImage
-                            Scene:scene];
+        if(!imageData) {
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_IMAGE_PARAM_INCORRECT];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        } else {
+            [self shareObjectWithData:@{ @"url" : url,
+                                         @"image" : imageData,
+                                         @"title" : title,
+                                         @"description" : description }
+                                 Type:NewsMessageWithLocalImage
+                                Scene:scene];
+        }
     } else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -187,20 +196,25 @@ NSString *appId = @"";
     self.callback = command.callbackId;
     NSDictionary *args = [command.arguments objectAtIndex:0];
     if (args) {
-        NSString *title = [args objectForKey:@"title"];
-        NSString *image = [args objectForKey:@"image"];
-        NSString *url = [args objectForKey:@"url"];
-        NSString *description = [args objectForKey:@"description"];
-        NSString *flashUrl = [args objectForKey:@"flashUrl"];
+        NSString *title = [self check:@"title" in:args];
+        NSString *image = [self check:@"image" in:args];
+        NSString *description = [self check:@"description" in:args];
+        NSString *url = [self check:@"url" in:args];
+        NSString *flashUrl = [self check:@"flashUrl" in:args];
         int scene = [[args valueForKey:@"scene"] intValue];
         NSData *imageData = [self processImage:image];
-        [self shareObjectWithData:@{ @"url" : url,
-                                     @"image" : imageData,
-                                     @"flashUrl" : flashUrl,
-                                     @"title" : title,
-                                     @"description" : description }
-                             Type:AudioMessage
-                            Scene:scene];
+        if(!imageData) {
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_IMAGE_PARAM_INCORRECT];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        } else {
+            [self shareObjectWithData:@{ @"url" : url,
+                                         @"image" : imageData,
+                                         @"flashUrl" : flashUrl,
+                                         @"title" : title,
+                                         @"description" : description }
+                                 Type:AudioMessage
+                                Scene:scene];
+        }
     } else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -216,20 +230,25 @@ NSString *appId = @"";
     self.callback = command.callbackId;
     NSDictionary *args = [command.arguments objectAtIndex:0];
     if (args) {
-        NSString *title = [args objectForKey:@"title"];
-        NSString *image = [args objectForKey:@"image"];
-        NSString *url = [args objectForKey:@"url"];
-        NSString *description = [args objectForKey:@"description"];
-        NSString *flashUrl = [args objectForKey:@"flashUrl"];
+        NSString *title = [self check:@"title" in:args];
+        NSString *image = [self check:@"image" in:args];
+        NSString *description = [self check:@"description" in:args];
+        NSString *url = [self check:@"url" in:args];
+        NSString *flashUrl = [self check:@"flashUrl" in:args];
         int scene = [[args valueForKey:@"scene"] intValue];
         NSData *imageData = [self processImage:image];
-        [self shareObjectWithData:@{ @"url" : url,
-                                     @"image" : imageData,
-                                     @"flashUrl" : flashUrl,
-                                     @"title" : title,
-                                     @"description" : description }
-                             Type:VideoMessage
-                            Scene:scene];
+        if(!imageData) {
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_IMAGE_PARAM_INCORRECT];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        } else {
+            [self shareObjectWithData:@{ @"url" : url,
+                                         @"image" : imageData,
+                                         @"flashUrl" : flashUrl,
+                                         @"title" : title,
+                                         @"description" : description }
+                                 Type:VideoMessage
+                                Scene:scene];
+        }
     } else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -538,6 +557,18 @@ NSString *appId = @"";
         return [data rangeOfCharacterFromSet:invertedBase64CharacterSet options:NSLiteralSearch].location == NSNotFound;
     }
     return NO;
+}
+
+/**
+ 检查参数是否存在
+
+ @param param 要检查的参数
+ @param args 参数字典
+ @return 参数
+ */
+- (NSString *)check:(NSString *)param in:(NSDictionary *)args {
+    NSString *data = [args objectForKey:param];
+    return data?data:@"";
 }
 
 @end
