@@ -1,8 +1,8 @@
 # cordova-plugin-qqsdk
-[![npm version](https://badge.fury.io/js/cordova-plugin-qqsdk.svg?style=flat-square)](https://github.com/iVanPan/Cordova_QQ)
-[![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat-square)](https://github.com/iVanPan/Cordova_QQ)
-[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
-[![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat-square)](http://VanPan.me)					
+[![npm version](https://badge.fury.io/js/cordova-plugin-qqsdk.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
+[![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
+[![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)					
 
 A Cordova wrapper around the Tencent QQ SDK for Android and iOS. Provides access to QQ ssoLogin, QQ Sharing, QQ Zone Sharing etc.. [简体中文](https://github.com/iVanPan/Cordova_QQ/blob/master/README_ZH.md).     
 I also write a cordova plugin for WeiboSDK [here](https://github.com/iVanPan/cordova_weibo).                    
