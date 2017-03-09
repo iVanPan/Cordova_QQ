@@ -1,8 +1,8 @@
 # cordova-plugin-qqsdk
-[![version](https://img.shields.io/badge/version-0.8.5-blue.svg?style=flat-square)](https://github.com/iVanPan/Cordova_QQ)
-[![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat-square)](https://github.com/iVanPan/Cordova_QQ)
-[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
-[![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat-square)](http://VanPan.me)  
+[![npm version](https://badge.fury.io/js/cordova-plugin-qqsdk.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
+[![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
+[![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)		
 	
 这个一个QQ SDK的Cordova 插件。 [English](https://github.com/iVanPan/Cordova_QQ)				
 如果你希望使用一个微博的cordova插件可以查看[这里](https://github.com/iVanPan/cordova_weibo).                     
