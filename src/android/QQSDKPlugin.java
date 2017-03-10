@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -543,9 +542,7 @@ public class QQSDKPlugin extends CordovaPlugin {
    * 生成文件用来存储图片
    */
   private File getOutputMediaFile() {
-    File mediaStorageDir = new File(
-        Environment.getExternalStorageDirectory() + "/Android/data/" + this.cordova.getActivity()
-            .getPackageName() + "/Files");
+    File mediaStorageDir = this.cordova.getActivity().getExternalCacheDir();
     if (!mediaStorageDir.exists()) {
       if (!mediaStorageDir.mkdirs()) {
         return null;
@@ -553,7 +550,7 @@ public class QQSDKPlugin extends CordovaPlugin {
     }
     String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
     File mediaFile;
-    String mImageName = "RN_" + timeStamp + ".jpg";
+    String mImageName = "Cordova_" + timeStamp + ".jpg";
     mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
     return mediaFile;
   }
@@ -678,7 +675,6 @@ public class QQSDKPlugin extends CordovaPlugin {
   }
 
   @Override public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-    mTencent.onActivityResultData(requestCode, resultCode, intent, loginListener);
     if (requestCode == Constants.REQUEST_API) {
       if (resultCode == Constants.REQUEST_LOGIN) {
         Tencent.handleResultData(intent, loginListener);
