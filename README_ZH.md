@@ -185,15 +185,15 @@
 ```
 
 ##关于SDK 
-本插件 Android SDK 的版本是3.1.2，iOS SDK的版本是3.1.3，你可以在[这里](http://wiki.connect.qq.com/sdk%E4%B8%8B%E8%BD%BD)下载最新版本的SDK          
+本插件 Android SDK 的版本是3.1.3，iOS SDK 的版本是3.1.3，你可以在[这里](http://wiki.open.qq.com/wiki/mobile/SDK%E4%B8%8B%E8%BD%BD)下载最新版本的 SDK          
 
 ##注意事项  
 **请认真阅读文档，请认真阅读文档，请认真阅读文档**                 
-1. 这个插件要求cordova-android 的版本 >=4.0,推荐使用 cordova  5.0.0 或更高的版本，因为从cordova 5.0 开始cordova-android 4.0 是默认使用的android版本
-2.  请在cordova的deviceready事件触发以后再调用本插件！！！    
-3. <del>在低于5.1.1的cordova版本中存在一个Bug，如果你有多个插件要修改iOS工程中的 “*-Info.plist” CFBundleURLTypes, 只有第一个安装的插件才会生效.所以安装完插件请务必在你的Xcode工程里面检查一下URLTypes。 关于这个bug的详情你可以在 [这里](https://issues.apache.org/jira/browse/CB-8007)找到</del> 建议安装使用5.1.1及以上的cordova版本   
-4. Android版本请确保你的签名是正确的 
-5. 分享的URL长度不要过长，图片不要太大，不然会分享失败，因为SDK做了限制          
+1. 这个插件要求 Cordova-android 的版本 >=4.0,推荐使用 Cordova  5.0.0 或更高的版本，因为从 Cordova 5.0 开始 Cordova-android 4.0 是默认使用的android版本
+2. 请在 Cordova 的 deviceready 事件触发以后再调用本插件！！！    
+3. <del>在低于5.1.1的 Cordova 版本中存在一个Bug，如果你有多个插件要修改iOS工程中的 “*-Info.plist” CFBundleURLTypes, 只有第一个安装的插件才会生效.所以安装完插件请务必在你的 Xcode 工程里面检查一下 URLTypes。 关于这个 bug 的详情你可以在 [这里](https://issues.apache.org/jira/browse/CB-8007)找到</del> 建议安装使用5.1.1及以上的 Cordova 版本   
+4. Android 版本请确保你的签名是正确的 
+5. 分享的 URL 长度不要过长，图片不要太大，不然会分享失败，因为 SDK 做了限制          
 
 
 
@@ -202,7 +202,7 @@
 <div style="text-align:center"><img src="https://github.com/iVanPan/Cordova_QQ/blob/master/ScreenShot.png?raw=true" alt="example" style="width:300px"></div>    
 
 ## 贡献代码
-欢迎提交PR，贡献你的代码，如果有新功能，请提供Demo。
+欢迎提交 PR，贡献你的代码，如果有新功能，请提供 Demo。
 
 ## 开源证书
 
