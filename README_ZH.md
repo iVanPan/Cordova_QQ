@@ -45,13 +45,15 @@
 - Cordova-Android >=4.0
 - Cordova-iOS >=4.0     
 
-##安装
+	
+## 安装
 1. 命令行运行      ```cordova plugin add https://github.com/iVanPan/Cordova_QQ.git --variable QQ_APP_ID=YOUR_QQ_APPID```  或者  ```cordova plugin add cordova-plugin-qqsdk --variable QQ_APP_ID=YOUR_QQ_APPID```              
 2. 命令行运行 cordova build               
 
-##文档
 
-###支持的接口
+## 文档
+
+### 支持的接口
 1. ssoLogin
 2. Logout
 3. checkClientInstalled
@@ -66,7 +68,7 @@
 |      Audio         |    √   |     √     |      √       |    √    |     √     |      √       |
 
 
-###错误码        
+### 错误码        
 使用SDK时，所有结果都会通过回调返回给应用。在回调的结果中，会包含每次调用结果的返回码。
 正常情况下返回码为0，表示调用成功。
 如果返回码不为0，说明调用出错，需要根据返回码的值来定位错误原因。       
@@ -85,14 +87,14 @@
 
 详情查看[这里](http://wiki.open.qq.com/wiki/mobile/API%E8%B0%83%E7%94%A8%E8%AF%B4%E6%98%8E#6._.E8.BF.94.E5.9B.9E.E7.A0.81.E8.AF.B4.E6.98.8E%E3%80%82) 
 
-###关于图片
+### 关于图片
  这个插件中的图片分享、新闻分享、音乐分享功能都要使用到图片，以下类型的图片在这些功能中都支持
   1. 网络图片
   2. Base64
   3. 本地图片(图片的绝对路径)         
  
-###使用方式
-#####检查客户端是否安装
+### 使用方式
+##### 检查客户端是否安装
   ```js
   QQSDK.checkClientInstalled(function () {
       alert('client is installed');
@@ -102,7 +104,7 @@
   });
 
   ```
-#####登录
+##### 登录
   ```js
   QQSDK.ssoLogin(function (args) {
       alert("token is " + args.access_token);
@@ -113,7 +115,7 @@
   });
 
   ```
-#####登出
+##### 登出
   ```js
   QQSDK.logout(function () {
       alert('logout success');
@@ -122,7 +124,7 @@
   });
 
   ```
-#####分享文字
+##### 分享文字
   ```js
   var args = {};
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
@@ -134,7 +136,7 @@
   },args);
 
   ```
-#####分享图片
+##### 分享图片
   ```js
   var args = {};
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
@@ -148,7 +150,7 @@
   },args); 
 
   ```
-#####分享新闻
+##### 分享新闻
   ```js
   var args = {};
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
@@ -163,7 +165,7 @@
   },args);
 
   ```
-#####分享音乐
+##### 分享音乐
   ```js
   var args = {};
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
@@ -178,16 +180,16 @@
       alert(failReason);
   },args);
   ```
-#####获取用户信息
+##### 获取用户信息
 ```js
   var url = "https://graph.qq.com/user/get_user_info?access_token=" + accessToken + "&oauth_consumer_key=" + QQ_APP_ID + "&openid=" + userId;
   http.get(url)
 ```
 
-##关于SDK 
+## 关于SDK 
 本插件 Android SDK 的版本是3.1.3，iOS SDK 的版本是3.1.3，你可以在[这里](http://wiki.open.qq.com/wiki/mobile/SDK%E4%B8%8B%E8%BD%BD)下载最新版本的 SDK          
 
-##注意事项  
+## 注意事项  
 **请认真阅读文档，请认真阅读文档，请认真阅读文档**                 
 1. 这个插件要求 Cordova-android 的版本 >=4.0,推荐使用 Cordova  5.0.0 或更高的版本，因为从 Cordova 5.0 开始 Cordova-android 4.0 是默认使用的android版本
 2. 请在 Cordova 的 deviceready 事件触发以后再调用本插件！！！    
@@ -197,7 +199,7 @@
 
 
 
-##Demo     
+## Demo     
 在安装完这个插件以后，把 cordova 工程中的代码替换为 example_www中的代码，安装Cordova相机插件，在build以后可以进行各个功能测试，以下为运行效果图：
 <div style="text-align:center"><img src="https://github.com/iVanPan/Cordova_QQ/blob/master/ScreenShot.png?raw=true" alt="example" style="width:300px"></div>    
 
