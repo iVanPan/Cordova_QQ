@@ -675,8 +675,8 @@ public class QQSDKPlugin extends CordovaPlugin {
   }
 
   @Override public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-    if (requestCode == Constants.REQUEST_API) {
-      if (resultCode == Constants.REQUEST_LOGIN) {
+    if (requestCode == Constants.REQUEST_LOGIN) {
+      if (resultCode == Constants.ACTIVITY_OK) {
         Tencent.onActivityResultData(requestCode, resultCode, intent, loginListener);
       }
     }
