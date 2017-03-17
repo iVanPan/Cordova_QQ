@@ -45,13 +45,13 @@ I also write a cordova plugin for WeiboSDK [here](https://github.com/iVanPan/cor
 - Cordova-Android >=4.0
 - Cordova-iOS >=4.0			
 
-##Installation
+## Installation
 1. ```cordova plugin add https://github.com/iVanPan/Cordova_QQ.git --variable QQ_APP_ID=YOUR_QQ_APPID``` or ```cordova plugin add cordova-plugin-qqsdk --variable QQ_APP_ID=YOUR_QQ_APPID```                  
 2. cordova build          			
 
-##Documentation
+## Documentation
 
-###Support API
+### Support API
 1. ssoLogin
 2. Logout
 3. checkClientInstalled
@@ -66,17 +66,17 @@ I also write a cordova plugin for WeiboSDK [here](https://github.com/iVanPan/cor
 |      Audio         |    √   |     √     |      √       |    √    |     √     |      √       |
 
 
-###Error Code        
+### Error Code        
 When you use qq login,you may get an error code.If you get one, find detail error msg from [here](http://wiki.open.qq.com/wiki/mobile/API%E8%B0%83%E7%94%A8%E8%AF%B4%E6%98%8E#6._.E8.BF.94.E5.9B.9E.E7.A0.81.E8.AF.B4.E6.98.8E%E3%80%82) please.
 
-###Image
+### Image
  This plugin support three Image types:
   1. Network URL
   2. Base64
   3. Absolute file path         
  
-###Usage
-#####checkClientInstalled
+### Usage
+##### checkClientInstalled
   ```js
   QQSDK.checkClientInstalled(function () {
       alert('client is installed');
@@ -86,7 +86,7 @@ When you use qq login,you may get an error code.If you get one, find detail erro
   });
 
   ```
-#####ssoLogin
+##### ssoLogin
   ```js
   QQSDK.ssoLogin(function (args) {
       alert("token is " + args.access_token);
@@ -97,7 +97,7 @@ When you use qq login,you may get an error code.If you get one, find detail erro
   });
 
   ```
-#####logout
+##### logout
   ```js
   QQSDK.logout(function () {
       alert('logout success');
@@ -106,7 +106,7 @@ When you use qq login,you may get an error code.If you get one, find detail erro
   });
 
   ```
-#####shareText
+##### shareText
   ```js
   var args = {};
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
@@ -118,7 +118,7 @@ When you use qq login,you may get an error code.If you get one, find detail erro
   },args);
 
   ```
-#####shareImage
+##### shareImage
   ```js
   var args = {};
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
@@ -132,7 +132,7 @@ When you use qq login,you may get an error code.If you get one, find detail erro
   },args); 
 
   ```
-#####shareNews
+##### shareNews
   ```js
   var args = {};
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
@@ -147,7 +147,7 @@ When you use qq login,you may get an error code.If you get one, find detail erro
   },args);
 
   ```
-#####shareAudio
+##### shareAudio
   ```js
   var args = {};
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
@@ -162,7 +162,7 @@ When you use qq login,you may get an error code.If you get one, find detail erro
       alert(failReason);
   },args);
   ```
-#####getUserInfo
+##### getUserInfo
 ```js
   var url = "https://graph.qq.com/user/get_user_info?access_token=" + accessToken + "&oauth_consumer_key=" + QQ_APP_ID + "&openid=" + userId;
   http.get(url)
@@ -171,14 +171,14 @@ When you use qq login,you may get an error code.If you get one, find detail erro
 ## About SDK 
 This plugin use 3.1.3 version sdk for Android,3.1.3 version sdk for iOS. You can download lastest version sdk [here](http://wiki.open.qq.com/wiki/mobile/SDK%E4%B8%8B%E8%BD%BD)              
 
-##Notes             
-1. This plugin is required cordova-android version >=4.0,so using cordova  5.0.0 or higher is recommended
+## Notes             
+1. This plugin is required Cordova-android version >=4.0,so using Cordova  5.0.0 or higher is recommended
 2. This plugin should be used after the deviceready event has been fired!!!       
-3. ~~If cordova version  <5.1.1,when two cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007)~~ Update:This Bug is fixed in last cordova version(5.1.1) 
+3. ~~If cordova version  <5.1.1,when two Cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007)~~ Update:This Bug is fixed in last cordova version(5.1.1) 
 4. For Android: make sure your signature is correct !!!
 5. long share URL and large image shoud be avoid.       
 
-##Demo     
+## Demo     
 1. install this plugin
 2. backup www folder in your cordova project
 3. replace www by example_www
