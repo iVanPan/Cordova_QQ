@@ -503,6 +503,7 @@ NSString *appId = @"";
 }
 
 - (void)tencentDidLogout {
+    tencentOAuth = nil;
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
 }
