@@ -320,7 +320,7 @@ NSString *appId = @"";
         } break;
         case NewsMessageWithLocalImage: {
             NSData *data = [shareData objectForKey:@"image"];
-            NSURL *url = [NSURL URLWithString:[[shareData objectForKey:@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            NSURL *url = [NSURL URLWithString:[shareData objectForKey:@"url"]];
             NSString *title = [shareData objectForKey:@"title"];
             NSString *description = [shareData objectForKey:@"description"];
             QQApiNewsObject *newsObj = [QQApiNewsObject objectWithURL:url
