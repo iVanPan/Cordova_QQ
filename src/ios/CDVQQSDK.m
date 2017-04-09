@@ -533,7 +533,7 @@ NSString *appId = @"";
     if ([self isBase64Data:image]) {
         return [[NSData alloc] initWithBase64EncodedString:image options:0];
     } else if ([image hasPrefix:@"http://"] || [image hasPrefix:@"https://"]) {
-        NSURL *url = [NSURL URLWithString:[image stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSURL *url = [NSURL URLWithString:image];
         return [NSData dataWithContentsOfURL:url];
     } else {
         return [NSData dataWithContentsOfFile:image];
