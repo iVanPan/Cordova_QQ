@@ -1,6 +1,5 @@
 
 var cordova = require('cordova');
-
 module.exports = {
 	Scene: {
         QQ:  0, // QQ 好友
@@ -9,28 +8,27 @@ module.exports = {
     },
     ClientType: {
         QQ:  0, // QQ 手机客户端
-        TIM: 1, // TIM 客户端
+        TIM: 1 // TIM 客户端
     },
-	ssoLogin:function(successCallback, errorCallback){
+	ssoLogin:function(successCallback, errorCallback, args){
 		cordova.exec(successCallback, errorCallback, "QQSDK", "ssoLogin",[args]);
 	},
 	logout:function(successCallback, errorCallback){
 		cordova.exec(successCallback, errorCallback, "QQSDK", "logout", []);
 	},
-	checkClientInstalled:function(successCallback, errorCallback){
+	checkClientInstalled:function(successCallback, errorCallback, args){
 		cordova.exec(successCallback, errorCallback, "QQSDK", "checkClientInstalled", [args]);
 	},
-	shareText:function(successCallback, errorCallback,args){
+	shareText:function(successCallback, errorCallback, args){
 		cordova.exec(successCallback, errorCallback, "QQSDK", "shareText", [args]);
 	},
-	shareImage:function(successCallback, errorCallback,args){
+	shareImage:function(successCallback, errorCallback, args){
 		cordova.exec(successCallback, errorCallback, "QQSDK", "shareImage", [args]);
 	},
-	shareNews:function(successCallback, errorCallback,args){
+	shareNews:function(successCallback, errorCallback, args){
 		cordova.exec(successCallback, errorCallback, "QQSDK", "shareNews", [args]);
 	},
-	shareAudio:function(successCallback, errorCallback,args){
+	shareAudio:function(successCallback, errorCallback, args){
 		cordova.exec(successCallback, errorCallback, "QQSDK", "shareAudio", [args]);
 	},
 };
-
