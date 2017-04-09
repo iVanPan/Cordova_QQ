@@ -63,7 +63,7 @@ I also write a cordova plugin for WeiboSDK [here](https://github.com/iVanPan/cor
 |      Text        |    √   |     √     |      √       |    ✕    |     √     |      √       |
 |      Image         |    √   |     √     |      √       |    √    |     √     |      √       |
 |      News        |    √   |     √     |      √       |    √    |     √     |      √       |
-|      Audio         |    √   |     √     |      √       |    √    |     √     |      √       |
+|     Audio         |    √   |     √     |      √       |    √    |     √     |      √       |
 
 
 ### Error Code        
@@ -78,23 +78,27 @@ When you use qq login,you may get an error code.If you get one, find detail erro
 ### Usage
 ##### checkClientInstalled
   ```js
+  var args = {};  
+  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
   QQSDK.checkClientInstalled(function () {
       alert('client is installed');
   }, function () {
       // if installed QQ Client version is not supported sso,also will get this error
       alert('client is not installed');
-  });
+  },args);
 
   ```
 ##### ssoLogin
   ```js
-  QQSDK.ssoLogin(function (args) {
-      alert("token is " + args.access_token);
-      alert("userid is " +args.userid);
-      alert("expires_time is "+ new Date(parseInt(args.expires_time)) + " TimeStamp is " +args.expires_time);
+  var args = {};  
+  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
+  QQSDK.ssoLogin(function (result) {
+      alert("token is " + result.access_token);
+      alert("userid is " +result.userid);
+      alert("expires_time is "+ new Date(parseInt(result.expires_time)) + " TimeStamp is " +result.expires_time);
   }, function (failReason) {
       alert(failReason);
-  });
+  }.args);
 
   ```
 ##### logout
@@ -108,7 +112,8 @@ When you use qq login,you may get an error code.If you get one, find detail erro
   ```
 ##### shareText
   ```js
-  var args = {};
+  var args = {};  
+  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.text = "这个是Cordova QQ分享文字";
   QQSDK.shareText(function () {
@@ -120,7 +125,8 @@ When you use qq login,you may get an error code.If you get one, find detail erro
   ```
 ##### shareImage
   ```js
-  var args = {};
+  var args = {};  
+  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.title = "这个是Cordova QQ图片分享的标题";
   args.description = "这个是Cordova QQ图片分享的描述";
@@ -135,6 +141,7 @@ When you use qq login,you may get an error code.If you get one, find detail erro
 ##### shareNews
   ```js
   var args = {};
+  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.url = "https://cordova.apache.org/";
   args.title = "这个是Cordova QQ新闻分享的标题";
@@ -150,6 +157,7 @@ When you use qq login,you may get an error code.If you get one, find detail erro
 ##### shareAudio
   ```js
   var args = {};
+  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.url = "https://y.qq.com/portal/song/001OyHbk2MSIi4.html";
   args.title = "十年";
@@ -169,7 +177,7 @@ When you use qq login,you may get an error code.If you get one, find detail erro
 ```
 
 ## About SDK 
-This plugin use 3.1.3 version sdk for Android,3.1.3 version sdk for iOS. You can download lastest version sdk [here](http://wiki.open.qq.com/wiki/mobile/SDK%E4%B8%8B%E8%BD%BD)              
+This plugin use 3.2.0 version sdk for Android,3.2.0 version sdk for iOS. You can download lastest version sdk [here](http://wiki.open.qq.com/wiki/mobile/SDK%E4%B8%8B%E8%BD%BD)              
 
 ## Notes             
 1. This plugin is required Cordova-android version >=4.0,so using Cordova  5.0.0 or higher is recommended

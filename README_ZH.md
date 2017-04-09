@@ -96,23 +96,27 @@
 ### 使用方式
 ##### 检查客户端是否安装
   ```js
+  var args = {};
+  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
   QQSDK.checkClientInstalled(function () {
       alert('client is installed');
   }, function () {
       // if installed QQ Client version is not supported sso,also will get this error
       alert('client is not installed');
-  });
+  },args);
 
   ```
 ##### 登录
   ```js
-  QQSDK.ssoLogin(function (args) {
-      alert("token is " + args.access_token);
-      alert("userid is " +args.userid);
-      alert("expires_time is "+ new Date(parseInt(args.expires_time)) + " TimeStamp is " +args.expires_time);
+  var args = {};
+  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
+  QQSDK.ssoLogin(function (result) {
+      alert("token is " + result.access_token);
+      alert("userid is " +result.userid);
+      alert("expires_time is "+ new Date(parseInt(result.expires_time)) + " TimeStamp is " +result.expires_time);
   }, function (failReason) {
       alert(failReason);
-  });
+  }.args);
 
   ```
 ##### 登出
@@ -127,6 +131,7 @@
 ##### 分享文字
   ```js
   var args = {};
+  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.text = "这个是Cordova QQ分享文字";
   QQSDK.shareText(function () {
@@ -138,7 +143,8 @@
   ```
 ##### 分享图片
   ```js
-  var args = {};
+  var args = {};  
+  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.title = "这个是Cordova QQ图片分享的标题";
   args.description = "这个是Cordova QQ图片分享的描述";
@@ -152,7 +158,8 @@
   ```
 ##### 分享新闻
   ```js
-  var args = {};
+  var args = {}; 
+  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.url = "https://cordova.apache.org/";
   args.title = "这个是Cordova QQ新闻分享的标题";
@@ -167,7 +174,8 @@
   ```
 ##### 分享音乐
   ```js
-  var args = {};
+  var args = {};  
+  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.url = "https://y.qq.com/portal/song/001OyHbk2MSIi4.html";
   args.title = "十年";
@@ -187,7 +195,7 @@
 ```
 
 ## 关于SDK 
-本插件 Android SDK 的版本是3.1.3，iOS SDK 的版本是3.1.3，你可以在[这里](http://wiki.open.qq.com/wiki/mobile/SDK%E4%B8%8B%E8%BD%BD)下载最新版本的 SDK          
+本插件 Android SDK 的版本是3.2.0，iOS SDK 的版本是3.2.0，你可以在[这里](http://wiki.open.qq.com/wiki/mobile/SDK%E4%B8%8B%E8%BD%BD)下载最新版本的 SDK          
 
 ## 注意事项  
 **请认真阅读文档，请认真阅读文档，请认真阅读文档**                 
