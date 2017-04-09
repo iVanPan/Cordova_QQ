@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-qqsdk",
-  "version": "0.8.8",
+  "version": "0.8.9",
   "description": "codrova/phonegap wrapper for qq sdk",
   "main": "index.js",
   "scripts": {
