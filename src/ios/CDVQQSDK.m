@@ -50,6 +50,24 @@ NSString *appId = @"";
  *  @param command CDVInvokedUrlCommand
  */
 - (void)checkClientInstalled:(CDVInvokedUrlCommand *)command {
+    NSDictionary *args = [command.arguments objectAtIndex:0];
+    int type = [[args valueForKey:@"client"] intValue];
+    if(type == 0) {
+        [tencentOAuth setAuthShareType:AuthShareType_QQ];
+        [self checkQQInstalled:command];
+    } else if (type == 1) {
+        [self checkTIMInstalled:command];
+    } else {
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
+}
+/**
+ *  检查QQ官方客户端是否安装
+ *
+ *  @param command CDVInvokedUrlCommand
+ */
+- (void)checkQQInstalled:(CDVInvokedUrlCommand *)command {
     if ([TencentOAuth iphoneQQInstalled] && [TencentOAuth iphoneQQSupportSSOLogin]) {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -59,6 +77,20 @@ NSString *appId = @"";
     }
 }
 
+/**
+ *  检查TIM客户端是否安装
+ *
+ *  @param command CDVInvokedUrlCommand
+ */
+- (void)checkTIMInstalled:(CDVInvokedUrlCommand *)command {
+    if ([TencentOAuth iphoneTIMInstalled] && [TencentOAuth iphoneTIMSupportSSOLogin]) {
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    } else {
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
+}
 /**
  *  QQ 登出
  *
@@ -78,6 +110,7 @@ NSString *appId = @"";
     if (nil == tencentOAuth) {
         tencentOAuth = [[TencentOAuth alloc] initWithAppId:appId andDelegate:self];
     }
+    NSDictionary *args = [command.arguments objectAtIndex:0];
     if (tencentOAuth.isSessionValid) {
         NSMutableDictionary *Dic = [NSMutableDictionary dictionaryWithCapacity:2];
         [Dic setObject:tencentOAuth.openId forKey:@"userid"];
@@ -88,28 +121,35 @@ NSString *appId = @"";
     } else {
         self.callback = command.callbackId;
         NSArray *permissions = [NSArray arrayWithObjects:
-                                            kOPEN_PERMISSION_GET_USER_INFO,
-                                            kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
-                                            kOPEN_PERMISSION_ADD_ALBUM,
-                                            kOPEN_PERMISSION_ADD_ONE_BLOG,
-                                            kOPEN_PERMISSION_ADD_SHARE,
-                                            kOPEN_PERMISSION_ADD_TOPIC,
-                                            kOPEN_PERMISSION_CHECK_PAGE_FANS,
-                                            kOPEN_PERMISSION_GET_INFO,
-                                            kOPEN_PERMISSION_GET_OTHER_INFO,
-                                            kOPEN_PERMISSION_LIST_ALBUM,
-                                            kOPEN_PERMISSION_UPLOAD_PIC,
-                                            kOPEN_PERMISSION_GET_VIP_INFO,
-                                            kOPEN_PERMISSION_GET_VIP_RICH_INFO,
-                                            nil];
-
+                                kOPEN_PERMISSION_GET_USER_INFO,
+                                kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
+                                kOPEN_PERMISSION_ADD_ALBUM,
+                                kOPEN_PERMISSION_ADD_ONE_BLOG,
+                                kOPEN_PERMISSION_ADD_SHARE,
+                                kOPEN_PERMISSION_ADD_TOPIC,
+                                kOPEN_PERMISSION_CHECK_PAGE_FANS,
+                                kOPEN_PERMISSION_GET_INFO,
+                                kOPEN_PERMISSION_GET_OTHER_INFO,
+                                kOPEN_PERMISSION_LIST_ALBUM,
+                                kOPEN_PERMISSION_UPLOAD_PIC,
+                                kOPEN_PERMISSION_GET_VIP_INFO,
+                                kOPEN_PERMISSION_GET_VIP_RICH_INFO,
+                                nil];
+        int type = [[args valueForKey:@"client"] intValue];
+        if(type == 0) {
+            [tencentOAuth setAuthShareType:AuthShareType_QQ];
+        } else if (type == 1) {
+            [tencentOAuth setAuthShareType:AuthShareType_TIM];
+        } else {
+            [tencentOAuth setAuthShareType:AuthShareType_Unknow];
+        }
         [tencentOAuth authorize:permissions];
     }
 }
 
 /**
  分享文本
-
+ 
  @param command cordova参数
  */
 - (void)shareText:(CDVInvokedUrlCommand *)command {
@@ -118,7 +158,8 @@ NSString *appId = @"";
     if ([args objectForKey:@"text"]) {
         NSString *text = [args objectForKey:@"text"];
         int scene = [[args valueForKey:@"scene"] intValue];
-        [self shareObjectWithData:@{ @"text" : text } Type:TextMessage Scene:scene];
+        int type = [[args valueForKey:@"client"] intValue];
+        [self shareObjectWithData:@{ @"text" : text } Type:TextMessage Scene:scene ClientType:type];
     } else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -127,7 +168,7 @@ NSString *appId = @"";
 
 /**
  分享图片
-
+ 
  @param command Cordova参数
  */
 - (void)shareImage:(CDVInvokedUrlCommand *)command {
@@ -138,6 +179,7 @@ NSString *appId = @"";
         NSString *image = [self check:@"image" in:args];
         NSString *description = [self check:@"description" in:args];
         int scene = [[args valueForKey:@"scene"] intValue];
+        int type = [[args valueForKey:@"client"] intValue];
         NSData *imageData = [self processImage:image];
         if(!imageData) {
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_IMAGE_PARAM_INCORRECT];
@@ -147,7 +189,8 @@ NSString *appId = @"";
                                          @"title" : title,
                                          @"description" : description }
                                  Type:ImageMesssage
-                                Scene:scene];
+                                Scene:scene
+                           ClientType:type];
         }
     } else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
@@ -157,7 +200,7 @@ NSString *appId = @"";
 
 /**
  分享新闻链接
-
+ 
  @param command Cordova参数
  */
 - (void)shareNews:(CDVInvokedUrlCommand *)command {
@@ -169,6 +212,7 @@ NSString *appId = @"";
         NSString *description = [self check:@"description" in:args];
         NSString *url = [self check:@"url" in:args];
         int scene = [[args valueForKey:@"scene"] intValue];
+        int type = [[args valueForKey:@"client"] intValue];
         NSData *imageData = [self processImage:image];
         if(!imageData) {
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_IMAGE_PARAM_INCORRECT];
@@ -179,7 +223,9 @@ NSString *appId = @"";
                                          @"title" : title,
                                          @"description" : description }
                                  Type:NewsMessageWithLocalImage
-                                Scene:scene];
+                                Scene:scene
+                                ClientType:type];
+
         }
     } else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
@@ -189,7 +235,7 @@ NSString *appId = @"";
 
 /**
  分享音乐链接
-
+ 
  @param command Cordova参数
  */
 - (void)shareAudio:(CDVInvokedUrlCommand *)command {
@@ -202,6 +248,7 @@ NSString *appId = @"";
         NSString *url = [self check:@"url" in:args];
         NSString *flashUrl = [self check:@"flashUrl" in:args];
         int scene = [[args valueForKey:@"scene"] intValue];
+        int type = [[args valueForKey:@"client"] intValue];
         NSData *imageData = [self processImage:image];
         if(!imageData) {
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_IMAGE_PARAM_INCORRECT];
@@ -213,7 +260,8 @@ NSString *appId = @"";
                                          @"title" : title,
                                          @"description" : description }
                                  Type:AudioMessage
-                                Scene:scene];
+                                Scene:scene
+                                ClientType:type];
         }
     } else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
@@ -223,7 +271,7 @@ NSString *appId = @"";
 
 /**
  分享视频链接
-
+ 
  @param command Cordova参数
  */
 - (void)shareVideo:(CDVInvokedUrlCommand *)command {
@@ -236,6 +284,7 @@ NSString *appId = @"";
         NSString *url = [self check:@"url" in:args];
         NSString *flashUrl = [self check:@"flashUrl" in:args];
         int scene = [[args valueForKey:@"scene"] intValue];
+        int type = [[args valueForKey:@"client"] intValue];
         NSData *imageData = [self processImage:image];
         if(!imageData) {
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_IMAGE_PARAM_INCORRECT];
@@ -247,7 +296,8 @@ NSString *appId = @"";
                                          @"title" : title,
                                          @"description" : description }
                                  Type:VideoMessage
-                                Scene:scene];
+                                Scene:scene
+                           ClientType:type];
         }
     } else {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:QQ_PARAM_NOT_FOUND];
@@ -257,11 +307,16 @@ NSString *appId = @"";
 
 /**
  分享文本到QQ空间
-
+ 
  @param text 分享文本
  */
-- (void)shareTextToQQZone:(NSString *)text {
+- (void)shareTextToQQZone:(NSString *)text Client:(int) client {
     QQApiImageArrayForQZoneObject *txtObj = [QQApiImageArrayForQZoneObject objectWithimageDataArray:nil title:text];
+    if (client == 1) {
+        txtObj.shareDestType = AuthShareType_TIM;
+    } else {
+        txtObj.shareDestType = AuthShareType_QQ;
+    }
     SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:txtObj];
     QQApiSendResultCode sent = [QQApiInterface SendReqToQZone:req];
     [self handleSendResult:sent];
@@ -269,12 +324,12 @@ NSString *appId = @"";
 
 /**
  分享方法
-
+ 
  @param shareData 分享数据
  @param type 分享的类型
  @param scene 分享的场景
  */
-- (void)shareObjectWithData:(NSDictionary *)shareData Type:(QQShareType)type Scene:(QQShareScene)scene {
+- (void)shareObjectWithData:(NSDictionary *)shareData Type:(QQShareType)type Scene:(QQShareScene)scene ClientType:(int) client {
     switch (type) {
         case TextMessage: {
             NSString *msg = [shareData objectForKey:@"text"];
@@ -282,7 +337,7 @@ NSString *appId = @"";
             [txtObj setCflag:kQQAPICtrlFlagQZoneShareOnStart];
             switch (scene) {
                 case QQZone:
-                    [self shareTextToQQZone:msg];
+                    [self shareTextToQQZone:msg Client:client];
                     return;
                 case Favorite:
                     [txtObj setCflag:kQQAPICtrlFlagQQShareFavorites];
@@ -290,6 +345,11 @@ NSString *appId = @"";
                 default:
                     [txtObj setCflag:kQQAPICtrlFlagQQShare];
                     break;
+            }
+            if (client == 1) {
+                txtObj.shareDestType = AuthShareType_TIM;
+            } else {
+                txtObj.shareDestType = AuthShareType_QQ;
             }
             SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:txtObj];
             QQApiSendResultCode sent = [QQApiInterface sendReq:req];
@@ -314,6 +374,11 @@ NSString *appId = @"";
                     [imgObj setCflag:kQQAPICtrlFlagQQShare];
                     break;
             }
+            if (client == 1) {
+                imgObj.shareDestType = AuthShareType_TIM;
+            } else {
+                imgObj.shareDestType = AuthShareType_QQ;
+            }
             SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:imgObj];
             QQApiSendResultCode sent = [QQApiInterface sendReq:req];
             [self handleSendResult:sent];
@@ -337,6 +402,11 @@ NSString *appId = @"";
                 default:
                     [newsObj setCflag:kQQAPICtrlFlagQQShare];
                     break;
+            }
+            if (client == 1) {
+                newsObj.shareDestType = AuthShareType_TIM;
+            } else {
+                newsObj.shareDestType = AuthShareType_QQ;
             }
             SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:newsObj];
             QQApiSendResultCode sent = [QQApiInterface sendReq:req];
@@ -364,6 +434,11 @@ NSString *appId = @"";
                     [audioObj setCflag:kQQAPICtrlFlagQQShare];
                     break;
             }
+            if (client == 1) {
+                audioObj.shareDestType = AuthShareType_TIM;
+            } else {
+                audioObj.shareDestType = AuthShareType_QQ;
+            }
             SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:audioObj];
             QQApiSendResultCode sent = [QQApiInterface sendReq:req];
             [self handleSendResult:sent];
@@ -390,6 +465,11 @@ NSString *appId = @"";
                     [videoObj setCflag:kQQAPICtrlFlagQQShare];
                     break;
             }
+            if (client == 1) {
+                videoObj.shareDestType = AuthShareType_TIM;
+            } else {
+                videoObj.shareDestType = AuthShareType_QQ;
+            }
             SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:videoObj];
             QQApiSendResultCode sent = [QQApiInterface sendReq:req];
             [self handleSendResult:sent];
@@ -401,7 +481,7 @@ NSString *appId = @"";
 
 /**
  分析那个结果处理
-
+ 
  @param sendResult 分享结果
  */
 - (void)handleSendResult:(QQApiSendResultCode)sendResult {
@@ -411,7 +491,7 @@ NSString *appId = @"";
         case EQQAPIAPPSHAREASYNC:
             break;
         case EQQAPIAPPNOTREGISTED: {
-            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"App未注册"];
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"App 未注册"];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
             break;
         }
@@ -422,13 +502,19 @@ NSString *appId = @"";
             [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
             break;
         }
-        case EQQAPIQQNOTINSTALLED: {
-            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"没有安装手机QQ"];
+        case EQQAPITIMNOTINSTALLED: {
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"没有安装 TIM"];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
             break;
         }
+        case EQQAPIQQNOTINSTALLED: {
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"没有安装手机 QQ"];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
+            break;
+        }
+        case EQQAPITIMNOTSUPPORTAPI:
         case EQQAPIQQNOTSUPPORTAPI: {
-            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"API接口不支持"];
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"API 接口不支持"];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
             break;
         }
@@ -438,17 +524,27 @@ NSString *appId = @"";
             break;
         }
         case EQQAPIVERSIONNEEDUPDATE: {
-            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"当前QQ版本太低"];
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"当前 QQ 版本太低"];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
+            break;
+        }
+        case ETIMAPIVERSIONNEEDUPDATE: {
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"当前 TIM 版本太低"];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
             break;
         }
         case EQQAPIQZONENOTSUPPORTTEXT: {
-            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"QQZone不支持QQApiTextObject分享"];
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"QQZone 不支持 QQApiTextObject 分享"];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
             break;
         }
         case EQQAPIQZONENOTSUPPORTIMAGE: {
-            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"QQZone不支持QQApiImageObject分享"];
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"QQZone 不支持 QQApiImageObject 分享"];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
+            break;
+        }
+        case EQQAPISHAREDESTUNKNOWN: {
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"未指定分享到 QQ 或 TIM"];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
             break;
         }
@@ -525,7 +621,7 @@ NSString *appId = @"";
 
 /**
  图片处理
-
+ 
  @param image 图片数据
  @return 图片NSdata数据
  */
@@ -542,14 +638,14 @@ NSString *appId = @"";
 
 /**
  检查图片是不是Base64
-
+ 
  @param data 图片数据
  @return 结果true or false
  */
 - (BOOL)isBase64Data:(NSString *)data {
     data = [[data componentsSeparatedByCharactersInSet:
-                      [NSCharacterSet whitespaceAndNewlineCharacterSet]]
-        componentsJoinedByString:@""];
+             [NSCharacterSet whitespaceAndNewlineCharacterSet]]
+            componentsJoinedByString:@""];
     if ([data length] % 4 == 0) {
         static NSCharacterSet *invertedBase64CharacterSet = nil;
         if (invertedBase64CharacterSet == nil) {
@@ -562,7 +658,7 @@ NSString *appId = @"";
 
 /**
  检查参数是否存在
-
+ 
  @param param 要检查的参数
  @param args 参数字典
  @return 参数
