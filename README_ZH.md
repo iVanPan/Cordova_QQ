@@ -1,5 +1,6 @@
 # cordova-plugin-qqsdk
 [![npm version](https://badge.fury.io/js/cordova-plugin-qqsdk.svg?style=flat)](https://badge.fury.io/js/cordova-plugin-qqsdk)
+[![npm](https://img.shields.io/npm/dm/cordova-plugin-qqsdk.svg)](https://www.npmjs.com/package/cordova-plugin-qqsdk)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)		
@@ -47,7 +48,7 @@
 
 	
 ## 安装
-1. 命令行运行      ```cordova plugin add https://github.com/iVanPan/Cordova_QQ.git --variable QQ_APP_ID=YOUR_QQ_APPID```  或者  ```cordova plugin add cordova-plugin-qqsdk --variable QQ_APP_ID=YOUR_QQ_APPID```              
+1. 命令行运行 ```cordova plugin add cordova-plugin-qqsdk --variable QQ_APP_ID=YOUR_QQ_APPID```              
 2. 命令行运行 cordova build               
 
 
@@ -65,7 +66,7 @@
 |      Text        |    √   |     √     |      √       |    ✕    |     √     |      √       |
 |      Image         |    √   |     √     |      √       |    √    |     √     |      √       |
 |      News        |    √   |     √     |      √       |    √    |     √     |      √       |
-|      Audio         |    √   |     √     |      √       |    √    |     √     |      √       |
+|     Audio        |    √   |     √     |      √       |    √    |     √     |      √       |
 
 
 ### 错误码        
