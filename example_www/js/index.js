@@ -18,7 +18,7 @@ var app = function () {
             alert("expires_time is "+ new Date(parseInt(result.expires_time)) + " TimeStamp is " +result.expires_time);
         }, function (failReason) {
             alert(failReason);
-        }.args);
+        },args);
     };
     this.logout = function () {
         QQSDK.logout(function () {
