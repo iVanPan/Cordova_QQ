@@ -77,6 +77,23 @@
             <string>mqzoneopensdkapi19</string>
             <string>mqzoneopensdkapi</string>
             <string>mqzoneopensdk</string>
+            <string>mqqgamebindinggroup</string>
+            <string>tencentapi.qq.reqContent</string>
+            <string>tencentapi.qzone.reqContent</string>
+            <string>tim</string>
+            <string>timapi</string>
+            <string>timopensdkfriend</string>
+            <string>timwpa</string>
+            <string>timgamebindinggroup</string>
+            <string>timapiwallet</string>
+            <string>timOpensdkSSoLogin</string>
+            <string>wtlogintim</string>
+            <string>timopensdkgrouptribeshare</string>
+            <string>timopensdkapiV4</string>
+            <string>timgamebindinggroup</string>
+            <string>timopensdkdataline</string>
+            <string>wtlogintimV1</string>
+            <string>timapiV1</string>
         </array>
     </config-file>
     <header-file src="src/ios/CDVQQSDK.h"/>
