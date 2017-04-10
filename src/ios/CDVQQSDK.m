@@ -83,7 +83,7 @@ NSString *appId = @"";
  *  @param command CDVInvokedUrlCommand
  */
 - (void)checkTIMInstalled:(CDVInvokedUrlCommand *)command {
-    if ([TencentOAuth iphoneTIMInstalled] && [TencentOAuth iphoneTIMSupportSSOLogin]) {
+    if ([TencentOAuth iphoneTIMInstalled]) {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     } else {
