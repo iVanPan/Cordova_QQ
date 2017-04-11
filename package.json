@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-qqsdk",
-  "version": "0.8.9",
+  "version": "0.9.0",
   "description": "codrova/phonegap wrapper for qq sdk",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,7 @@
     "plugin",
     "qqsdk",
     "qq",
+    "TIM",
     "Tencent",
     "login",
     "share",
