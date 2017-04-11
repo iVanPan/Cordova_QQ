@@ -111,40 +111,32 @@ NSString *appId = @"";
         tencentOAuth = [[TencentOAuth alloc] initWithAppId:appId andDelegate:self];
     }
     NSDictionary *args = [command.arguments objectAtIndex:0];
-    if (tencentOAuth.isSessionValid) {
-        NSMutableDictionary *Dic = [NSMutableDictionary dictionaryWithCapacity:2];
-        [Dic setObject:tencentOAuth.openId forKey:@"userid"];
-        [Dic setObject:tencentOAuth.accessToken forKey:@"access_token"];
-        [Dic setObject:[NSString stringWithFormat:@"%f", [tencentOAuth.expirationDate timeIntervalSince1970] * 1000] forKey:@"expires_time"];
-        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:Dic];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    self.callback = command.callbackId;
+    NSArray *permissions = [NSArray arrayWithObjects:
+                                        kOPEN_PERMISSION_GET_USER_INFO,
+                                        kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
+                                        kOPEN_PERMISSION_ADD_ALBUM,
+                                        kOPEN_PERMISSION_ADD_ONE_BLOG,
+                                        kOPEN_PERMISSION_ADD_SHARE,
+                                        kOPEN_PERMISSION_ADD_TOPIC,
+                                        kOPEN_PERMISSION_CHECK_PAGE_FANS,
+                                        kOPEN_PERMISSION_GET_INFO,
+                                        kOPEN_PERMISSION_GET_OTHER_INFO,
+                                        kOPEN_PERMISSION_LIST_ALBUM,
+                                        kOPEN_PERMISSION_UPLOAD_PIC,
+                                        kOPEN_PERMISSION_GET_VIP_INFO,
+                                        kOPEN_PERMISSION_GET_VIP_RICH_INFO,
+                                        nil];
+    int type = [[args valueForKey:@"client"] intValue];
+    if (type == 0) {
+        [tencentOAuth setAuthShareType:AuthShareType_QQ];
+    } else if (type == 1) {
+        [tencentOAuth setAuthShareType:AuthShareType_TIM];
     } else {
-        self.callback = command.callbackId;
-        NSArray *permissions = [NSArray arrayWithObjects:
-                                kOPEN_PERMISSION_GET_USER_INFO,
-                                kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
-                                kOPEN_PERMISSION_ADD_ALBUM,
-                                kOPEN_PERMISSION_ADD_ONE_BLOG,
-                                kOPEN_PERMISSION_ADD_SHARE,
-                                kOPEN_PERMISSION_ADD_TOPIC,
-                                kOPEN_PERMISSION_CHECK_PAGE_FANS,
-                                kOPEN_PERMISSION_GET_INFO,
-                                kOPEN_PERMISSION_GET_OTHER_INFO,
-                                kOPEN_PERMISSION_LIST_ALBUM,
-                                kOPEN_PERMISSION_UPLOAD_PIC,
-                                kOPEN_PERMISSION_GET_VIP_INFO,
-                                kOPEN_PERMISSION_GET_VIP_RICH_INFO,
-                                nil];
-        int type = [[args valueForKey:@"client"] intValue];
-        if(type == 0) {
-            [tencentOAuth setAuthShareType:AuthShareType_QQ];
-        } else if (type == 1) {
-            [tencentOAuth setAuthShareType:AuthShareType_TIM];
-        } else {
-            [tencentOAuth setAuthShareType:AuthShareType_Unknow];
-        }
-        [tencentOAuth authorize:permissions];
+        [tencentOAuth setAuthShareType:AuthShareType_Unknow];
     }
+    [tencentOAuth authorize:permissions];
+
 }
 
 /**

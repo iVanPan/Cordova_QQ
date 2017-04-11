@@ -111,25 +111,14 @@ public class QQSDKPlugin extends CordovaPlugin {
    */
   private boolean ssoLogin(CallbackContext callbackContext) {
     currentCallbackContext = callbackContext;
-    if (mTencent.isSessionValid()) {
-      JSONObject jo =
-          makeJson(mTencent.getAccessToken(), mTencent.getOpenId(), mTencent.getExpiresIn());
-      this.webView.sendPluginResult(new PluginResult(PluginResult.Status.OK, jo),
-          callbackContext.getCallbackId());
-      return true;
-    } else {
       Runnable runnable = new Runnable() {
-
         @Override public void run() {
           mTencent.login(QQSDKPlugin.this.cordova.getActivity(), "all", loginListener);
-          //					mTencent.loginServerSide(YCQQ.this.cordova.getActivity(), "all",
-          //							loginListener);
         }
       };
       this.cordova.getActivity().runOnUiThread(runnable);
       this.cordova.setActivityResultCallback(this);
       return true;
-    }
   }
 
   /**
