@@ -11,12 +11,18 @@ module.exports = {
         TIM: 1 // TIM 客户端
     },
 	ssoLogin:function(successCallback, errorCallback, args){
+		if(args === undefined) {
+            args = {}
+        }
 		cordova.exec(successCallback, errorCallback, "QQSDK", "ssoLogin",[args]);
 	},
 	logout:function(successCallback, errorCallback){
 		cordova.exec(successCallback, errorCallback, "QQSDK", "logout", []);
 	},
 	checkClientInstalled:function(successCallback, errorCallback, args){
+		if(args === undefined) {
+            args = {}
+        }
 		cordova.exec(successCallback, errorCallback, "QQSDK", "checkClientInstalled", [args]);
 	},
 	shareText:function(successCallback, errorCallback, args){
