@@ -117,7 +117,7 @@ NSString *appId = @"";
         [Dic setObject:tencentOAuth.accessToken forKey:@"access_token"];
         [Dic setObject:[NSString stringWithFormat:@"%f", [tencentOAuth.expirationDate timeIntervalSince1970] * 1000] forKey:@"expires_time"];
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:Dic];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     } else {
         self.callback = command.callbackId;
         NSArray *permissions = [NSArray arrayWithObjects:
