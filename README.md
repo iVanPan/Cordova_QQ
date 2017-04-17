@@ -129,8 +129,8 @@ When you use qq login,you may get an error code.If you get one, find detail erro
   var args = {};  
   args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
-  args.title = "这个是 Cordova QQ图片分享的标题";
-  args.description = "这个是Cordova QQ图片分享的描述";
+  args.title = "这个是 Cordova QQ 图片分享的标题";
+  args.description = "这个是 Cordova QQ 图片分享的描述";
   args.image = "https://cordova.apache.org/static/img/cordova_bot.png";
   QQSDK.shareImage(function () {
       alert('shareImage success');
@@ -145,8 +145,8 @@ When you use qq login,you may get an error code.If you get one, find detail erro
   args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.url = "https://cordova.apache.org/";
-  args.title = "这个是Cordova QQ新闻分享的标题";
-  args.description = "这个是Cordova QQ新闻分享的描述";
+  args.title = "这个是 Cordova QQ 新闻分享的标题";
+  args.description = "这个是 Cordova QQ 新闻分享的描述";
   args.image = "https://cordova.apache.org/static/img/cordova_bot.png";
   QQSDK.shareNews(function () {
       alert('shareNews success');
