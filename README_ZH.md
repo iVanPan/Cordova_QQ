@@ -5,7 +5,8 @@
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)		
 	
-这个一个 QQ SDK 的 Cordova 插件。 [English](https://github.com/iVanPan/Cordova_QQ)				
+这个一个 QQ SDK 的 Cordova 插件。 [English](https://github.com/iVanPan/Cordova_QQ)		
+				
 如果你希望使用一个微博的 Cordova 插件可以查看[这里](https://github.com/iVanPan/cordova_weibo).                     
 
 
@@ -65,8 +66,8 @@
 |      ShareScene    |   QQ   |   QQZone  |  QQ Favorite |    QQ   |   QQZone  |  QQ Favorite |
 |      Text        |    √   |     √     |      √       |    ✕    |     √     |      √       |
 |      Image         |    √   |     √     |      √       |    √    |     √     |      √       |
-|      News        |    √   |     √     |      √       |    √    |     √     |      √       |
-|      Audio        |    √   |     √     |      √       |    √    |     √     |      √       |
+|      News         |    √   |     √     |      √       |    √    |     √     |      √       |
+|      Audio         |    √   |     √     |      √       |    √    |     √     |      √       |
 
 
 ### 错误码        
@@ -134,7 +135,7 @@
   var args = {};
   args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
-  args.text = "这个是Cordova QQ分享文字";
+  args.text = "这个是 Cordova QQ 分享文字";
   QQSDK.shareText(function () {
       alert('shareText success');
   }, function (failReason) {
@@ -147,8 +148,8 @@
   var args = {};  
   args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
-  args.title = "这个是Cordova QQ图片分享的标题";
-  args.description = "这个是Cordova QQ图片分享的描述";
+  args.title = "这个是 Cordova QQ 图片分享的标题";
+  args.description = "这个是 Cordova QQ 图片分享的描述";
   args.image = "https://cordova.apache.org/static/img/cordova_bot.png";
   QQSDK.shareImage(function () {
       alert('shareImage success');
@@ -163,8 +164,8 @@
   args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
   args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
   args.url = "https://cordova.apache.org/";
-  args.title = "这个是Cordova QQ新闻分享的标题";
-  args.description = "这个是Cordova QQ新闻分享的描述";
+  args.title = "这个是 Cordova QQ 新闻分享的标题";
+  args.description = "这个是 Cordova QQ 新闻分享的描述";
   args.image = "https://cordova.apache.org/static/img/cordova_bot.png";
   QQSDK.shareNews(function () {
       alert('shareNews success');
@@ -191,8 +192,8 @@
   ```
 ##### 获取用户信息
 ```js
-  var url = "https://graph.qq.com/user/get_user_info?access_token=" + accessToken + "&oauth_consumer_key=" + QQ_APP_ID + "&openid=" + userId;
-  http.get(url)
+var url = "https://graph.qq.com/user/get_user_info?access_token=" + accessToken + "&oauth_consumer_key=" + QQ_APP_ID + "&openid=" + userId;
+http.get(url)
 ```
 
 ## 关于SDK 
