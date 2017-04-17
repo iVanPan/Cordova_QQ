@@ -1,12 +1,12 @@
 # cordova-plugin-qqsdk
-[![npm version](https://badge.fury.io/js/cordova-plugin-qqsdk.svg?style=flat)](https://badge.fury.io/js/cordova-plugin-qqsdk)
+[![npm](https://img.shields.io/npm/v/cordova-plugin-qqsdk.svg)](https://www.npmjs.com/package/cordova-plugin-qqsdk)
 [![npm](https://img.shields.io/npm/dm/cordova-plugin-qqsdk.svg)](https://www.npmjs.com/package/cordova-plugin-qqsdk)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)		
 	
-这个一个QQ SDK的Cordova 插件。 [English](https://github.com/iVanPan/Cordova_QQ)				
-如果你希望使用一个微博的cordova插件可以查看[这里](https://github.com/iVanPan/cordova_weibo).                     
+这个一个 QQ SDK 的 Cordova 插件。 [English](https://github.com/iVanPan/Cordova_QQ)				
+如果你希望使用一个微博的 Cordova 插件可以查看[这里](https://github.com/iVanPan/cordova_weibo).                     
 
 
 ## Table of Contents
@@ -43,8 +43,8 @@
 
 ## 安装要求
 - Cordova Version 3.5+ 
-- Cordova-Android >=4.0
-- Cordova-iOS >=4.0     
+- Cordova-Android >= 4.0
+- Cordova-iOS >= 4.0     
 
 	
 ## 安装
@@ -66,24 +66,24 @@
 |      Text        |    √   |     √     |      √       |    ✕    |     √     |      √       |
 |      Image         |    √   |     √     |      √       |    √    |     √     |      √       |
 |      News        |    √   |     √     |      √       |    √    |     √     |      √       |
-|     Audio        |    √   |     √     |      √       |    √    |     √     |      √       |
+|      Audio        |    √   |     √     |      √       |    √    |     √     |      √       |
 
 
 ### 错误码        
-使用SDK时，所有结果都会通过回调返回给应用。在回调的结果中，会包含每次调用结果的返回码。
-正常情况下返回码为0，表示调用成功。
-如果返回码不为0，说明调用出错，需要根据返回码的值来定位错误原因。       
+使用 SDK 时，所有结果都会通过回调返回给应用。在回调的结果中，会包含每次调用结果的返回码。
+正常情况下返回码为 0，表示调用成功。
+如果返回码不为 0，说明调用出错，需要根据返回码的值来定位错误原因。       
 110201：未登陆              
 110405：登录请求被限制              
-110404：请求参数缺少appid            
+110404：请求参数缺少 appid            
 110401：请求的应用不存在           
 110407：应用已经下架             
 110406：应用没有通过审核               
-100044：错误的sign          
+100044：错误的 sign          
 110500：获取用户授权信息失败           
 110501：获取应用的授权信息失败            
 110502：设置用户授权失败             
-110503：获取token失败              
+110503：获取 token 失败              
 110504：系统内部错误             
 
 详情查看[这里](http://wiki.open.qq.com/wiki/mobile/API%E8%B0%83%E7%94%A8%E8%AF%B4%E6%98%8E#6._.E8.BF.94.E5.9B.9E.E7.A0.81.E8.AF.B4.E6.98.8E%E3%80%82) 
@@ -196,20 +196,20 @@
 ```
 
 ## 关于SDK 
-本插件 Android SDK 的版本是3.2.0，iOS SDK 的版本是3.2.0，你可以在[这里](http://wiki.open.qq.com/wiki/mobile/SDK%E4%B8%8B%E8%BD%BD)下载最新版本的 SDK          
+本插件 Android SDK 的版本是 3.2.0，iOS SDK 的版本是 3.2.0，你可以在[这里](http://wiki.open.qq.com/wiki/mobile/SDK%E4%B8%8B%E8%BD%BD)下载最新版本的 SDK          
 
 ## 注意事项  
 **请认真阅读文档，请认真阅读文档，请认真阅读文档**                 
-1. 这个插件要求 Cordova-android 的版本 >=4.0,推荐使用 Cordova  5.0.0 或更高的版本，因为从 Cordova 5.0 开始 Cordova-android 4.0 是默认使用的android版本
+1. 这个插件要求 Cordova-android 的版本 >= 4.0,推荐使用 Cordova 5.0.0 或更高的版本，因为从 Cordova 5.0 开始 Cordova-android 4.0 是默认使用的 Android 版本
 2. 请在 Cordova 的 deviceready 事件触发以后再调用本插件！！！    
-3. <del>在低于5.1.1的 Cordova 版本中存在一个Bug，如果你有多个插件要修改iOS工程中的 “*-Info.plist” CFBundleURLTypes, 只有第一个安装的插件才会生效.所以安装完插件请务必在你的 Xcode 工程里面检查一下 URLTypes。 关于这个 bug 的详情你可以在 [这里](https://issues.apache.org/jira/browse/CB-8007)找到</del> 建议安装使用5.1.1及以上的 Cordova 版本   
+3. <del>在低于 5.1.1 的 Cordova 版本中存在一个 Bug，如果你有多个插件要修改 iOS 工程中的 “*-Info.plist” CFBundleURLTypes, 只有第一个安装的插件才会生效.所以安装完插件请务必在你的 Xcode 工程里面检查一下 URLTypes。 关于这个 bug 的详情你可以在 [这里](https://issues.apache.org/jira/browse/CB-8007)找到</del> 建议安装使用 5.1.1 及以上的 Cordova 版本   
 4. Android 版本请确保你的签名是正确的 
 5. 分享的 URL 长度不要过长，图片不要太大，不然会分享失败，因为 SDK 做了限制          
 
 
 
 ## Demo     
-在安装完这个插件以后，把 cordova 工程中的代码替换为 example_www中的代码，安装Cordova相机插件，在build以后可以进行各个功能测试，以下为运行效果图：
+在安装完这个插件以后，把 Cordova 工程中的代码替换为 example_www 中的代码，安装 Cordova 相机插件，在 build 以后可以进行各个功能测试，以下为运行效果图：
 <div style="text-align:center"><img src="https://github.com/iVanPan/Cordova_QQ/blob/master/ScreenShot.png?raw=true" alt="example" style="width:300px"></div>    
 
 ## 贡献代码
@@ -218,13 +218,3 @@
 ## 开源证书
 
 **cordova-plugin-qqsdk** 遵照了 **MIT** 证书. 详情可以查看 [证书](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE) 文件
- 
- 		
-	
-				
-
-
-	
-
-
-
