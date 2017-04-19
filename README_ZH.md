@@ -97,102 +97,98 @@
  
 ### 使用方式
 ##### 检查客户端是否安装
-  ```js
-  var args = {};
-  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
-  QQSDK.checkClientInstalled(function () {
-      alert('client is installed');
-  }, function () {
-      // if installed QQ Client version is not supported sso,also will get this error
-      alert('client is not installed');
-  },args);
+```js
+var args = {};
+args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
+QQSDK.checkClientInstalled(function () {
+  alert('client is installed');
+}, function () {
+  // if installed QQ Client version is not supported sso,also will get this error
+  alert('client is not installed');
+}, args);
+```
 
-  ```
 ##### 登录
-  ```js
-  var args = {};
-  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
-  QQSDK.ssoLogin(function (result) {
-      alert("token is " + result.access_token);
-      alert("userid is " +result.userid);
-      alert("expires_time is "+ new Date(parseInt(result.expires_time)) + " TimeStamp is " +result.expires_time);
-  }, function (failReason) {
-      alert(failReason);
-  }.args);
+```js
+var args = {};
+args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
+QQSDK.ssoLogin(function (result) {
+  alert('token is ' + result.access_token);
+  alert('userid is ' + result.userid);
+  alert('expires_time is ' + new Date(parseInt(result.expires_time)) + ' TimeStamp is ' + result.expires_time);
+}, function (failReason) {
+  alert(failReason);
+}, args);
 
-  ```
+```
 ##### 登出
-  ```js
-  QQSDK.logout(function () {
-      alert('logout success');
-  }, function (failReason) {
-      alert(failReason);
-  });
-
-  ```
+```js
+QQSDK.logout(function () {
+  alert('logout success');
+}, function (failReason) {
+  alert(failReason);
+});
+```
 ##### 分享文字
-  ```js
-  var args = {};
-  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
-  args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
-  args.text = "这个是 Cordova QQ 分享文字";
-  QQSDK.shareText(function () {
-      alert('shareText success');
-  }, function (failReason) {
-      alert(failReason);
-  },args);
-
-  ```
+```js
+var args = {};
+args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
+args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
+args.text = '这个是 Cordova QQ 分享文字';
+QQSDK.shareText(function () {
+  alert('shareText success');
+}, function (failReason) {
+  alert(failReason);
+}, args);
+```
 ##### 分享图片
-  ```js
-  var args = {};  
-  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
-  args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
-  args.title = "这个是 Cordova QQ 图片分享的标题";
-  args.description = "这个是 Cordova QQ 图片分享的描述";
-  args.image = "https://cordova.apache.org/static/img/cordova_bot.png";
-  QQSDK.shareImage(function () {
-      alert('shareImage success');
-  }, function (failReason) {
-      alert(failReason);
-  },args); 
-
-  ```
+```js
+var args = {};
+args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
+args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
+args.title = '这个是 Cordova QQ 图片分享的标题';
+args.description = '这个是 Cordova QQ 图片分享的描述';
+args.image = 'https://cordova.apache.org/static/img/cordova_bot.png';
+QQSDK.shareImage(function () {
+  alert('shareImage success');
+}, function (failReason) {
+  alert(failReason);
+}, args);
+```
 ##### 分享新闻
-  ```js
-  var args = {}; 
-  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
-  args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
-  args.url = "https://cordova.apache.org/";
-  args.title = "这个是 Cordova QQ 新闻分享的标题";
-  args.description = "这个是 Cordova QQ 新闻分享的描述";
-  args.image = "https://cordova.apache.org/static/img/cordova_bot.png";
-  QQSDK.shareNews(function () {
-      alert('shareNews success');
-  }, function (failReason) {
-      alert(failReason);
-  },args);
-
-  ```
+```js
+var args = {};
+args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
+args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
+args.url = 'https://cordova.apache.org/';
+args.title = '这个是 Cordova QQ 新闻分享的标题';
+args.description = '这个是 Cordova QQ 新闻分享的描述';
+args.image = 'https://cordova.apache.org/static/img/cordova_bot.png';
+QQSDK.shareNews(function () {
+  alert('shareNews success');
+}, function (failReason) {
+  alert(failReason);
+}, args);
+```
 ##### 分享音乐
-  ```js
-  var args = {};  
-  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
-  args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
-  args.url = "https://y.qq.com/portal/song/001OyHbk2MSIi4.html";
-  args.title = "十年";
-  args.description = "陈奕迅";
-  args.image = "https://y.gtimg.cn/music/photo_new/T001R300x300M000003Nz2So3XXYek.jpg";
-  args.flashUrl = "http://stream20.qqmusic.qq.com/30577158.mp3";
-  QQSDK.shareAudio(function () {
-      alert('shareAudio success');
-  }, function (failReason) {
-      alert(failReason);
-  },args);
-  ```
+```js
+var args = {};
+args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
+args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
+args.url = 'https://y.qq.com/portal/song/001OyHbk2MSIi4.html';
+args.title = '十年';
+args.description = '陈奕迅';
+args.image = 'https://y.gtimg.cn/music/photo_new/T001R300x300M000003Nz2So3XXYek.jpg';
+args.flashUrl = 'http://stream20.qqmusic.qq.com/30577158.mp3';
+QQSDK.shareAudio(function () {
+  alert('shareAudio success');
+}, function (failReason) {
+  alert(failReason);
+}, args);
+```
 ##### 获取用户信息
 ```js
-var url = "https://graph.qq.com/user/get_user_info?access_token=" + accessToken + "&oauth_consumer_key=" + QQ_APP_ID + "&openid=" + userId;
+var url = 'https://graph.qq.com/user/get_user_info?access_token=' + accessToken + '&oauth_consumer_key=' + QQ_APP_ID + '&openid=' + userId;
 http.get(url)
 ```
 
@@ -201,7 +197,7 @@ http.get(url)
 
 ## 注意事项  
 **请认真阅读文档，请认真阅读文档，请认真阅读文档**                 
-1. 这个插件要求 Cordova-android 的版本 >= 4.0,推荐使用 Cordova 5.0.0 或更高的版本，因为从 Cordova 5.0 开始 Cordova-android 4.0 是默认使用的 Android 版本
+1. 这个插件要求 Cordova-Android 的版本 >= 4.0,推荐使用 Cordova 5.0 或更高的版本，因为从 Cordova 5.0 开始 Cordova-Android 4.0 是默认使用的 Android 版本
 2. 请在 Cordova 的 deviceready 事件触发以后再调用本插件！！！    
 3. <del>在低于 5.1.1 的 Cordova 版本中存在一个 Bug，如果你有多个插件要修改 iOS 工程中的 “*-Info.plist” CFBundleURLTypes, 只有第一个安装的插件才会生效.所以安装完插件请务必在你的 Xcode 工程里面检查一下 URLTypes。 关于这个 bug 的详情你可以在 [这里](https://issues.apache.org/jira/browse/CB-8007)找到</del> 建议安装使用 5.1.1 及以上的 Cordova 版本   
 4. Android 版本请确保你的签名是正确的 

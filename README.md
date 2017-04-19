@@ -168,7 +168,7 @@ QQSDK.shareAudio(function () {
 ```
 ##### getUserInfo
 ```js
-var url = "https://graph.qq.com/user/get_user_info?access_token=" + accessToken + "&oauth_consumer_key=" + QQ_APP_ID + "&openid=" + userId;
+var url = 'https://graph.qq.com/user/get_user_info?access_token=' + accessToken + '&oauth_consumer_key=' + QQ_APP_ID + '&openid=' + userId;
 http.get(url)
 ```
 
