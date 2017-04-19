@@ -78,99 +78,94 @@ When you use qq login,you may get an error code.If you get one, find detail erro
  
 ### Usage
 ##### checkClientInstalled
-  ```js
-  var args = {};  
-  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
-  QQSDK.checkClientInstalled(function () {
-      alert('client is installed');
-  }, function () {
-      // if installed QQ Client version is not supported sso,also will get this error
-      alert('client is not installed');
-  },args);
-
-  ```
+```js
+var args = {};
+args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
+QQSDK.checkClientInstalled(function () {
+  alert('client is installed');
+}, function () {
+  // if installed QQ Client version is not supported sso,also will get this error
+  alert('client is not installed');
+}, args);
+```
 ##### ssoLogin
-  ```js
-  var args = {};  
-  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
-  QQSDK.ssoLogin(function (result) {
-      alert("token is " + result.access_token);
-      alert("userid is " +result.userid);
-      alert("expires_time is "+ new Date(parseInt(result.expires_time)) + " TimeStamp is " +result.expires_time);
-  }, function (failReason) {
-      alert(failReason);
-  }.args);
+```js
+var args = {};
+args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
+QQSDK.ssoLogin(function (result) {
+  alert('token is ' + result.access_token);
+  alert('userid is ' + result.userid);
+  alert('expires_time is ' + new Date(parseInt(result.expires_time)) + ' TimeStamp is ' + result.expires_time);
+}, function (failReason) {
+  alert(failReason);
+}, args);
 
-  ```
+```
 ##### logout
-  ```js
-  QQSDK.logout(function () {
-      alert('logout success');
-  }, function (failReason) {
-      alert(failReason);
-  });
-
-  ```
+```js
+QQSDK.logout(function () {
+  alert('logout success');
+}, function (failReason) {
+  alert(failReason);
+});
+```
 ##### shareText
-  ```js
-  var args = {};  
-  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
-  args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
-  args.text = "这个是 Cordova QQ 分享文字";
-  QQSDK.shareText(function () {
-      alert('shareText success');
-  }, function (failReason) {
-      alert(failReason);
-  },args);
-
-  ```
+```js
+var args = {};
+args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
+args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
+args.text = '这个是 Cordova QQ 分享文字';
+QQSDK.shareText(function () {
+  alert('shareText success');
+}, function (failReason) {
+  alert(failReason);
+}, args);
+```
 ##### shareImage
-  ```js
-  var args = {};  
-  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
-  args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
-  args.title = "这个是 Cordova QQ 图片分享的标题";
-  args.description = "这个是 Cordova QQ 图片分享的描述";
-  args.image = "https://cordova.apache.org/static/img/cordova_bot.png";
-  QQSDK.shareImage(function () {
-      alert('shareImage success');
-  }, function (failReason) {
-      alert(failReason);
-  },args); 
-
-  ```
+```js
+var args = {};
+args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
+args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
+args.title = '这个是 Cordova QQ 图片分享的标题';
+args.description = '这个是 Cordova QQ 图片分享的描述';
+args.image = 'https://cordova.apache.org/static/img/cordova_bot.png';
+QQSDK.shareImage(function () {
+  alert('shareImage success');
+}, function (failReason) {
+  alert(failReason);
+}, args);
+```
 ##### shareNews
-  ```js
-  var args = {};
-  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
-  args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
-  args.url = "https://cordova.apache.org/";
-  args.title = "这个是 Cordova QQ 新闻分享的标题";
-  args.description = "这个是 Cordova QQ 新闻分享的描述";
-  args.image = "https://cordova.apache.org/static/img/cordova_bot.png";
-  QQSDK.shareNews(function () {
-      alert('shareNews success');
-  }, function (failReason) {
-      alert(failReason);
-  },args);
-
-  ```
+```js
+var args = {};
+args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
+args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
+args.url = 'https://cordova.apache.org/';
+args.title = '这个是 Cordova QQ 新闻分享的标题';
+args.description = '这个是 Cordova QQ 新闻分享的描述';
+args.image = 'https://cordova.apache.org/static/img/cordova_bot.png';
+QQSDK.shareNews(function () {
+  alert('shareNews success');
+}, function (failReason) {
+  alert(failReason);
+}, args);
+```
 ##### shareAudio
-  ```js
-  var args = {};
-  args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
-  args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
-  args.url = "https://y.qq.com/portal/song/001OyHbk2MSIi4.html";
-  args.title = "十年";
-  args.description = "陈奕迅";
-  args.image = "https://y.gtimg.cn/music/photo_new/T001R300x300M000003Nz2So3XXYek.jpg";
-  args.flashUrl = "http://stream20.qqmusic.qq.com/30577158.mp3";
-  QQSDK.shareAudio(function () {
-      alert('shareAudio success');
-  }, function (failReason) {
-      alert(failReason);
-  },args);
-  ```
+```js
+var args = {};
+args.client = QQSDK.ClientType.QQ;//QQSDK.ClientType.QQ,QQSDK.ClientType.TIM;
+args.scene = QQSDK.Scene.QQ;//QQSDK.Scene.QQZone,QQSDK.Scene.Favorite
+args.url = 'https://y.qq.com/portal/song/001OyHbk2MSIi4.html';
+args.title = '十年';
+args.description = '陈奕迅';
+args.image = 'https://y.gtimg.cn/music/photo_new/T001R300x300M000003Nz2So3XXYek.jpg';
+args.flashUrl = 'http://stream20.qqmusic.qq.com/30577158.mp3';
+QQSDK.shareAudio(function () {
+  alert('shareAudio success');
+}, function (failReason) {
+  alert(failReason);
+}, args);
+```
 ##### getUserInfo
 ```js
 var url = "https://graph.qq.com/user/get_user_info?access_token=" + accessToken + "&oauth_consumer_key=" + QQ_APP_ID + "&openid=" + userId;
@@ -181,7 +176,7 @@ http.get(url)
 This plugin use 3.2.0 version sdk for Android,3.2.0 version sdk for iOS. You can download lastest version sdk [here](http://wiki.open.qq.com/wiki/mobile/SDK%E4%B8%8B%E8%BD%BD)              
 
 ## Notes             
-1. This plugin is required Cordova-android version >=4.0,so using Cordova 5.0.0 or higher is recommended
+1. This plugin is required Cordova-Android version >=4.0,so using Cordova 5.0 or higher is recommended
 2. This plugin should be used after the deviceready event has been fired!!!       
 3. ~~If Cordova version  <5.1.1,when two Cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007)~~ Update:This Bug is fixed in last Cordova version(5.1.1) 
 4. For Android: make sure your signature is correct !!!
