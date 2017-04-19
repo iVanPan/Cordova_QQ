@@ -112,7 +112,9 @@
     <resource-file src="src/ios/TencentOpenApi_IOS_Bundle.bundle" />
 
     <info>
-      安装完插件，请用XCode打开工程，查看URL Types里面QQ的URL type有没有，如果没有请手动添加.after installing this plugin,check the URL Types in your Xcode project.If you don't find URL Types for qqsdk，manually add it.
+      1.安装完这个插件,请用 Xcode 打开工程,查看 URL Types 里面 QQ 的 URL Type 有没有，如果没有请手动添加。
+      // ENGLISH
+      1.after installing this plugin,check the URL Types in your Xcode project.If you don't find URL Types for QQ SDK，manually add it.
     </info>
   </platform>
 
