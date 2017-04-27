@@ -664,23 +664,14 @@ public class QQSDKPlugin extends CordovaPlugin {
   }
 
   @Override public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-    if (requestCode == Constants.REQUEST_LOGIN) {
-      if (resultCode == Constants.ACTIVITY_OK) {
+    if (resultCode == Constants.ACTIVITY_OK) {
+      if (requestCode == Constants.REQUEST_LOGIN) {
         Tencent.onActivityResultData(requestCode, resultCode, intent, loginListener);
       }
-    }
-    if (requestCode == Constants.REQUEST_QQ_SHARE) {
-      if (resultCode == Constants.ACTIVITY_OK) {
+      if (requestCode == Constants.REQUEST_QQ_SHARE) {
         Tencent.onActivityResultData(requestCode, resultCode, intent, qqShareListener);
       }
-    }
-    if (requestCode == Constants.REQUEST_QZONE_SHARE) {
-      if (resultCode == Constants.ACTIVITY_OK) {
-        Tencent.onActivityResultData(requestCode, resultCode, intent, qZoneShareListener);
-      }
-    }
-    if (requestCode == Constants.REQUEST_QQ_FAVORITES) {
-      if (resultCode == Constants.ACTIVITY_OK) {
+      if (requestCode == Constants.REQUEST_QQ_FAVORITES) {
         Tencent.onActivityResultData(requestCode, resultCode, intent, addToQQFavoritesListener);
       }
     }
