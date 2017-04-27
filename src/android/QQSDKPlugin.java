@@ -140,7 +140,7 @@ public class QQSDKPlugin extends CordovaPlugin {
       int shareScene = data.has("scene")? data.getInt("scene"): 0;
       switch (shareScene) {
         case ShareScene.QQ:
-          callbackContext.error("Android不支持分享文字到QQ");
+          callbackContext.error("Android 不支持分享文字到 QQ");
           break;
         case ShareScene.Favorite:
           params.putInt(GameAppOperation.QQFAV_DATALINE_REQTYPE,
