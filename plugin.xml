@@ -3,9 +3,9 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-qqsdk"
-  version="0.9.0">
+  version="0.9.6">
 
-  <name>cordova-plugin-qqsdk</name>
+  <name>QQSDK</name>
   <description>Cordova Plugin QQSDK</description>
   <license>MIT</license>
   <keywords>cordova,qq</keywords>
@@ -107,7 +107,7 @@
     <framework src="libsqlite3.tbd" />
     <framework src="libstdc++.tbd" />
     <framework src="libz.tbd" />
-    <!--QQ SDK version 3.1.3-->
+    <!--QQ SDK version 3.2.1-->
     <framework src="src/ios/TencentOpenAPI.framework" custom="true" framework="true"/>
     <resource-file src="src/ios/TencentOpenApi_IOS_Bundle.bundle" />
 
@@ -162,7 +162,7 @@
     </activity>
   </config-file>
   <source-file src="src/android/QQSDKPlugin.java" target-dir="src/me/vanpan/qqsdk" />
-  <!--QQ SDK version 3.1.1-->
+  <!--QQ SDK version 3.2.0-->
   <source-file src="src/android/open_sdk_r5788.jar" target-dir="libs/" />
   <source-file src="src/android/mta-sdk-1.6.2.jar" target-dir="libs/" />
   <framework src="com.android.support:support-v4:24.1.1+" />
