@@ -3,7 +3,6 @@
 [![npm](https://img.shields.io/npm/dm/cordova-plugin-qqsdk.svg)](https://www.npmjs.com/package/cordova-plugin-qqsdk)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
-[![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)					
 
 A Cordova wrapper around the Tencent QQ SDK for Android and iOS. Provides access to QQ ssoLogin, QQ Sharing, QQ Zone Sharing etc.. [简体中文](https://github.com/iVanPan/Cordova_QQ/blob/master/README_ZH.md).     
                    
@@ -173,7 +172,7 @@ http.get(url)
 ```
 
 ## About SDK 
-This plugin use 3.2.0 version sdk for Android,3.2.0 version sdk for iOS. You can download lastest version sdk [here](http://wiki.open.qq.com/wiki/mobile/SDK%E4%B8%8B%E8%BD%BD)              
+This plugin use 3.2.1 version sdk for Android,3.2.0 version sdk for iOS. You can download lastest version sdk [here](http://wiki.open.qq.com/wiki/mobile/SDK%E4%B8%8B%E8%BD%BD)              
 
 ## Notes             
 1. This plugin is required Cordova-Android version >=4.0,so using Cordova 5.0 or higher is recommended

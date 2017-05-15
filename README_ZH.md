@@ -3,7 +3,6 @@
 [![npm](https://img.shields.io/npm/dm/cordova-plugin-qqsdk.svg)](https://www.npmjs.com/package/cordova-plugin-qqsdk)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
-[![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)		
 	
 这个一个 QQ SDK 的 Cordova 插件。 [English](https://github.com/iVanPan/Cordova_QQ)		
 				
@@ -193,7 +192,7 @@ http.get(url)
 ```
 
 ## 关于SDK 
-本插件 Android SDK 的版本是 3.2.0，iOS SDK 的版本是 3.2.0，你可以在[这里](http://wiki.open.qq.com/wiki/mobile/SDK%E4%B8%8B%E8%BD%BD)下载最新版本的 SDK          
+本插件 Android SDK 的版本是 3.2.1，iOS SDK 的版本是 3.2.0，你可以在[这里](http://wiki.open.qq.com/wiki/mobile/SDK%E4%B8%8B%E8%BD%BD)下载最新版本的 SDK          
 
 ## 注意事项  
 **请认真阅读文档，请认真阅读文档，请认真阅读文档**                 
