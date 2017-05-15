@@ -51,7 +51,6 @@ enum
 
 // 分享到QQ或TIM
 typedef enum ShareDestType {
-    ShareDestTypeUnknown,
     ShareDestTypeQQ,
     ShareDestTypeTIM,
 }ShareDestType;

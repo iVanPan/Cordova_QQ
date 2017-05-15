@@ -47,7 +47,6 @@ typedef enum TIMVersion {
  * \breif 授权/分享 方式
  */
 typedef enum TencentAuthShareType {
-    AuthShareType_Unknow,
     AuthShareType_QQ,
     AuthShareType_TIM,
 }TencentAuthShareType;
