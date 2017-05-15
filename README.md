@@ -172,7 +172,7 @@ http.get(url)
 ```
 
 ## About SDK 
-This plugin use 3.2.1 version sdk for Android,3.2.0 version sdk for iOS. You can download lastest version sdk [here](http://wiki.open.qq.com/wiki/mobile/SDK%E4%B8%8B%E8%BD%BD)              
+This plugin use 3.2.0 version sdk for Android,3.2.1 version sdk for iOS. You can download lastest version sdk [here](http://wiki.open.qq.com/wiki/mobile/SDK%E4%B8%8B%E8%BD%BD)              
 
 ## Notes             
 1. This plugin is required Cordova-Android version >=4.0,so using Cordova 5.0 or higher is recommended
