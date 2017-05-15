@@ -83,7 +83,7 @@ NSString *appId = @"";
  *  @param command CDVInvokedUrlCommand
  */
 - (void)checkTIMInstalled:(CDVInvokedUrlCommand *)command {
-    if ([TencentOAuth iphoneTIMInstalled]) {
+    if ([TencentOAuth iphoneTIMInstalled] && [TencentOAuth iphoneTIMSupportSSOLogin]) {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     } else {
@@ -132,8 +132,6 @@ NSString *appId = @"";
         [tencentOAuth setAuthShareType:AuthShareType_QQ];
     } else if (type == 1) {
         [tencentOAuth setAuthShareType:AuthShareType_TIM];
-    } else {
-        [tencentOAuth setAuthShareType:AuthShareType_Unknow];
     }
     [tencentOAuth authorize:permissions];
 
@@ -352,7 +350,7 @@ NSString *appId = @"";
             NSString *title = [shareData objectForKey:@"title"];
             NSString *description = [shareData objectForKey:@"description"];
             QQApiImageObject *imgObj = [QQApiImageObject objectWithData:data
-                                                       previewImageData:data
+                                                       previewImageData:nil
                                                                   title:title
                                                             description:description];
             switch (scene) {
