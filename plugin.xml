@@ -107,7 +107,7 @@
     <framework src="libsqlite3.tbd" />
     <framework src="libstdc++.tbd" />
     <framework src="libz.tbd" />
-    <!--QQ SDK version 3.2.1-->
+    <!--QQ SDK version 3.2.3-->
     <framework src="src/ios/TencentOpenAPI.framework" custom="true" framework="true"/>
     <resource-file src="src/ios/TencentOpenApi_IOS_Bundle.bundle" />
 
@@ -162,8 +162,8 @@
     </activity>
   </config-file>
   <source-file src="src/android/QQSDKPlugin.java" target-dir="src/me/vanpan/qqsdk" />
-  <!--QQ SDK version 3.2.0-->
-  <source-file src="src/android/open_sdk_r5788.jar" target-dir="libs/" />
+  <!--QQ SDK version 3.2.1-->
+  <source-file src="src/android/open_sdk_r5793.jar" target-dir="libs/" />
   <source-file src="src/android/mta-sdk-1.6.2.jar" target-dir="libs/" />
   <framework src="com.android.support:support-v4:24.1.1+" />
   </platform>
