@@ -301,8 +301,7 @@ NSString *appId = @"";
  @param text 分享文本
  */
 - (void)shareTextToQQZone:(NSString *)text Client:(int) client {
-    QQApiImageArrayForQZoneObject *txtObj = [QQApiImageArrayForQZoneObject objectWithimageDataArray:nil title:text];
-    if (client == 1) {
+    QQApiImageArrayForQZoneObject *txtObj = [QQApiImageArrayForQZoneObject objectWithimageDataArray:nil title:text extMap:nil];    if (client == 1) {
         txtObj.shareDestType = AuthShareType_TIM;
     } else {
         txtObj.shareDestType = AuthShareType_QQ;

@@ -195,22 +195,25 @@ __attribute__((visibility("default"))) @interface QQApiURLObject : QQApiObject
 @interface QQApiImageArrayForQZoneObject : QQApiObject
 
 @property(nonatomic,retain) NSArray* imageDataArray;///图片数组
+@property(nonatomic,retain) NSDictionary* extMap; // 扩展字段
 
 /**
  初始化方法
  @param imageDataArray 图片数组
  @param title 写说说的内容，可以为空
+ @param extMap 扩展字段
  */
-- (id)initWithImageArrayData:(NSArray*)imageDataArray title:(NSString*)title;
+- (id)initWithImageArrayData:(NSArray*)imageDataArray title:(NSString*)title extMap:(NSDictionary *)extMap;
 
 /**
  helper方法获取一个autorelease的<code>QQApiExtendObject</code>对象
  @param title 写说说的内容，可以为空
  @param imageDataArray 发送的多张图片队列
+ @param extMap 扩展字段
  @return
  一个自动释放的<code>QQApiExtendObject</code>实例
  */
-+ (id)objectWithimageDataArray:(NSArray*)imageDataArray title:(NSString*)title;
++ (id)objectWithimageDataArray:(NSArray*)imageDataArray title:(NSString*)title extMap:(NSDictionary *)extMap;
 
 @end
 
@@ -218,14 +221,16 @@ __attribute__((visibility("default"))) @interface QQApiURLObject : QQApiObject
 /** @brief 视频对象
  用于分享视频到空间，走写说说路径<code>QQApiObject</code>
  assetURL可传ALAsset的ALAssetPropertyAssetURL，或者PHAsset的localIdentifier
+  @param extMap 扩展字段
  */
 @interface QQApiVideoForQZoneObject : QQApiObject
 
 @property(nonatomic, retain) NSString *assetURL;
+@property(nonatomic,retain) NSDictionary* extMap; // 扩展字段
 
-- (id)initWithAssetURL:(NSString*)assetURL title:(NSString*)title;
+- (id)initWithAssetURL:(NSString*)assetURL title:(NSString*)title extMap:(NSDictionary *)extMap;
 
-+ (id)objectWithAssetURL:(NSString*)assetURL title:(NSString*)title;
++ (id)objectWithAssetURL:(NSString*)assetURL title:(NSString*)title extMap:(NSDictionary *)extMap;
 
 @end
 
