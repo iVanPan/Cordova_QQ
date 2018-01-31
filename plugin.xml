@@ -3,7 +3,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-qqsdk"
-  version="0.9.6">
+  version="0.9.7">
 
   <name>QQSDK</name>
   <description>Cordova Plugin QQSDK</description>
@@ -17,7 +17,7 @@
   <!--require cordova version -->
   <engines>
     <engine name="cordova" version=">=4.0.0" />
-     <engine name="cordova-android" version=">=4.0.0" />
+    <engine name="cordova-android" version=">=7.0.0" />
   </engines>
 
   <!-- js module-->
@@ -136,13 +136,13 @@
       <preference name="QQ_APP_ID" value="$QQ_APP_ID" />
     </config-file>
   <!--permission for QQ SDK -->
-  <config-file target="AndroidManifest.xml" parent="/manifest">
+  <config-file target="app/src/main/AndroidManifest.xml" parent="/manifest">
       <uses-permission android:name="android.permission.INTERNET" />
       <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
       <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     </config-file>
   <!--QQ webview Auth Activity -->
-  <config-file target="AndroidManifest.xml" parent="/manifest/application">
+  <config-file target="app/src/main/AndroidManifest.xml" parent="/manifest/application">
    <activity
          android:name="com.tencent.tauth.AuthActivity"
          android:noHistory="true"
@@ -163,8 +163,8 @@
   </config-file>
   <source-file src="src/android/QQSDKPlugin.java" target-dir="src/me/vanpan/qqsdk" />
   <!--QQ SDK version 3.2.1-->
-  <source-file src="src/android/open_sdk_r5793.jar" target-dir="libs/" />
-  <source-file src="src/android/mta-sdk-1.6.2.jar" target-dir="libs/" />
+  <source-file src="src/android/open_sdk_r5793.jar" target-dir="app/libs/" />
+  <source-file src="src/android/mta-sdk-1.6.2.jar" target-dir="app/libs/" />
   <framework src="com.android.support:support-v4:24.1.1+" />
   </platform>
 </plugin>

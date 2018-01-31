@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-qqsdk",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "description": "codrova/phonegap wrapper for qq sdk",
   "main": "index.js",
   "scripts": {
@@ -31,6 +31,12 @@
     "login",
     "share",
     "favorites"
+  ],
+  "engines": [
+    {
+      "name": "cordova-android",
+      "version": ">=7.0.0"
+    }
   ],
   "author": "https://github.com/iVanPan",
   "license": "MIT",
