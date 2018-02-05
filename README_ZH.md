@@ -43,7 +43,7 @@
 
 ## 安装要求
 - Cordova Version 3.5+ 
-- Cordova-Android >= 4.0
+- Cordova-Android >= 7.0
 - Cordova-iOS >= 4.0     
 
 	
