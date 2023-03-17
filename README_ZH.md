@@ -4,7 +4,7 @@
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/Cordova_QQ/blob/master/LICENSE)
 	
-这个一个 QQ SDK 的 Cordova 插件。 [English](https://github.com/iVanPan/Cordova_QQ)		
+这是一个 QQ SDK 的 Cordova 插件。 [English](https://github.com/iVanPan/Cordova_QQ)		
 				
 如果你希望使用一个微博的 Cordova 插件可以查看[这里](https://github.com/iVanPan/cordova_weibo).                     
 
